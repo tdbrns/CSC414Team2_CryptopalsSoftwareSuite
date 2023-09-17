@@ -25,6 +25,4 @@ vcpkg install
 
 # Installing new dependencies
 
-## Install new dependency:
-
-Update vcpkg.json.
+Update vcpkg.json
