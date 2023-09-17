@@ -21,5 +21,5 @@ tools/dependencies.bat
 ### Installing a new dependency with vcpkg:
 vcpkg does not include a traditional package lock system, so new dependencies must be appended to the bat script manually.
 ```cmd
-./vcpkg install [dependency] --triplet x64-windows
+./vcpkg install [dependency] --triplet x86-windows
 ```
