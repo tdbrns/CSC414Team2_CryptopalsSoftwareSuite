@@ -17,10 +17,10 @@ if not exist vcpkg.exe (
 )
 
 :: Install gtest dependency
-echo Installing gtest...
-vcpkg install gtest --triplet x86-windows
+echo Installing dependencies...
+vcpkg install
 if errorlevel 1 (
-    echo Error installing gtest. Exiting.
+    echo Error installing Dependencies. Exiting.
     exit /b 1
 )
 

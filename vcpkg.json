@@ -1,0 +1,9 @@
+{
+  "name": "csc414-team2-cryptopals-software-suite",
+  "version-string": "2023-09-17",
+  "dependencies": [
+    {
+      "name": "gtest"
+    }
+  ]
+}

@@ -23,9 +23,4 @@ tools/dependencies.bat
 
 ## Install new dependency:
 
-vcpkg does not include a traditional package lock system, so new dependencies must be appended to the bat script.
-
-Install with:
-```cmd
-./vcpkg install [dependency] --triplet x64-windows
-```
+Update vcpkg.json.
