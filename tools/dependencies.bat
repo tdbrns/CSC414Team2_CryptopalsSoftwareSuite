@@ -16,11 +16,11 @@ if not exist vcpkg.exe (
     echo vcpkg already bootstrapped.
 )
 
-:: Install gtest dependency
+:: Install dependencies
 echo Installing dependencies...
 vcpkg install
 if errorlevel 1 (
-    echo Error installing Dependencies. Exiting.
+    echo Error installing dependencies. Exiting.
     exit /b 1
 )
 

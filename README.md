@@ -19,6 +19,11 @@ Use the included tools/dependencies.bat script:
 tools/dependencies.bat
 ```
 
+You can also install dependencies manually by creating vcpkg.exe with the bootstrap script and then running:
+```cmd
+vcpkg install
+```
+
 # Installing new dependencies
 
 ## Install new dependency:
