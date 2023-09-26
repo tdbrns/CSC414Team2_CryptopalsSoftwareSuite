@@ -24,5 +24,11 @@
     <ClCompile Include="HexToBase64Tests.cpp">
       <Filter>Source Files\tests</Filter>
     </ClCompile>
+    <ClCompile Include="XORTests.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="AESTests.cpp">
+      <Filter>Source Files\tests</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
