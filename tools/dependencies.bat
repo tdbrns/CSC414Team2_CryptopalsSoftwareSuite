@@ -7,7 +7,7 @@ pushd external\vcpkg
 :: Check if vcpkg.exe exists
 if not exist vcpkg.exe (
     echo Bootstrapping vcpkg...
-    bootstrap-vcpkg.bat
+    call bootstrap-vcpkg.bat
     if errorlevel 1 (
         echo Error bootstrapping vcpkg. Exiting.
         exit /b 1
