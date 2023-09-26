@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ChallengeSolutions.h"
+
 namespace CSC414Team2CryptopalsSoftwareSuite {
 
 	using namespace System;
