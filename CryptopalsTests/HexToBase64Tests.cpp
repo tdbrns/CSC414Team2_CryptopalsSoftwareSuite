@@ -12,6 +12,5 @@ TEST(HexToBase64Tests, HexToBase64Basic) {
 
     for (const auto& testCase : testCases) {
         FAIL() << "Pending impl.";
-        // ASSERT_EQ(HexToBase64(testCase.input_hex), testCase.expected_base64);
     }
 }
