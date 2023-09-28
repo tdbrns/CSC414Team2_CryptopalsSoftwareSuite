@@ -61,7 +61,9 @@ private:
 		return score;
 	}
 
-	// Private method for converting hexadecimal values into bytes
+	// Create method for generating plaintext w/ XOR
+
+	// Method for converting hexadecimal values into bytes
 	vector<unsigned char> hexToBytes(const string& hex)
 	{
 		vector<unsigned char> bytes;
@@ -77,14 +79,14 @@ private:
 	}
 
 public:
-	// Use currentEncryptKey to output the encryption key used in the most recently called challenge in MainForm.h
-	int currentEncryptKey;
-	ChallengeSolution()			// Constructor
+	char currentEncryptKey;
+	// Constructor
+	ChallengeSolution()
 	{
 		currentEncryptKey = 0;
 	}
 
-	/*********************************************** Method for Challenge 1 ***********************************************/
+	/*************************************************** Method for Challenge 1 ***************************************************/
 	string HexToBase64()
 	{
 		char encodeTable[64] = {
@@ -126,7 +128,7 @@ public:
 		return base64String;
 	}
 
-	/*********************************************** Method for Challenge 2 ***********************************************/
+	/*************************************************** Method for Challenge 2 ***************************************************/
 	string FixedXOR()
 	{
 		string hexString1 = "1c0111001f010100061a024b53535009181c";
@@ -149,20 +151,17 @@ public:
 		return result;
 	}
 
-	/*********************************************** Method for Challenge 3 ***********************************************/
+	/*************************************************** Method for Challenge 3 ***************************************************/
 	string SingleByteXORCipher()
 	{
 		string hexString = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
 		vector<float> plaintextScores;
-
 		vector<unsigned char> hexBytes = hexToBytes(hexString);
-
-		string plaintext;
 
 		// Generate plaintext with every possible character key with ASCII value 0 through 255
 		for (int i = 0; i < 256; i++)
 		{
-			plaintext = "";
+			string plaintext = "";
 
 			for (size_t j = 0; j < hexBytes.size(); j++)
 			{
@@ -175,12 +174,12 @@ public:
 
 		float highestScore = *max_element(plaintextScores.begin(), plaintextScores.end());
 		// Key is 88
-		int key = distance(plaintextScores.begin(), max_element(plaintextScores.begin(), plaintextScores.end()));
+		char key = distance(plaintextScores.begin(), max_element(plaintextScores.begin(), plaintextScores.end()));
 		currentEncryptKey = key;
 
 		string message;
 
-		for (int i = 0; i < hexBytes.size(); i++)
+		for (size_t i = 0; i < hexBytes.size(); i++)
 		{
 			unsigned char xorResult = hexBytes[i] ^ key;
 			message += xorResult;
@@ -189,43 +188,90 @@ public:
 		return message;
 	}
 
-	/*********************************************** Method for Challenge 4 ***********************************************/
+	/*************************************************** Method for Challenge 4 ***************************************************/
 	string DetectSingleCharXOR()
 	{
-		vector<string> ciphers;
+		vector<string> ciphertexts;
+		vector<float> highPlaintextScores;
+		vector<unsigned char> candidateBytes;
+		string bestCandidate;
 		string ciphertext;
-		std::ifstream fileIn;
+		char possibleKey = '\0';
 
+		// Read in hex strings from datafile_challenge4.txt
+		std::ifstream fileIn;
 		fileIn.open("datafile_challenge4.txt");
 		while (!fileIn.eof())
 		{
 			std::getline(fileIn, ciphertext);
-			ciphers.push_back(ciphertext);
+			ciphertexts.push_back(ciphertext);
 		}
 		fileIn.close();
 
-		return "";
+		for (size_t i = 0; i < ciphertexts.size(); i++)
+		{
+			vector<unsigned char> hexBytes = hexToBytes(ciphertexts[i]);
+			vector<float> plaintextScores;
+			string plaintext;
+
+			for (int i = 0; i < 256; i++)
+			{
+				plaintext = "";
+
+				for (size_t j = 0; j < hexBytes.size(); j++)
+				{
+					unsigned char xorResult = hexBytes[j] ^ i;
+					plaintext += xorResult;
+				}
+
+				plaintextScores.push_back(ScorePlaintext(plaintext));
+			}
+
+			float highScore = *max_element(plaintextScores.begin(), plaintextScores.end());
+			highPlaintextScores.push_back(highScore);
+
+			// If current high score is the highest of the high scores, it is the new best candidate for being the encrypted string
+			if (highScore == *max_element(highPlaintextScores.begin(), highPlaintextScores.end()))
+			{
+				possibleKey = distance(plaintextScores.begin(), max_element(plaintextScores.begin(), plaintextScores.end()));
+				bestCandidate = ciphertexts[i];
+				candidateBytes = hexBytes;
+			}
+		}
+
+		string message;
+		currentEncryptKey = possibleKey;
+		for (size_t i = 0; i < candidateBytes.size(); i++)
+		{
+			unsigned char xorResult = candidateBytes[i] ^ possibleKey;
+			message += xorResult;
+		}
+
+		// Remove the newline character at the end of the string
+		message.erase(message.end() - 1);
+
+		return message;
 	}
 
-	/*********************************************** Method for Challenge 5 ***********************************************/
+	/*************************************************** Method for Challenge 5 ***************************************************/
 	string RepeatingKeyXOR()
 	{
 		return "";
 	}
 
-	/*********************************************** Method for Challenge 6 ***********************************************/
+	/*************************************************** Method for Challenge 6 ***************************************************/
 	string BreakRepeatingKeyXOR()
 	{
 		return "";
 	}
 
-	/*********************************************** Method for Challenge 7 ***********************************************/
+	/*************************************************** Method for Challenge 7 ***************************************************/
 	string AES_ECBMode()
 	{
 		return "";
 	}
 
-	/*********************************************** Method for Challenge 8 ***********************************************/
+	/*************************************************** Method for Challenge 8 ***************************************************/
 	string DetectAES_ECBMode()
 	{
 		return "";
