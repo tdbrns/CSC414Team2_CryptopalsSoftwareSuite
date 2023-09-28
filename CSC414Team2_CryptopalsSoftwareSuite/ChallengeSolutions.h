@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -76,14 +77,14 @@ private:
 	}
 
 public:
+	// Use currentEncryptKey to output the encryption key used in the most recently called challenge in MainForm.h
 	int currentEncryptKey;
-	// Constructor
-	ChallengeSolution()
+	ChallengeSolution()			// Constructor
 	{
 		currentEncryptKey = 0;
 	}
 
-	// Method for challenge 1
+	/*********************************************** Method for Challenge 1 ***********************************************/
 	string HexToBase64()
 	{
 		char encodeTable[64] = {
@@ -125,7 +126,7 @@ public:
 		return base64String;
 	}
 
-	// Method for challenge 2
+	/*********************************************** Method for Challenge 2 ***********************************************/
 	string FixedXOR()
 	{
 		string hexString1 = "1c0111001f010100061a024b53535009181c";
@@ -148,7 +149,7 @@ public:
 		return result;
 	}
 
-	// Method for challenge 3
+	/*********************************************** Method for Challenge 3 ***********************************************/
 	string SingleByteXORCipher()
 	{
 		string hexString = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
@@ -174,7 +175,7 @@ public:
 
 		float highestScore = *max_element(plaintextScores.begin(), plaintextScores.end());
 		// Key is 88
-		auto key = distance(plaintextScores.begin(), max_element(plaintextScores.begin(), plaintextScores.end()));
+		int key = distance(plaintextScores.begin(), max_element(plaintextScores.begin(), plaintextScores.end()));
 		currentEncryptKey = key;
 
 		string message;
@@ -186,5 +187,47 @@ public:
 		}
 
 		return message;
+	}
+
+	/*********************************************** Method for Challenge 4 ***********************************************/
+	string DetectSingleCharXOR()
+	{
+		vector<string> ciphers;
+		string ciphertext;
+		std::ifstream fileIn;
+
+		fileIn.open("hex_file.txt");
+		while (!fileIn.eof())
+		{
+			std::getline(fileIn, ciphertext);
+			ciphers.push_back(ciphertext);
+		}
+		fileIn.close();
+
+		return "";
+	}
+
+	/*********************************************** Method for Challenge 5 ***********************************************/
+	string RepeatingKeyXOR()
+	{
+		return "";
+	}
+
+	/*********************************************** Method for Challenge 6 ***********************************************/
+	string BreakRepeatingKeyXOR()
+	{
+		return "";
+	}
+
+	/*********************************************** Method for Challenge 7 ***********************************************/
+	string AES_ECBMode()
+	{
+		return "";
+	}
+
+	/*********************************************** Method for Challenge 8 ***********************************************/
+	string DetectAES_ECBMode()
+	{
+		return "";
 	}
 };
