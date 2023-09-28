@@ -196,7 +196,7 @@ public:
 		string ciphertext;
 		std::ifstream fileIn;
 
-		fileIn.open("hex_file.txt");
+		fileIn.open("datafile_challenge4.txt");
 		while (!fileIn.eof())
 		{
 			std::getline(fileIn, ciphertext);
