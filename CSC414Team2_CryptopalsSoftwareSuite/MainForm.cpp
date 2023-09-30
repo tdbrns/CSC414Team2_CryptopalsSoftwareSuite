@@ -1,3 +1,5 @@
+#define NOMINMAX // fixes collision with std::numeric_limits?
+
 #include "MainForm.h"
 
 using namespace System;

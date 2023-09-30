@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CSC414Team2_CryptopalsSoftwareSuite", "CSC414Team2_CryptopalsSoftwareSuite\CSC414Team2_CryptopalsSoftwareSuite.vcxproj", "{75606D37-8355-4008-99A3-AC368D5BA69C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CryptopalsTests", "CryptopalsTests\CryptopalsTests.vcxproj", "{832B6147-79D9-48FE-927C-C0F8E30A4D1D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{75606D37-8355-4008-99A3-AC368D5BA69C} = {75606D37-8355-4008-99A3-AC368D5BA69C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

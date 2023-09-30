@@ -371,7 +371,6 @@ public:
     int findLikelyKeySize(const std::string& ciphertext) {
         int likelyKeySize = 0;
 
-        //cant solve error
         double smallestNormalizedDistance = std::numeric_limits<double>::max();
 
         for (int keySize = 2; keySize <= 40; ++keySize) {

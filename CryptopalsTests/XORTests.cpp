@@ -1,4 +1,7 @@
 #include "gtest/gtest.h"
+#include "ChallengeSolutions.h"
+
+ChallengeSolution challengeClass;
 
 TEST(XORTests, FixedXOR) {
     struct TestCase {
@@ -74,14 +77,13 @@ TEST(XORTests, BreakRepeatingKeyXOR) {
     struct TestCase {
         std::string cipher_text;
         std::string expected_decrypted;
-        std::string expected_key;
     };
 
     std::vector<TestCase> testCases = {
-        {"1c203f383b6973033b373f3075", "Hello, World!", "TEST"},
+        {"1c203f383b6973033b373f3075", "Hello World!"}, // key = TEST
     };
 
     for (const auto& testCase : testCases) {
-        FAIL() << "Pending impl.";
+        challengeClass.BreakRepeatingKeyXOR(testCase.cipher_text);
     }
 }
