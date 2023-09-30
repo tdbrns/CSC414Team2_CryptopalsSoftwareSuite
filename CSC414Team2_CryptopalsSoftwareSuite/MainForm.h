@@ -50,6 +50,9 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
     private: System::Windows::Forms::Button^ repeat_xor_btn;
     private: System::Windows::Forms::Label^ label7;
     private: System::Windows::Forms::TextBox^ key_text_box;
+    private: System::Windows::Forms::Button^ add_file_btn;
+    private: System::Windows::Forms::TextBox^ file_xor_results;
+    private: System::Windows::Forms::Label^ label8;
 
     private: System::Windows::Forms::TextBox^ base_hex;
 
@@ -128,6 +131,9 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
             this->repeat_xor_btn = (gcnew System::Windows::Forms::Button());
             this->label7 = (gcnew System::Windows::Forms::Label());
             this->key_text_box = (gcnew System::Windows::Forms::TextBox());
+            this->add_file_btn = (gcnew System::Windows::Forms::Button());
+            this->file_xor_results = (gcnew System::Windows::Forms::TextBox());
+            this->label8 = (gcnew System::Windows::Forms::Label());
             (cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->background_img))->BeginInit();
             this->SuspendLayout();
             //
@@ -305,11 +311,40 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
             this->key_text_box->TabIndex = 19;
             this->key_text_box->TextChanged += gcnew System::EventHandler(this, &MainForm::key_text_box_TextChanged);
             //
+            // add_file_btn
+            //
+            this->add_file_btn->Location = System::Drawing::Point(353, 168);
+            this->add_file_btn->Name = L"add_file_btn";
+            this->add_file_btn->Size = System::Drawing::Size(75, 23);
+            this->add_file_btn->TabIndex = 20;
+            this->add_file_btn->Text = L"Add File";
+            this->add_file_btn->UseVisualStyleBackColor = true;
+            this->add_file_btn->Click += gcnew System::EventHandler(this, &MainForm::add_file_btn_Click);
+            //
+            // file_xor_results
+            //
+            this->file_xor_results->Location = System::Drawing::Point(353, 72);
+            this->file_xor_results->Name = L"file_xor_results";
+            this->file_xor_results->Size = System::Drawing::Size(161, 20);
+            this->file_xor_results->TabIndex = 21;
+            //
+            // label8
+            //
+            this->label8->AutoSize = true;
+            this->label8->Location = System::Drawing::Point(350, 56);
+            this->label8->Name = L"label8";
+            this->label8->Size = System::Drawing::Size(42, 13);
+            this->label8->TabIndex = 22;
+            this->label8->Text = L"File Xor";
+            //
             // MainForm
             //
             this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
             this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
             this->ClientSize = System::Drawing::Size(526, 326);
+            this->Controls->Add(this->label8);
+            this->Controls->Add(this->file_xor_results);
+            this->Controls->Add(this->add_file_btn);
             this->Controls->Add(this->key_text_box);
             this->Controls->Add(this->label7);
             this->Controls->Add(this->repeat_xor_btn);
@@ -468,5 +503,27 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
     private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
         }
 
+    private: System::Void add_file_btn_Click(System::Object^ sender, System::EventArgs^ e) {
+            ChallengeSolution solution;
+            OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
+
+            // Set the file filter and other properties as needed.
+            openFileDialog1->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            openFileDialog1->FilterIndex = 1;
+            openFileDialog1->RestoreDirectory = true;
+
+            if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+                // Get the selected file name and pass it to DetectSingleCharXOR.
+                String^ selectedFileName = openFileDialog1->FileName;
+                // Convert the selectedFileName to a standard string (if needed).
+                std::string standardStringFileName = msclr::interop::marshal_as<std::string>(selectedFileName);
+
+                // Call the DetectSingleCharXOR function with the selected file name.
+                std::string result = solution.DetectSingleCharXOR(standardStringFileName);
+
+                // Display or process the result in the file_xor_results TextBox.
+                // Assuming "file_xor_results" is the name of your TextBox:
+                file_xor_results->Text = gcnew String(result.c_str());
+            }
+        };
     };
-};

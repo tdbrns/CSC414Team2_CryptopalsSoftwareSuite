@@ -6,9 +6,15 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <limits>
 
 using std::string;
 using std::vector;
+
+std::vector<std::string> transposeBlocks(const std::string& ciphertext, int keySize);
+int hammingDistance(const std::string& s1, const std::string& s2);
+char findKeyForBlock(const std::string& block);
+int findLikelyKeySize(const std::string& ciphertext);
 
 // The ChallengeSolution class holds all the methods that will be used to solve all eight Cryptopal challenges.
 // Each methods can be called via a ChallengeSolution object in MainForm.h
@@ -196,7 +202,7 @@ public:
     }
 
     /*************************************************** Method for Challenge 4 ***************************************************/
-    string DetectSingleCharXOR()
+    string DetectSingleCharXOR(string file_name)
     {
         vector<string> ciphertexts;
         vector<float> highPlaintextScores;
@@ -206,7 +212,7 @@ public:
         char possibleKey = '\0';
 
         // Read in hex strings from datafile_challenge4.txt
-        std::ifstream fileIn;
+        std::ifstream fileIn(file_name);
         fileIn.open("datafile_challenge4.txt");
         while (!fileIn.eof())
         {
@@ -280,9 +286,26 @@ public:
     }
 
     /*************************************************** Method for Challenge 6 ***************************************************/
-    string BreakRepeatingKeyXOR()
+    string BreakRepeatingKeyXOR(const string& input)
     {
-        return "";
+
+        //static const std::string base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
+        int likelyKeySize = findLikelyKeySize(input);
+        std::vector<std::string> transposedBlocks = transposeBlocks(input, likelyKeySize);
+        std::string key;
+
+        for (const std::string& block : transposedBlocks) {
+            char likelyKey = findKeyForBlock(block);
+            key += likelyKey;
+        }
+
+        std::string plaintext;
+        for (size_t i = 0; i < input.size(); ++i) {
+            plaintext += input[i] ^ key[i % likelyKeySize];
+        }
+
+        return plaintext;
     }
 
     /*************************************************** Method for Challenge 7 ***************************************************/
@@ -296,4 +319,86 @@ public:
     {
         return "";
     }
+
+    int hammingDistance(const std::string& s1, const std::string& s2) {
+        int distance = 0;
+        for (size_t i = 0; i < s1.length(); ++i) {
+            uint8_t xorResult = s1[i] ^ s2[i];
+            while (xorResult) {
+                distance += (xorResult & 1);
+                xorResult >>= 1;
+            }
+        }
+        return distance;
+    }
+
+
+    std::vector<std::string> transposeBlocks(const std::string& ciphertext, int keySize) {
+        std::vector<std::string> transposedBlocks(keySize, "");
+
+        for (size_t i = 0; i < ciphertext.size(); ++i) {
+            transposedBlocks[i % keySize] += ciphertext[i];
+        }
+
+        return transposedBlocks;
+    }
+
+    char findKeyForBlock(const std::string& block) {
+        char likelyKey = 0;
+        int maxScore = 0;
+
+        for (char key = 0; key < 256; ++key) {
+            int score = 0;
+            for (char c : block) {
+                char decrypted = c ^ key;
+                if (std::isprint(decrypted)) {
+                    score++;
+                }
+            }
+            if (score > maxScore) {
+                maxScore = score;
+                likelyKey = key;
+            }
+        }
+
+        return likelyKey;
+
+
+    }
+
+
+    // Function to find the likely key size
+    int findLikelyKeySize(const std::string& ciphertext) {
+        int likelyKeySize = 0;
+
+        //cant solve error
+        double smallestNormalizedDistance = std::numeric_limits<double>::max();
+
+        for (int keySize = 2; keySize <= 40; ++keySize) {
+            std::vector<std::string> blocks;
+            for (size_t i = 0; i < ciphertext.size(); i += keySize) {
+                blocks.push_back(ciphertext.substr(i, keySize));
+            }
+
+            double normalizedDistance = 0.0;
+            int pairsCount = 0;
+
+            for (size_t i = 0; i < blocks.size() - 1; ++i) {
+                for (size_t j = i + 1; j < blocks.size(); ++j) {
+                    normalizedDistance += hammingDistance(blocks[i], blocks[j]) / static_cast<double>(keySize);
+                    pairsCount++;
+                }
+            }
+
+            normalizedDistance /= pairsCount;
+
+            if (normalizedDistance < smallestNormalizedDistance) {
+                smallestNormalizedDistance = normalizedDistance;
+                likelyKeySize = keySize;
+            }
+        }
+
+        return likelyKeySize;
+    }
+
 };
