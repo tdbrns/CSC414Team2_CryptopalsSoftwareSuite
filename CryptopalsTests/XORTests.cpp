@@ -80,7 +80,7 @@ TEST(XORTests, BreakRepeatingKeyXOR) {
     };
 
     std::vector<TestCase> testCases = {
-        {"1c203f383b6973033b373f3075", "Hello World!"}, // key = TEST
+        {"1c203f383b6973033b373f3075", "Hello, World!"}, // key = TEST
     };
 
     for (const auto& testCase : testCases) {
