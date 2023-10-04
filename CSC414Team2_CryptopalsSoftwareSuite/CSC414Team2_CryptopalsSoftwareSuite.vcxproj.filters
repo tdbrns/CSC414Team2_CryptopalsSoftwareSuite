@@ -26,5 +26,8 @@
     <ClInclude Include="ChallengeSolutions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CryptoUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

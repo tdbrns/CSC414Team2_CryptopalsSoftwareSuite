@@ -1,4 +1,5 @@
 #define NOMINMAX // fixes collision with std::numeric_limits?
+#pragma warning(disable : 4996)
 
 #include "MainForm.h"
 

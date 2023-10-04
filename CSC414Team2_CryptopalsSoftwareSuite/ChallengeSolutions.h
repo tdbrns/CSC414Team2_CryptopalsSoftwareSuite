@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <sstream>
 #include <limits>
+#include "CryptoUtilities.h"
 
 using std::string;
 using std::vector;
@@ -311,14 +312,62 @@ public:
     /*************************************************** Method for Challenge 7 ***************************************************/
     string AES_ECBMode()
     {
-        return "";
+        // YELLOW SUBMARINE in hexadecimal form
+        unsigned char strKey[16] = { 0x59, 0x45, 0x4C, 0x4C, 0x4F, 0x57, 0x20, 0x53, 0x55, 0x42, 0x4D, 0x41, 0x52, 0x49, 0x4E, 0x45 };
+        Block base64Text;
+        if (!BlockReadFile(&base64Text, "datafile_challenge7.txt"))
+            return "Error reading file\n";
+
+        // Base64 decode the input 
+        int iMaximumSize = base64Text.len * 3 / 4;
+
+        Block ciphertext;
+        ciphertext.Alloc(iMaximumSize);
+        ciphertext.len = base64decode(base64Text.data, base64Text.len, ciphertext.data, iMaximumSize);
+        Block plaintext;
+        plaintext.Alloc(ciphertext.len);
+
+        AES_ECB_Decrypt(ciphertext.data, ciphertext.len, plaintext.data, &plaintext.len, strKey, true);
+
+        string message;
+        for (int i = 0; i < plaintext.len; i++)
+            message += plaintext.data[i];
+
+        return message;
     }
 
     /*************************************************** Method for Challenge 8 ***************************************************/
     string DetectAES_ECBMode()
     {
-        return "";
+        string message;
+        vector<Block> lines = GetLinesFromFile("datafile_challenge8.txt");
+        if (lines.size() == 0)
+            return "Failed to open file.\n";
+
+        int lineNum = 0;
+
+        // for-each loop
+        for (Block const& lineASC : lines)
+        {
+            lineNum++;
+
+            Block lineHex = stringToHex(lineASC.data, lineASC.len);
+            if (lineHex.len < 0)
+                return "Failed to convert string to hex\n";
+
+            int detected = DetectECBMode(lineHex.data, lineHex.len, 16);
+
+            if (ECBMode == detected)
+            {
+                message = "Line ";
+                message += std::to_string(lineNum);
+                message += " is encrypted with ECB.\n";
+            }
+        }
+
+        return message;
     }
+ 
 
     int hammingDistance(const std::string& s1, const std::string& s2) {
         int distance = 0;
