@@ -4,6 +4,16 @@
   "dependencies": [
     {
       "name": "gtest"
+    },
+    {
+      "name": "openssl"
     }
-  ]
+  ],
+  "overrides": [
+    {
+      "name": "openssl",
+      "version-string": "1.1.1n"
+    }
+  ],
+  "builtin-baseline": "e8c2a04eb7ca058b6e2f0e6e33c67fdbffeee846"
 }

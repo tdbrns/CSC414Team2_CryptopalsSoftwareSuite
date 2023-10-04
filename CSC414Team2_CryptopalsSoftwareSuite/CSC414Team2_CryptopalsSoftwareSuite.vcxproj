@@ -85,7 +85,7 @@
       <AdditionalIncludeDirectories>C:\Users\tdbar\OneDrive\Documents\THEGDSTUF1\Project Stuff\CSC414Team2_CryptopalsSoftwareSuite\OpenSSL\Lib\x64\Debug\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\Users\tdbar\OneDrive\Documents\THEGDSTUF1\Project Stuff\CSC414Team2_CryptopalsSoftwareSuite\OpenSSL\Lib\x64\Debug\lib\libcrypto.lib;C:\Users\tdbar\OneDrive\Documents\THEGDSTUF1\Project Stuff\CSC414Team2_CryptopalsSoftwareSuite\OpenSSL\Lib\x64\Debug\lib\libssl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
