@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include <iomanip>  
+#include <iomanip>
 #include <sstream>
 #include <limits>
 #include "CryptoUtilities.h"
@@ -31,7 +31,7 @@ public:
     string FixedXOR(string hexString1, string hexString2);
 
     /*************************************************** Method for Challenge 3 ***************************************************/
-    string SingleByteXORCipher();
+    string SingleByteXORCipher(string hexString);
 
     /*************************************************** Method for Challenge 4 ***************************************************/
     string DetectSingleCharXOR(string file_name);
@@ -40,7 +40,7 @@ public:
     string repeat_key_xor(const string& plain_text, const string key);
 
     /*************************************************** Method for Challenge 6 ***************************************************/
-    string BreakRepeatingKeyXOR(const string& input);
+    string BreakRepeatingKeyXOR();
 
     /*************************************************** Method for Challenge 7 ***************************************************/
     string AES_ECBMode();
@@ -65,7 +65,7 @@ inline int ChallengeSolutions::hammingDistance(const std::string& s1, const std:
 
 inline vector<string> ChallengeSolutions::transposeBlocks(const std::string& ciphertext, int keySize)
 {
-    vector<string> transposedBlocks(keySize, "");
+    std::vector<std::string> transposedBlocks(keySize, "");
 
     for (size_t i = 0; i < ciphertext.size(); ++i) {
         transposedBlocks[i % keySize] += ciphertext[i];
@@ -79,13 +79,19 @@ inline char ChallengeSolutions::findKeyForBlock(const std::string& block)
     char likelyKey = 0;
     int maxScore = 0;
 
-    for (char key = 0; key < 256; ++key) {
+    for (unsigned char key = 0; key <= 255; ++key) {
         int score = 0;
-        for (char c : block) {
-            char decrypted = c ^ key;
+        for (char character : block) {
+            unsigned char usigned_character = static_cast<unsigned char>(character);
+            unsigned char decrypted = usigned_character ^ key;
             if (std::isprint(decrypted)) {
                 score++;
             }
+            // Debugging statements to print values
+            std::cout << "Character: " << character << std::endl;
+            std::cout << "Usigne Character: " << usigned_character << std::endl;
+            std::cout << "Decrypted: " << decrypted << std::endl;
+            std::cout << "Score: " << score << std::endl;
         }
         if (score > maxScore) {
             maxScore = score;
@@ -128,19 +134,18 @@ inline int ChallengeSolutions::findLikelyKeySize(const std::string& ciphertext)
 
     return likelyKeySize;
 }
-
 // Public
 inline string ChallengeSolutions::HexToBase64(string input)
 {
     char encodeTable[64] = {
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
-                'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
-                'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
-                'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
-                'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
-                'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-                'w', 'x', 'y', 'z', '0', '1', '2', '3',
-                '4', '5', '6', '7', '8', '9', '+', '/'
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+            'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+            'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+            'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+            'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+            'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+            'w', 'x', 'y', 'z', '0', '1', '2', '3',
+            '4', '5', '6', '7', '8', '9', '+', '/'
     };
 
     string hexString = input;
@@ -195,9 +200,9 @@ inline string ChallengeSolutions::FixedXOR(string hexString1, string hexString2)
     }
 }
 
-inline string ChallengeSolutions::SingleByteXORCipher()
+inline string ChallengeSolutions::SingleByteXORCipher(string hexString)
 {
-    string hexString = "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736";
+
     vector<float> plaintextScores;
     vector<unsigned char> hexBytes = hexToBytes(hexString);
 
@@ -311,9 +316,24 @@ inline string ChallengeSolutions::repeat_key_xor(const string& plain_text, const
     return hex_stream.str();
 }
 
-inline string ChallengeSolutions::BreakRepeatingKeyXOR(const string& input)
+inline string ChallengeSolutions::BreakRepeatingKeyXOR()
 {
-    //static const std::string base64_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    string input;
+
+    // Read the content of the specified file
+    std::ifstream fileIn("datafile_challenge6.txt");
+    if (!fileIn.is_open()) {
+        throw std::runtime_error("Failed to open the file.");
+    }
+
+    std::string line;
+
+    // Read lines from the file and append them to the input string
+    while (std::getline(fileIn, line)) {
+        input += line;
+    }
+
+    fileIn.close();
 
     int likelyKeySize = findLikelyKeySize(input);
     std::vector<std::string> transposedBlocks = transposeBlocks(input, likelyKeySize);
@@ -340,7 +360,7 @@ inline string ChallengeSolutions::AES_ECBMode()
     if (!BlockReadFile(&base64Text, "datafile_challenge7.txt"))
         return "Error reading file\n";
 
-    // Base64 decode the input 
+    // Base64 decode the input
     int iMaximumSize = base64Text.len * 3 / 4;
 
     Block ciphertext;
