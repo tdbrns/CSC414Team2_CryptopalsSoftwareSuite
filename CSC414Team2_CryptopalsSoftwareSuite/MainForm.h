@@ -439,7 +439,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
     }
 
            void MainForm::hex_to_base64() {
-               ChallengeSolution solution; //points to challange solution class
+               ChallengeSolutions solution; //points to challange solution class
                // Check if base_hex_array is not empty
                System::String^ managedString = base_hex_array;
                if (!String::IsNullOrEmpty(base_hex_array)) {
@@ -459,7 +459,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
            }
 
            void MainForm::fixed_xor() {
-               ChallengeSolution solution;
+               ChallengeSolutions solution;
                System::String^ managedString = base_hex_array;
                std::string hexString = msclr::interop::marshal_as<std::string>(managedString);
                System::String^ managedString_2 = xor_compare;
@@ -478,7 +478,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
            }
 
            void MainForm::repeat_xor() {
-               ChallengeSolution solution;
+               ChallengeSolutions solution;
                System::String^ managedString = plain_txt;
                std::string plain_txt_string = msclr::interop::marshal_as<std::string>(managedString);
                System::String^ managedString_2 = key_txt;
@@ -504,7 +504,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
     }
 
     private: System::Void add_file_btn_Click(System::Object^ sender, System::EventArgs^ e) {
-        ChallengeSolution solution;
+        ChallengeSolutions solution;
         OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
         // Set the file filter and other properties as needed.

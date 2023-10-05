@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "ChallengeSolutions.h"
 
-ChallengeSolution challengeClass;
+ChallengeSolutions XORSolutions;
 
 TEST(XORTests, FixedXOR) {
     struct TestCase {
@@ -15,7 +15,7 @@ TEST(XORTests, FixedXOR) {
     };
 
     for (const auto& testCase : testCases) {
-        FAIL() << "Pending impl.";
+        EXPECT_EQ(XORSolutions.FixedXOR(testCase.input1, testCase.input2), testCase.expected_result);
     }
 }
 
@@ -31,6 +31,7 @@ TEST(XORTests, SingleByteXORCipher) {
     };
 
     for (const auto& testCase : testCases) {
+        // EXPECT_EQ(XORSolutions.SingleByteXORCipher(testCase.input1, testCase.input2), testCase.expected_result);
         FAIL() << "Pending impl.";
     }
 }
@@ -53,6 +54,7 @@ TEST(XORTests, DetectSingleCharacterXOR) {
     };
 
     for (const auto& testCase : testCases) {
+        // EXPECT_EQ(XORSolutions.DetectSingleCharXOR(testCase.input1, testCase.input2), testCase.expected_result);
         FAIL() << "Pending impl.";
     }
 }
@@ -69,7 +71,7 @@ TEST(XORTests, RepeatingKeyXOR) {
     };
 
     for (const auto& testCase : testCases) {
-        FAIL() << "Pending impl.";
+        EXPECT_EQ(XORSolutions.repeat_key_xor(testCase.input, testCase.key), testCase.expected_result);
     }
 }
 
@@ -84,6 +86,6 @@ TEST(XORTests, BreakRepeatingKeyXOR) {
     };
 
     for (const auto& testCase : testCases) {
-        challengeClass.BreakRepeatingKeyXOR(testCase.cipher_text);
+        EXPECT_EQ(XORSolutions.BreakRepeatingKeyXOR(testCase.cipher_text), testCase.expected_decrypted);
     }
 }

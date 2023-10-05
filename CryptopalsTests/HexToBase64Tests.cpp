@@ -1,4 +1,7 @@
 #include "gtest/gtest.h"
+#include "ChallengeSolutions.h"
+
+ChallengeSolutions HexSolutions;
 
 TEST(HexToBase64Tests, HexToBase64Basic) {
     struct TestCase {
@@ -11,6 +14,6 @@ TEST(HexToBase64Tests, HexToBase64Basic) {
     };
 
     for (const auto& testCase : testCases) {
-        FAIL() << "Pending impl.";
+        EXPECT_EQ(HexSolutions.HexToBase64(testCase.input_hex), testCase.expected_base64);
     }
 }

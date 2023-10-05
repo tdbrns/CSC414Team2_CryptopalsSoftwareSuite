@@ -105,7 +105,7 @@ struct Block
 };
 
 // Method for scoring plaintext according to letter frequency
-float ScorePlaintext(string plaintxt)
+inline float ScorePlaintext(string plaintxt)
 {
     float score = 0;
     int asciiCount = 0;
@@ -154,7 +154,7 @@ float ScorePlaintext(string plaintxt)
 }
 
 // Method for converting hexadecimal values into bytes
-vector<unsigned char> hexToBytes(const string& hex)
+inline vector<unsigned char> hexToBytes(const string& hex)
 {
     vector<unsigned char> bytes;
 
@@ -168,7 +168,7 @@ vector<unsigned char> hexToBytes(const string& hex)
     return bytes;
 }
 
-Block stringToHex(unsigned char* inputASCII, int inputLength)
+inline Block stringToHex(unsigned char* inputASCII, int inputLength)
 {
     // Create a Block object to be returned.
     Block out(inputLength / 2);
@@ -225,7 +225,7 @@ static inline std::string& trim(std::string& str)
     return leftTrim(rightTrim(str));
 }
 
-bool BlockReadFile(Block* out, const char* file)
+inline bool BlockReadFile(Block* out, const char* file)
 {
     std::ifstream inStream(file, std::ifstream::binary);
     if (!inStream)
@@ -247,7 +247,7 @@ bool BlockReadFile(Block* out, const char* file)
     return true;
 }
 
-vector<Block> GetLinesFromFile(const char* file)
+inline vector<Block> GetLinesFromFile(const char* file)
 {
     vector<Block> out;
 
@@ -277,7 +277,7 @@ vector<Block> GetLinesFromFile(const char* file)
     return out;
 }
 
-int FindIndex(char ch)
+inline int FindIndex(char ch)
 {
     int i;
     for (i = 0; i < 64; i++)
@@ -287,7 +287,7 @@ int FindIndex(char ch)
     return i;
 }
 
-int base64decode(unsigned char* encodedBuffer, int encodedSize, unsigned char* hexBuffer, int hexMaxSize)
+inline int base64decode(unsigned char* encodedBuffer, int encodedSize, unsigned char* hexBuffer, int hexMaxSize)
 {
     char achFour[4] = { 0 };
     int iHexSize = 0;
@@ -327,7 +327,7 @@ int base64decode(unsigned char* encodedBuffer, int encodedSize, unsigned char* h
 }
 
 
-bool ValidPKCS7Padding(unsigned char* plaintext, unsigned int ciphertextLen, unsigned int* newLength)
+inline bool ValidPKCS7Padding(unsigned char* plaintext, unsigned int ciphertextLen, unsigned int* newLength)
 {
     bool bValid = true;
     *newLength = ciphertextLen;
@@ -356,7 +356,7 @@ bool ValidPKCS7Padding(unsigned char* plaintext, unsigned int ciphertextLen, uns
     return bValid;
 }
 
-unsigned int RemovePKCS7Padding(unsigned char* plaintext, unsigned int ciphertextLen, bool useExceptions = false)
+inline unsigned int RemovePKCS7Padding(unsigned char* plaintext, unsigned int ciphertextLen, bool useExceptions = false)
 {
     bool bValid = false;
     unsigned int uiNewSize = 0;
@@ -383,7 +383,7 @@ unsigned int RemovePKCS7Padding(unsigned char* plaintext, unsigned int ciphertex
     return uiNewSize;
 }
 
-void AES_ECB_Decrypt(unsigned char* ciphertext, unsigned int ciphertextLen, unsigned char* plaintext, unsigned int* pPlaintextLen, unsigned char* strKey, bool removePadding = true)
+inline void AES_ECB_Decrypt(unsigned char* ciphertext, unsigned int ciphertextLen, unsigned char* plaintext, unsigned int* pPlaintextLen, unsigned char* strKey, bool removePadding = true)
 {
     AES_KEY key;
     AES_set_decrypt_key(strKey, 8 * AES_BLOCK_SIZE, &key);
@@ -396,7 +396,7 @@ void AES_ECB_Decrypt(unsigned char* ciphertext, unsigned int ciphertextLen, unsi
         *pPlaintextLen = RemovePKCS7Padding(plaintext, ciphertextLen);
 }
 
-int DetectECBMode(unsigned char* ciphertext, unsigned int ciphertextLen, unsigned int blockSize)
+inline int DetectECBMode(unsigned char* ciphertext, unsigned int ciphertextLen, unsigned int blockSize)
 {
     int currMode = CBCMode;
     int numBlocks = ciphertextLen / blockSize;
