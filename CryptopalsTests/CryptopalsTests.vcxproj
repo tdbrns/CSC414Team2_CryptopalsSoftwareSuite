@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\leero\source\repos\CSC414Team2_CryptopalsSoftwareSuite\CSC414Team2_CryptopalsSoftwareSuite;$(IncludePath)</IncludePath>
+    <IncludePath>..\CSC414Team2_CryptopalsSoftwareSuite;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgEnableManifest>true</VcpkgEnableManifest>
