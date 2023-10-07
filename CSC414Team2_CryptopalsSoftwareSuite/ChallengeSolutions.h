@@ -200,7 +200,6 @@ inline string ChallengeSolution::FixedXOR(string hexString1, string hexString2)
 /*************************************************** Method for Challenge 3 ***************************************************/
 inline string ChallengeSolution::SingleByteXORCipher(string hexString)
 {
-
     vector<float> plaintextScores;
     vector<unsigned char> hexBytes = hexToBytes(hexString);
 

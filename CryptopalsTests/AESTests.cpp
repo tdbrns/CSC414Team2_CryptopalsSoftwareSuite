@@ -14,6 +14,6 @@ TEST(AESTests, DecryptAESInECB) {
     };
 
     for (const auto& testCase : testCases) {
-        FAIL() << "Pending impl.";
+        FAIL() << "Doesn't take input";
     }
 }

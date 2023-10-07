@@ -22,17 +22,15 @@ TEST(XORTests, FixedXOR) {
 TEST(XORTests, SingleByteXORCipher) {
     struct TestCase {
         std::string input;
-        char expected_key;
         std::string expected_decrypted;
     };
 
     std::vector<TestCase> testCases = {
-        {"1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736", 'X', "Cooking MC's like a pound of bacon"},
+        {"1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736", "Cooking MC's like a pound of bacon"} // key='X'
     };
 
     for (const auto& testCase : testCases) {
-        // EXPECT_EQ(XORSolutions.SingleByteXORCipher(testCase.input1, testCase.input2), testCase.expected_result);
-        FAIL() << "Pending impl.";
+        EXPECT_EQ(XORSolutions.SingleByteXORCipher(testCase.input), testCase.expected_decrypted);
     }
 }
 
@@ -55,7 +53,7 @@ TEST(XORTests, DetectSingleCharacterXOR) {
 
     for (const auto& testCase : testCases) {
         // EXPECT_EQ(XORSolutions.DetectSingleCharXOR(testCase.input1, testCase.input2), testCase.expected_result);
-        FAIL() << "Pending impl.";
+        FAIL() << "Doesn't use input.";
     }
 }
 
@@ -86,6 +84,7 @@ TEST(XORTests, BreakRepeatingKeyXOR) {
     };
 
     for (const auto& testCase : testCases) {
-        EXPECT_EQ(XORSolutions.BreakRepeatingKeyXOR(testCase.cipher_text), testCase.expected_decrypted);
+        // EXPECT_EQ(XORSolutions.BreakRepeatingKeyXOR(testCase.cipher_text), testCase.expected_decrypted);
+        FAIL() << "Doesn't take input";
     }
 }
