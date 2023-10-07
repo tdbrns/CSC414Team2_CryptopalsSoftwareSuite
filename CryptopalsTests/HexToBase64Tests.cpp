@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "ChallengeSolutions.h"
 
-ChallengeSolutions HexSolutions;
+ChallengeSolution HexSolutions;
 
 TEST(HexToBase64Tests, HexToBase64Basic) {
     struct TestCase {

@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "ChallengeSolutions.h"
 
-ChallengeSolutions XORSolutions;
+ChallengeSolution XORSolutions;
 
 TEST(XORTests, FixedXOR) {
     struct TestCase {

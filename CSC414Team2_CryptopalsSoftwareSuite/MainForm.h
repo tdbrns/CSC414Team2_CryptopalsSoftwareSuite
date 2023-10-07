@@ -654,7 +654,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
         void MainForm::hex_to_base64()
         {
-            ChallengeSolutions solution; //points to challange solution class
+            ChallengeSolution solution; //points to challange solution class
             // Check if base_hex_array is not empty
             System::String^ managedString = base_hex_array;
             //if (!String::IsNullOrEmpty(base_hex_array)) {
@@ -675,7 +675,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
         void MainForm::fixed_xor()
         {
-            ChallengeSolutions solution;
+            ChallengeSolution solution;
             System::String^ managedString = base_hex_array;
             std::string hexString = msclr::interop::marshal_as<std::string>(managedString);
             System::String^ managedString_2 = xor_compare;
@@ -695,7 +695,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
         void MainForm::single_byte_cipher()
         {
-            ChallengeSolutions solution;
+            ChallengeSolution solution;
             System::String^ managedString = single_xor_base64;
             System::String^ managedString2 = message_results;
 
@@ -713,7 +713,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
         void MainForm::repeat_xor()
         {
-            ChallengeSolutions solution;
+            ChallengeSolution solution;
             System::String^ managedString = plain_txt;
             std::string plain_txt_string = msclr::interop::marshal_as<std::string>(managedString);
             System::String^ managedString_2 = key_txt;
@@ -731,7 +731,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
         void MainForm::single_char_xor()
         {
-            ChallengeSolutions solution;
+            ChallengeSolution solution;
             OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
             // Set the file filter and other properties as needed.
@@ -758,7 +758,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
         void MainForm::break_repeat_key_xor()
         {
-            ChallengeSolutions solution;
+            ChallengeSolution solution;
             OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
             // Set the file filter and other properties as needed.
@@ -775,18 +775,17 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
                 std::string standardStringFileName = msclr::interop::marshal_as<std::string>(selectedFileName);
 
                 // Call the DetectSingleCharXOR function with the selected file name.
-                std::string result = solution.BreakRepeatingKeyXOR();
+                std::string result = solution.BreakRepeatingKeyXOR(standardStringFileName);
 
                 // Display or process the result in the file_xor_results TextBox.
                 // Assuming "file_xor_results" is the name of your TextBox:
                 file_break_repeat_xor_change->Text = gcnew String(result.c_str());
             };
-
         }
 
         void MainForm::AES_in_ECB()
         {
-            ChallengeSolutions solution;
+            ChallengeSolution solution;
             OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
             // Set the file filter and other properties as needed.
@@ -812,7 +811,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
         void MainForm::Detect_AES_in_ECB()
         {
-            ChallengeSolutions solution;
+            ChallengeSolution solution;
             OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
             // Set the file filter and other properties as needed.
