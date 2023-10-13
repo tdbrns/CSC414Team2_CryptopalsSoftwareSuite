@@ -1,16 +1,21 @@
 #pragma once
+// CryptoUtilities.h holds all of the supplementary functions and header files that are utilized within MainForm.h and
+// ChallengeSolutions.h
 
 #include <string>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <fstream>
 #include <vector>
 #include <algorithm>
 #include <functional>
-#include <fstream>
 #include <new>
+#include <limits>
 #include <openssl/aes.h>
 
 using std::string;
 using std::vector;
-using namespace std;
 
 const char base64Table[64] = {
 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -26,10 +31,10 @@ const char base64Table[64] = {
 enum OperationMode
 {
     ECBMode = 0,
-    CBCMode,
-    CTRMode
+    CBCMode
 };
 
+// The Block struct is used to identify blocks of data of any given size for a block cipher.
 struct Block
 {
     unsigned char* data = NULL;
@@ -95,20 +100,20 @@ struct Block
     }
 
     // Copy assignment operator
-    Block& operator=(const Block& other)
+    Block& operator=(const Block& rightSide)
     {
         // copy the data
-        Alloc(other.len);
-        memcpy(data, other.data, other.len);
-
+        Alloc(rightSide.len);
+        memcpy(data, rightSide.data, rightSide.len);
         return *this;
     }
 };
 
-// Method for scoring plaintext according to letter frequency
+// Scores plaintext according to letter frequency (the average number of times letters of the alphabet appear in the English
+//  language). Reference: https://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
 inline float ScorePlaintext(string plaintxt)
 {
-    float score = 0;
+    float score = 0.0f;
     int asciiCount = 0;
 
     for (int i = 0; i < plaintxt.length(); i++)
@@ -116,7 +121,6 @@ inline float ScorePlaintext(string plaintxt)
 
     for (int i = 0; i < plaintxt.length(); i++)
     {
-
         switch (tolower(plaintxt[i]))
         {
         case 'a': score += 8.12; break;
@@ -146,16 +150,15 @@ inline float ScorePlaintext(string plaintxt)
         case 'y': score += 2.11; break;
         case 'z': score += 0.07; break;
         case ' ': score += 15; break;
-        default:
-            break;
+        default: break;
         }
     }
 
     return score;
 }
 
-// Method for converting hexadecimal values into bytes
-inline vector<unsigned char> hexToBytes(const string& hex)
+// Converts hexadecimal values into bytes
+inline vector<unsigned char> HexToBytes(const string& hex)
 {
     vector<unsigned char> bytes;
 
@@ -169,7 +172,8 @@ inline vector<unsigned char> hexToBytes(const string& hex)
     return bytes;
 }
 
-inline Block stringToHex(unsigned char* inputASCII, int inputLength)
+// Converts a string into hexadecimal form
+inline Block StringToHex(unsigned char* inputASCII, int inputLength)
 {
     // Create a Block object to be returned.
     Block out(inputLength / 2);
@@ -205,6 +209,109 @@ inline Block stringToHex(unsigned char* inputASCII, int inputLength)
     return out;
 }
 
+// Calculates the edit/hamming distance between to strings
+inline int HammingDistance(string s1, string s2)
+{
+    int distance = 0;
+    for (size_t i = 0; i < s1.length(); ++i) {
+        uint8_t xorResult = s1[i] ^ s2[i];
+        while (xorResult) {
+            distance += (xorResult & 1);
+            xorResult >>= 1;
+        }
+    }
+
+    return distance;
+}
+
+// Transposes blocks of data according to the method described in Challenge 6, Set 1 
+inline vector<string> TransposeBlocks(string ciphertext, int keySize)
+{
+    vector<string> blocks;
+    //int numOfBlocks = ciphertext.size() / keySize;
+    vector<string> transposedBlocks;
+
+    for (size_t i = 0; i < ciphertext.size(); i += keySize)
+        blocks.push_back(ciphertext.substr(i, keySize));
+
+    for (size_t i = 0; i < 12; i++)
+    {
+        string tempStr = "";
+        for (size_t j = 0; j < blocks.size(); j++)
+            tempStr += blocks[j].substr(i, 1);
+
+        transposedBlocks.push_back(tempStr);
+    }
+
+    return transposedBlocks;
+}
+
+// 
+inline char FindKeyForBlock(string block)
+{
+    char likelyKey = 0;
+    int maxScore = 0;
+
+    for (size_t key = 0; key < 256; key++) {
+        int score = 0;
+        for (char character : block) {
+            unsigned char usigned_character = static_cast<unsigned char>(character);
+            unsigned char decrypted = usigned_character ^ key;
+            if (std::isprint(decrypted))
+                score++;
+
+            // Debugging statements to print values
+            //std::cout << "Character: " << character << std::endl;
+            //std::cout << "Usigne Character: " << usigned_character << std::endl;
+            //std::cout << "Decrypted: " << decrypted << std::endl;
+            //std::cout << "Score: " << score << std::endl;
+        }
+        if (score > maxScore) {
+            maxScore = score;
+            likelyKey = key;
+        }
+    }
+
+    return likelyKey;
+}
+
+// Determines the likely size of a key used to encrypt a given ciphertext
+inline int FindLikelyKeySize(string ciphertext)
+{
+    int likelyKeySize = 0;
+    int maxLikelyKeySize = 40;
+    double smallestNormalizedDistance = std::numeric_limits<double>::max();
+
+    for (int keySize = 2; keySize < maxLikelyKeySize + 1; keySize++)
+    {
+        vector<string> blocks;
+        for (size_t i = 0; i < ciphertext.size(); i += keySize)
+            blocks.push_back(ciphertext.substr(i, keySize));
+
+        double normalizedDistance = 0.0;
+        int pairsCount = 0;
+
+        for (size_t i = 0; i < blocks.size(); i++)
+        {
+            for (size_t j = i + 1; j < blocks.size(); j++)
+            {
+                normalizedDistance += HammingDistance(blocks[i], blocks[j]) / static_cast<double>(keySize);
+                pairsCount++;
+            }
+        }
+
+        normalizedDistance /= pairsCount;
+
+        if (normalizedDistance < smallestNormalizedDistance) 
+        {
+            smallestNormalizedDistance = normalizedDistance;
+            likelyKeySize = keySize;
+        }
+    }
+    
+    return likelyKeySize;
+}
+
 // Trim from the beginning of a string
 static inline string& leftTrim(string& str)
 {
@@ -226,6 +333,7 @@ static inline std::string& trim(std::string& str)
     return leftTrim(rightTrim(str));
 }
 
+// Read the contents of a file into a Block struct
 inline bool BlockReadFile(Block* out, const char* file)
 {
     std::ifstream inStream(file, std::ifstream::binary);
@@ -248,6 +356,7 @@ inline bool BlockReadFile(Block* out, const char* file)
     return true;
 }
 
+// Read the contents of a file into a vector of Block structs
 inline vector<Block> GetLinesFromFile(const char* file)
 {
     vector<Block> out;
@@ -258,7 +367,7 @@ inline vector<Block> GetLinesFromFile(const char* file)
         return out;
 
     // Add every line to the vector
-    std::string line;
+    string line;
 
     while (std::getline(inStream, line))
     {
@@ -278,7 +387,8 @@ inline vector<Block> GetLinesFromFile(const char* file)
     return out;
 }
 
-inline int FindIndex(char ch)
+// Accept a base64 character and find its index in the base64 encode table
+inline int FindIndexBase64(char ch)
 {
     int i;
     for (i = 0; i < 64; i++)
@@ -288,10 +398,11 @@ inline int FindIndex(char ch)
     return i;
 }
 
-inline int base64decode(unsigned char* encodedBuffer, int encodedSize, unsigned char* hexBuffer, int hexMaxSize)
+// Decode a base64 string and determine the size of the decoded hexadecimal value
+inline int DecodeBase64(unsigned char* encodedBuffer, int encodedSize, unsigned char* hexBuffer, int hexMaxSize)
 {
     char achFour[4] = { 0 };
-    int iHexSize = 0;
+    int hexSize = 0;
 
     if (NULL == hexBuffer || NULL == encodedBuffer || encodedSize <= 0)
         return 0;
@@ -305,29 +416,27 @@ inline int base64decode(unsigned char* encodedBuffer, int encodedSize, unsigned 
     while (encodedSize > 0)
     {
         for (int i = 0; i < 4; i++)
-        {
-            achFour[i] = FindIndex(*(encodedBuffer++));
-        }
+            achFour[i] = FindIndexBase64(*(encodedBuffer++));
 
-        hexBuffer[iHexSize++] = (achFour[0] << 2) | (achFour[1] >> 4);
+        hexBuffer[hexSize++] = (achFour[0] << 2) | (achFour[1] >> 4);
         if (achFour[2] < 64)
         {
-            hexBuffer[iHexSize++] = (achFour[1] << 4) | (achFour[2] >> 2);
+            hexBuffer[hexSize++] = (achFour[1] << 4) | (achFour[2] >> 2);
             if (achFour[3] < 64)
-                hexBuffer[iHexSize++] = (achFour[2] << 6) | (achFour[3] >> 0);
+                hexBuffer[hexSize++] = (achFour[2] << 6) | (achFour[3] >> 0);
             else
-                iHexSize = iHexSize;
+                hexSize = hexSize;
         }
         else
-            iHexSize = iHexSize;
+            hexSize = hexSize;
 
         encodedSize -= 4;
     }
 
-    return iHexSize;
+    return hexSize;
 }
 
-
+// Determine if the plaintext had any PKCS #7 padding added to it when it was encrypted
 inline bool ValidPKCS7Padding(unsigned char* plaintext, unsigned int ciphertextLen, unsigned int* newLength)
 {
     bool bValid = true;
@@ -336,14 +445,12 @@ inline bool ValidPKCS7Padding(unsigned char* plaintext, unsigned int ciphertextL
 
     // Padding must be smaller than the actual size
     if (uiPaddingSize >= ciphertextLen || uiPaddingSize == 0)
-    {
         bValid = false;
-    }
     else
     {
         *newLength -= uiPaddingSize;
 
-        // Determine if it has valid PKCS#7 padding
+        // Determine if it has valid PKCS #7 padding
         for (unsigned int i = ciphertextLen - 1; i >= *newLength; i--)
         {
             if (plaintext[i] != uiPaddingSize)
@@ -357,6 +464,7 @@ inline bool ValidPKCS7Padding(unsigned char* plaintext, unsigned int ciphertextL
     return bValid;
 }
 
+// Remove PKCS #7 padding from plaintext if needed
 inline unsigned int RemovePKCS7Padding(unsigned char* plaintext, unsigned int ciphertextLen, bool useExceptions = false)
 {
     bool bValid = false;
@@ -367,9 +475,7 @@ inline unsigned int RemovePKCS7Padding(unsigned char* plaintext, unsigned int ci
     if (false == bValid)
     {
         if (useExceptions)
-        {
             throw("Invalid PKCS#7 padding");
-        }
         else
         {
             // Return the exact same size
@@ -384,6 +490,7 @@ inline unsigned int RemovePKCS7Padding(unsigned char* plaintext, unsigned int ci
     return uiNewSize;
 }
 
+// Decrypt AES-encrypted ciphertext with a given key
 inline void AES_ECB_Decrypt(unsigned char* ciphertext, unsigned int ciphertextLen, unsigned char* plaintext, unsigned int* pPlaintextLen, unsigned char* strKey, bool removePadding = true)
 {
     AES_KEY key;
@@ -397,6 +504,7 @@ inline void AES_ECB_Decrypt(unsigned char* ciphertext, unsigned int ciphertextLe
         *pPlaintextLen = RemovePKCS7Padding(plaintext, ciphertextLen);
 }
 
+// Detect a line of ciphertext encrypted with AES in ECB mode by locating identical AES-sized blocks
 inline int DetectECBMode(unsigned char* ciphertext, unsigned int ciphertextLen, unsigned int blockSize)
 {
     int currMode = CBCMode;

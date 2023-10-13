@@ -69,7 +69,7 @@ TEST(XORTests, RepeatingKeyXOR) {
     };
 
     for (const auto& testCase : testCases) {
-        EXPECT_EQ(XORSolutions.repeat_key_xor(testCase.input, testCase.key), testCase.expected_result);
+        EXPECT_EQ(XORSolutions.RepeatingKeyXOR(testCase.input, testCase.key), testCase.expected_result);
     }
 }
 

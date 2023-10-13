@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\CryptoChallengeLib">
-      <UniqueIdentifier>{3c3b36d0-a776-4c85-9e65-4786f9e0a0db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\CryptoChallengeLib">
       <UniqueIdentifier>{f90bde81-95ea-4b0a-9eff-a3232cf62ca4}</UniqueIdentifier>
     </Filter>
