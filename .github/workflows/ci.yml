@@ -31,7 +31,6 @@ jobs:
     - name: Setup Vcpkg
       uses: lukka/run-vcpkg@main
       with:
-        vcpkgDirectory: '${{ runner.workspace }}/external/vcpkg/'
         runVcpkgInstall: true
 
     - name: Build
