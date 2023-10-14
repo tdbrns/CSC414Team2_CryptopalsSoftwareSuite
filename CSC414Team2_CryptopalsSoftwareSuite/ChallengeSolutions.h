@@ -27,6 +27,7 @@ inline string ChallengeSolution::HexToBase64(string input)
     string base64String;
     size_t i = 0;
 
+    // Takes Hex and Converts it into base64
     while (i < hexBytes.size())
     {
         unsigned char byte1 = hexBytes[i++];
@@ -51,6 +52,7 @@ inline string ChallengeSolution::HexToBase64(string input)
 /*************************************************** Method for Challenge 2 ***************************************************/
 inline string ChallengeSolution::FixedXOR(string hexString1, string hexString2)
 {
+    // Feeds a Hex string then decodes the Hex string. Finally it the decoded Hex goes against XOR'd
     try 
     {
         if (hexString1.length() != hexString2.length())
@@ -100,6 +102,7 @@ inline string ChallengeSolution::SingleByteXORCipher(string hexString)
 
     string message;
 
+    // Decrypt the message and then displays the message
     for (size_t i = 0; i < hexBytes.size(); i++)
     {
         unsigned char xorResult = hexBytes[i] ^ key;
@@ -135,6 +138,7 @@ inline string ChallengeSolution::DetectSingleCharXOR(string file_name)
         vector<float> plaintextScores;
         string plaintext;
 
+        // Calculates the high scores of the Plain texts
         for (int i = 0; i < 256; i++)
         {
             plaintext = "";
@@ -176,6 +180,7 @@ inline string ChallengeSolution::DetectSingleCharXOR(string file_name)
 /*************************************************** Method for Challenge 5 ***************************************************/
 inline string ChallengeSolution::RepeatingKeyXOR(const string& plain_text, const string key)
 {
+    //Converts plain text to cipher_text
     string cipher_text;
     for (size_t i = 0; i < plain_text.length(); i++) 
     {
@@ -251,6 +256,7 @@ inline string ChallengeSolution::AES_ECBMode(string fileName)
     AES_ECB_Decrypt(ciphertext.data, ciphertext.len, plaintext.data, &plaintext.len, strKey, true);
 
     string message;
+    //Displays message
     for (int i = 0; i < plaintext.len; i++)
         message += plaintext.data[i];
 
