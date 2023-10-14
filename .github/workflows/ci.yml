@@ -25,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        ubmodules: true   
+        submodules: true   
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
