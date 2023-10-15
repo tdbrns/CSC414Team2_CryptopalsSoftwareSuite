@@ -2,7 +2,7 @@
 setlocal
 
 :: Navigate to vcpkg directory
-pushd external\vcpkg
+pushd vcpkg
 
 :: Check if vcpkg.exe exists
 if not exist vcpkg.exe (
