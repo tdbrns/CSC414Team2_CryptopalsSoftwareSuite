@@ -34,7 +34,7 @@ enum OperationMode
     CBCMode
 };
 
-// The Block struct is used to identify blocks of data of any given size for a block cipher.
+// The Block struct is used to identify a block of data of any given size for a block cipher
 struct Block
 {
     unsigned char* data = NULL;
@@ -109,50 +109,66 @@ struct Block
     }
 };
 
-// Scores plaintext according to letter frequency (the average number of times letters of the alphabet appear in the English
+// Scores a character (byte) according to letter frequency (the average number of times letters of the alphabet appear in the English
 //  language). Reference: https://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
-inline float ScorePlaintext(string plaintxt)
+inline float ScoreByte(unsigned char ch)
 {
-    float score = 0.0f;
-    int asciiCount = 0;
+    float letterScore = 0;
 
-    for (int i = 0; i < plaintxt.length(); i++)
-        plaintxt[i] = tolower(plaintxt[i]);
-
-    for (int i = 0; i < plaintxt.length(); i++)
+    switch (tolower(ch))
     {
-        switch (tolower(plaintxt[i]))
-        {
-        case 'a': score += 8.12; break;
-        case 'b': score += 1.49; break;
-        case 'c': score += 2.71; break;
-        case 'd': score += 4.32; break;
-        case 'e': score += 12.02; break;
-        case 'f': score += 2.30; break;
-        case 'g': score += 2.03; break;
-        case 'h': score += 5.92; break;
-        case 'i': score += 7.31; break;
-        case 'j': score += 0.10; break;
-        case 'k': score += 0.69; break;
-        case 'l': score += 3.98; break;
-        case 'm': score += 2, 61; break;
-        case 'n': score += 6.95; break;
-        case 'o': score += 7.68; break;
-        case 'p': score += 1.82; break;
-        case 'q': score += 0.11; break;
-        case 'r': score += 6.02; break;
-        case 's': score += 6.28; break;
-        case 't': score += 9.10; break;
-        case 'u': score += 2.88; break;
-        case 'v': score += 1.11; break;
-        case 'w': score += 2.09; break;
-        case 'x': score += 0.17; break;
-        case 'y': score += 2.11; break;
-        case 'z': score += 0.07; break;
-        case ' ': score += 15; break;
-        default: break;
-        }
+    case 'a': letterScore = 8.12; break;
+    case 'b': letterScore = 1.49; break;
+    case 'c': letterScore = 2.71; break;
+    case 'd': letterScore = 4.32; break;
+    case 'e': letterScore = 12.02; break;
+    case 'f': letterScore = 2.30; break;
+    case 'g': letterScore = 2.03; break;
+    case 'h': letterScore = 5.92; break;
+    case 'i': letterScore = 7.31; break;
+    case 'j': letterScore = 0.10; break;
+    case 'k': letterScore = 0.69; break;
+    case 'l': letterScore = 3.98; break;
+    case 'm': letterScore = 2.61; break;
+    case 'n': letterScore = 6.95; break;
+    case 'o': letterScore = 7.68; break;
+    case 'p': letterScore = 1.82; break;
+    case 'q': letterScore = 0.11; break;
+    case 'r': letterScore = 6.02; break;
+    case 's': letterScore = 6.28; break;
+    case 't': letterScore = 9.10; break;
+    case 'u': letterScore = 2.88; break;
+    case 'v': letterScore = 1.11; break;
+    case 'w': letterScore = 2.09; break;
+    case 'x': letterScore = 0.17; break;
+    case 'y': letterScore = 2.11; break;
+    case 'z': letterScore = 0.07; break;
+    case ' ': letterScore = 15; break;
+    default:
+        break;
     }
+
+    return letterScore;
+}
+
+// Scores a string of plaintext according to letter frequency
+inline float ScoreString(string plaintext)
+{
+    float score = 0;
+
+    for (int i = 0; i < plaintext.length(); i++)
+        score += ScoreByte(plaintext[i]);
+
+    return score;
+}
+
+// Scores a block of plaintext according to letter frequency
+inline float ScoreBlock(unsigned char* block, int blockLen)
+{
+    float score = 0;
+
+    for (int i = 0; i < blockLen; i++)
+        score += ScoreByte(block[i]);
 
     return score;
 }
@@ -209,106 +225,84 @@ inline Block StringToHex(unsigned char* inputASCII, int inputLength)
     return out;
 }
 
-// Calculates the edit/hamming distance between to strings
-inline int HammingDistance(string s1, string s2)
+// Calculate the edit/hamming distance between two unsigned char arrays (strings)
+inline int HammingDistance(unsigned char* buffer1, unsigned char* buffer2, int bufferLen)
 {
     int distance = 0;
-    for (size_t i = 0; i < s1.length(); ++i) {
-        uint8_t xorResult = s1[i] ^ s2[i];
-        while (xorResult) {
-            distance += (xorResult & 1);
-            xorResult >>= 1;
+
+    // For every byte (character) in buffer1 and buffer2, compare the bits of buffer1's byte to the bits of buffer2's byte
+    for (int i = 0; i < bufferLen; i++)
+    {
+        for (int j = 0; j < 8; j++)
+        {
+            if (((buffer1[i] >> j) & 0x01) != ((buffer2[i] >> j) & 0x01))
+                distance++;
         }
     }
 
     return distance;
 }
 
-// Transposes blocks of data according to the method described in Challenge 6, Set 1 
-inline vector<string> TransposeBlocks(string ciphertext, int keySize)
+// Find a single byte of the key for repeating-key XOR cipher
+inline unsigned char FindKeyByte(unsigned char* ciphertext, int ciphertextLen, int targetByte, int keyLen)
 {
-    vector<string> blocks;
-    //int numOfBlocks = ciphertext.size() / keySize;
-    vector<string> transposedBlocks;
+    // Divide the ciphertext into key length-sized blocks.
+    // Because the ciphertext may not divide evenly into key length-sized blocks, the length of the block will either be 
+    // (ciphertextLen / keyLen) or (ciphertextLen / keyLen) + 1.
+    int blockLen = (ciphertextLen / keyLen) + ((targetByte < ciphertextLen % keyLen) ? 1 : 0);
 
-    for (size_t i = 0; i < ciphertext.size(); i += keySize)
-        blocks.push_back(ciphertext.substr(i, keySize));
+    Block candidateBlock(blockLen);
+    Block testBlock(blockLen);
 
-    for (size_t i = 0; i < 12; i++)
+    int indexOffset = 0;
+    for (int i = targetByte; i < ciphertextLen; i += keyLen)
+        candidateBlock.data[indexOffset++] = ciphertext[i];
+
+    unsigned char bestByte = 0;
+    float bestScore = 0;
+    for (int i = 0; i < 256; i++)
     {
-        string tempStr = "";
-        for (size_t j = 0; j < blocks.size(); j++)
-            tempStr += blocks[j].substr(i, 1);
-
-        transposedBlocks.push_back(tempStr);
-    }
-
-    return transposedBlocks;
-}
-
-// 
-inline char FindKeyForBlock(string block)
-{
-    char likelyKey = 0;
-    int maxScore = 0;
-
-    for (size_t key = 0; key < 256; key++) {
-        int score = 0;
-        for (char character : block) {
-            unsigned char usigned_character = static_cast<unsigned char>(character);
-            unsigned char decrypted = usigned_character ^ key;
-            if (std::isprint(decrypted))
-                score++;
-
-            // Debugging statements to print values
-            //std::cout << "Character: " << character << std::endl;
-            //std::cout << "Usigne Character: " << usigned_character << std::endl;
-            //std::cout << "Decrypted: " << decrypted << std::endl;
-            //std::cout << "Score: " << score << std::endl;
+        unsigned char* temp = (unsigned char*)&i;
+        for (int j = 0; j < candidateBlock.len; j++)
+        {
+            unsigned char byte = temp[j % 1];
+            testBlock.data[j] = candidateBlock.data[j] ^ byte;
         }
-        if (score > maxScore) {
-            maxScore = score;
-            likelyKey = key;
+
+        float blockScore = ScoreBlock(testBlock.data, testBlock.len);
+
+        if (blockScore > bestScore)
+        {
+            bestScore = blockScore;
+            bestByte = i;
         }
     }
 
-    return likelyKey;
+    return bestByte;
 }
 
 // Determines the likely size of a key used to encrypt a given ciphertext
-inline int FindLikelyKeySize(string ciphertext)
+inline int FindLikelyKeySize(unsigned char* ciphertext, int ciphertextLen)
 {
+    int numOfSamples = 3;
     int likelyKeySize = 0;
-    int maxLikelyKeySize = 40;
-    double smallestNormalizedDistance = std::numeric_limits<double>::max();
+    int MAX_KEYSIZE = 40;
+    float smallestDistance = 100;
 
-    for (int keySize = 2; keySize < maxLikelyKeySize + 1; keySize++)
+    for (int i = 3; i <= MAX_KEYSIZE; i++)
     {
-        vector<string> blocks;
-        for (size_t i = 0; i < ciphertext.size(); i += keySize)
-            blocks.push_back(ciphertext.substr(i, keySize));
+        int distance = 0;
+        for (int j = 0; j < numOfSamples; j++)
+            distance = HammingDistance(&ciphertext[j * i], &ciphertext[(j + 1) * i], i);
 
-        double normalizedDistance = 0.0;
-        int pairsCount = 0;
-
-        for (size_t i = 0; i < blocks.size(); i++)
+        float normalizedDistance = static_cast<float>(distance) / numOfSamples / i;
+        if (normalizedDistance < smallestDistance)
         {
-            for (size_t j = i + 1; j < blocks.size(); j++)
-            {
-                normalizedDistance += HammingDistance(blocks[i], blocks[j]) / static_cast<double>(keySize);
-                pairsCount++;
-            }
-        }
-
-        normalizedDistance /= pairsCount;
-
-        if (normalizedDistance < smallestNormalizedDistance) 
-        {
-            smallestNormalizedDistance = normalizedDistance;
-            likelyKeySize = keySize;
+            smallestDistance = normalizedDistance;
+            likelyKeySize = i;
         }
     }
-    
+
     return likelyKeySize;
 }
 

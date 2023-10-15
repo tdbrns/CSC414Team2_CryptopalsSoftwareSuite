@@ -94,7 +94,7 @@ inline string ChallengeSolution::SingleByteXORCipher(string hexString)
             plaintext += xorResult;
         }
 
-        plaintextScores.push_back(ScorePlaintext(plaintext));
+        plaintextScores.push_back(ScoreString(plaintext));
     }
 
     float highestScore = *max_element(plaintextScores.begin(), plaintextScores.end());
@@ -149,7 +149,7 @@ inline string ChallengeSolution::DetectSingleCharXOR(string file_name)
                 plaintext += xorResult;
             }
 
-            plaintextScores.push_back(ScorePlaintext(plaintext));
+            plaintextScores.push_back(ScoreString(plaintext));
         }
 
         float highScore = *max_element(plaintextScores.begin(), plaintextScores.end());
@@ -200,39 +200,34 @@ inline string ChallengeSolution::RepeatingKeyXOR(const string& plain_text, const
 /*************************************************** Method for Challenge 6 ***************************************************/
 inline string ChallengeSolution::BreakRepeatingKeyXOR(string file_name)
 {
-    string input;
+    Block base64Text;
+    if (!BlockReadFile(&base64Text, "datafile_challenge6.txt"))
+        return "Error reading file.";
 
-    // Read the content of the specified file
+    int maxSize = base64Text.len * 3 / 4;
 
-    std::ifstream fileIn;
-    fileIn.open("datafile_challenge6.txt");
-    if (!fileIn.is_open()) 
-        throw std::runtime_error("Failed to open the file.");
+    Block hexBuffer;
+    hexBuffer.Alloc(maxSize);
+    hexBuffer.len = DecodeBase64(base64Text.data, base64Text.len, hexBuffer.data, maxSize);
 
-    // Read lines from the file and append them to the input string
-    string line;
-    while (!fileIn.eof()) 
+    Block key;
+    key.Alloc(FindLikelyKeySize(hexBuffer.data, hexBuffer.len));
+
+    for (unsigned i = 0; i < key.len; i++)
+        key.data[i] = FindKeyByte(hexBuffer.data, hexBuffer.len, i, key.len);
+
+    Block plaintext;
+    plaintext.Alloc(hexBuffer.len);
+
+    string message = "";
+    for (int i = 0; i < hexBuffer.len; i++)
     {
-        std::getline(fileIn, line);
-        input += line;
-    }
-    fileIn.close();
-
-    int likelyKeySize = FindLikelyKeySize(input);
-    vector<string> transposedBlocks = TransposeBlocks(input, likelyKeySize);
-    string key;
-
-    for (string block : transposedBlocks) 
-    {
-        char likelyKey = FindKeyForBlock(block);
-        key += likelyKey;
+        char byte = key.data[i % key.len];
+        plaintext.data[i] = hexBuffer.data[i] ^ byte;
+        message += plaintext.data[i];
     }
 
-    string plaintext1;
-    for (size_t i = 0; i < input.size(); ++i) 
-        plaintext1 += input[i] ^ key[i % likelyKeySize];
-
-    return plaintext1;
+    return message;
 }
 
 /*************************************************** Method for Challenge 7 ***************************************************/
