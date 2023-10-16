@@ -1,5 +1,8 @@
 # Project Description
-This software project simulate Crypto Challenge Set 1 of The Cryptopals Crypto Challenges using a Windows Form Application front end and a back end written in C++.
+This software project simulates Crypto Challenge Set 1 of The Cryptopals Crypto Challenges using a Windows Form Application front end and a back end written in C++.
+
+Two third-party software were used in the project. A GoogleTests suite was implemented as the primary testing software for the challenges.
+OpenSSL was used as recommend by challenge 7. The aes.h file was used for its AES encryption and decryption
 
 # Project setup
 
