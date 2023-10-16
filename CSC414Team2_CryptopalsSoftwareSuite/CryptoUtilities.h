@@ -16,6 +16,7 @@
 
 using std::string;
 using std::vector;
+using std::ifstream;
 
 const char base64Table[64] = {
 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
@@ -310,7 +311,7 @@ inline int FindLikelyKeySize(unsigned char* ciphertext, int ciphertextLen)
 static inline string& leftTrim(string& str)
 {
     // lambda expression
-    str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](unsigned char c) {return !std::isspace(c); }));
+    str.erase(str.begin(), find_if(str.begin(), str.end(), [](unsigned char c) {return !isspace(c); }));
     return str;
 }
 
@@ -322,7 +323,7 @@ static inline string& rightTrim(string& str)
 }
 
 // Trim from beggining and end of string
-static inline std::string& trim(std::string& str)
+static inline string& trim(string& str)
 {
     return leftTrim(rightTrim(str));
 }
@@ -330,7 +331,7 @@ static inline std::string& trim(std::string& str)
 // Read the contents of a file into a Block struct
 inline bool BlockReadFile(Block* out, const char* file)
 {
-    std::ifstream inStream(file, std::ifstream::binary);
+    ifstream inStream(file, ifstream::binary);
     if (!inStream)
         return false;
 
@@ -356,7 +357,7 @@ inline vector<Block> GetLinesFromFile(const char* file)
     vector<Block> out;
 
     // Create an ifstream
-    std::ifstream inStream(file, std::ifstream::binary);
+    ifstream inStream(file, ifstream::binary);
     if (!inStream)
         return out;
 

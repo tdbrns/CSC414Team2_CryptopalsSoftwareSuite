@@ -123,7 +123,7 @@ inline string ChallengeSolution::DetectSingleCharXOR(string file_name)
     char possibleKey = '\0';
 
     // Read in hex strings from datafile_challenge4.txt
-    std::ifstream fileIn(file_name);
+    ifstream fileIn;
     fileIn.open("datafile_challenge4.txt");
     while (!fileIn.eof())
     {

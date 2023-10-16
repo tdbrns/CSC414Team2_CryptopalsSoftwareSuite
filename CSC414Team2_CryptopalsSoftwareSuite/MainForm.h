@@ -2,9 +2,9 @@
 
 #include <msclr/marshal_cppstd.h>
 #include "ChallengeSolutions.h"
-#include <fstream>
 
-
+using msclr::interop::marshal_as;		// marshal_as is used to convert data types defined by the .NET Framework to data types 
+										// defined by the standard C++ library and vice versa.
 
 namespace  CSC414Team2CryptopalsSoftwareSuite {
 
@@ -629,15 +629,15 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
 		   void MainForm::hex_to_base64()
 		   {
-			   ChallengeSolution solution; //points to challange solution class 
+			   ChallengeSolution solution; //points to challange solution struct 
 			   // Check if base_hex_array is not empty
 			   System::String^ managedString = base_hex_array;
 			   //if (!String::IsNullOrEmpty(base_hex_array)) {
 				   // Convert System::String to std::string
-			   std::string hexString = msclr::interop::marshal_as<std::string>(managedString);
+			   string hexString = marshal_as<string>(managedString);
 
 			   // Task 1: Convert hex to base64
-			   std::string base64_string = solution.HexToBase64(hexString);
+			   string base64_string = solution.HexToBase64(hexString);
 
 			   // Update the hash_output text box with the base64 result
 			   base_64->Text = gcnew String(base64_string.c_str());
@@ -652,14 +652,14 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   {
 			   ChallengeSolution solution;
 			   System::String^ managedString = base_hex_array;
-			   std::string hexString = msclr::interop::marshal_as<std::string>(managedString);
+			   string hexString = marshal_as<string>(managedString);
 			   System::String^ managedString_2 = xor_compare;
 
 			   if (!String::IsNullOrEmpty(xor_compare))
 			   {
-				   std::string xor_string = msclr::interop::marshal_as<std::string>(managedString);
-				   std::string xor_string_2 = msclr::interop::marshal_as<std::string>(managedString_2);
-				   std::string result_xor = solution.FixedXOR(xor_string, xor_string_2);
+				   string xor_string = marshal_as<string>(managedString);
+				   string xor_string_2 = marshal_as<string>(managedString_2);
+				   string result_xor = solution.FixedXOR(xor_string, xor_string_2);
 				   xor_results = gcnew String(result_xor.c_str());
 				   xor_result_string->Text = gcnew String(result_xor.c_str());
 			   }
@@ -676,8 +676,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   System::String^ managedString2 = message_results;
 
 			   if (!String::IsNullOrEmpty(single_xor_base64)) {
-				   std::string single_xor_base64_txt = msclr::interop::marshal_as<std::string>(managedString);
-				   std::string message = solution.SingleByteXORCipher(single_xor_base64_txt);
+				  string single_xor_base64_txt = marshal_as<string>(managedString);
+				  string message = solution.SingleByteXORCipher(single_xor_base64_txt);
 				   message_results = gcnew String(message.c_str());
 				   message_box->Text = gcnew String(message.c_str());
 			   }
@@ -691,11 +691,11 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   {
 			   ChallengeSolution solution;
 			   System::String^ managedString = plain_txt;
-			   std::string plain_txt_string = msclr::interop::marshal_as<std::string>(managedString);
+			   string plain_txt_string = marshal_as<string>(managedString);
 			   System::String^ managedString_2 = key_txt;
 			   if (!String::IsNullOrEmpty(key_txt)) {
-				   std::string key_txt_string = msclr::interop::marshal_as<std::string>(managedString_2);
-				   std::string cipher_result = solution.RepeatingKeyXOR(plain_txt_string, key_txt_string);
+				   string key_txt_string = marshal_as<string>(managedString_2);
+				   string cipher_result = solution.RepeatingKeyXOR(plain_txt_string, key_txt_string);
 				   cipher_txt = gcnew String(cipher_result.c_str());
 				   cipher_text_box->Text = gcnew String(cipher_result.c_str());
 			   }
@@ -721,10 +721,10 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 				   // Get the selected file name and pass it to DetectSingleCharXOR.
 
 				   // Convert the selectedFileName to a standard string (if needed).
-				   std::string standardStringFileName = msclr::interop::marshal_as<std::string>(selectedFileName);
+				   string standardStringFileName = marshal_as<string>(selectedFileName);
 
 				   // Call the DetectSingleCharXOR function with the selected file name.
-				   std::string result = solution.DetectSingleCharXOR(standardStringFileName);
+				   string result = solution.DetectSingleCharXOR(standardStringFileName);
 
 				   // Display or process the result in the file_xor_results TextBox.
 				   // Assuming "file_xor_results" is the name of your TextBox:
@@ -752,10 +752,10 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 
 				   // Convert the selectedFileName to a standard string (if needed).
-				   std::string standardStringFileName = msclr::interop::marshal_as<std::string>(selectedFileName);
+				   string standardStringFileName = marshal_as<string>(selectedFileName);
 
 				   // Call the DetectSingleCharXOR function with the selected file name.
-				   std::string result = solution.BreakRepeatingKeyXOR(standardStringFileName);
+				   string result = solution.BreakRepeatingKeyXOR(standardStringFileName);
 
 				   // Display or process the result in the file_xor_results TextBox.
 				   // Assuming "file_xor_results" is the name of your TextBox:
@@ -778,10 +778,10 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 
 				   // Convert the selectedFileName to a standard string (if needed).
-				   std::string standardStringFileName = msclr::interop::marshal_as<std::string>(selectedFileName);
+				   string standardStringFileName = marshal_as<string>(selectedFileName);
 
 				   // Call the DetectSingleCharXOR function with the selected file name.
-				   std::string result = solution.AES_ECBMode(standardStringFileName);
+				   string result = solution.AES_ECBMode(standardStringFileName);
 
 				   // Display or process the result in the file_xor_results TextBox.
 				   // Assuming "file_xor_results" is the name of your TextBox:
@@ -804,10 +804,10 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 
 				   // Convert the selectedFileName to a standard string (if needed).
-				   std::string standardStringFileName = msclr::interop::marshal_as<std::string>(selectedFileName);
+				  string standardStringFileName = marshal_as<string>(selectedFileName);
 
 				   // Call the DetectSingleCharXOR function with the selected file name.
-				   std::string result = solution.DetectAES_ECBMode(standardStringFileName);
+				   string result = solution.DetectAES_ECBMode(standardStringFileName);
 
 				   // Display or process the result in the file_xor_results TextBox.
 				   // Assuming "file_xor_results" is the name of your TextBox:
