@@ -1,3 +1,6 @@
+# Project Description
+This software project simulate Crypto Challenge Set 1 of The Cryptopals Crypto Challenges using a Windows Form Application front end and a back end written in C++.
+
 # Project setup
 
 ### 1. Clone the repository with submodules
