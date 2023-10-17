@@ -16,7 +16,7 @@ Three third-party software components are used in the project: GoogleTest, OpenS
 * [OpenSSL documentation](https://www.openssl.org/)
 * [OpenSSL repository](https://github.com/openssl/openssl)
 * [vcpkg documentation](https://learn.microsoft.com/en-us/vcpkg/)
-* [vcpkg Repository](https://github.com/microsoft/vcpkg)
+* [vcpkg repository](https://github.com/microsoft/vcpkg)
 
 # Project setup
 
