@@ -33,5 +33,5 @@ vcpkg install
 Update vcpkg.json
 
 # Third-party software used
-[GoogleTest](https://www.usm.edu/registrar/commencement/apply-for-graduation.php)
-[OpenSSL](https://www.openssl.org/)
+* [GoogleTest](https://www.usm.edu/registrar/commencement/apply-for-graduation.php)
+* [OpenSSL](https://www.openssl.org/)
