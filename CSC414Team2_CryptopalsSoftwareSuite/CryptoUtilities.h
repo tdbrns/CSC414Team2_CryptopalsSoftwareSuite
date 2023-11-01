@@ -4,7 +4,6 @@
 
 #include <string>
 #include <iomanip>
-#include <iostream>
 #include <sstream>
 #include <fstream>
 #include <vector>
@@ -18,7 +17,8 @@ using std::string;
 using std::vector;
 using std::ifstream;
 
-const char base64Table[64] = {
+const int BASE64_TABLE_SIZE = 64;
+const char BASE64_TABLE[] = {
 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
@@ -27,6 +27,13 @@ const char base64Table[64] = {
 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
 'w', 'x', 'y', 'z', '0', '1', '2', '3',
 '4', '5', '6', '7', '8', '9', '+', '/'
+};
+
+const int HEX_TABLE_SIZE = 22;
+const char HEX_TABLE[] = {
+    '0', '1', '2','3', '4', '5', '6', '7', '8', '9',
+    'a', 'b', 'c', 'd', 'e', 'f',
+    'A', 'B', 'C', 'D', 'E', 'F'
 };
 
 enum OperationMode
@@ -97,7 +104,8 @@ struct Block
     Block(const Block& other)
     {
         Alloc(other.len);
-        memcpy(data, other.data, other.len);
+        if (data != 0)
+            memcpy(data, other.data, other.len);
     }
 
     // Copy assignment operator
@@ -111,40 +119,40 @@ struct Block
 };
 
 // Scores a character (byte) according to letter frequency (the average number of times letters of the alphabet appear in the English
-//  language). Reference: https://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
+// language). Reference: https://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
 inline float ScoreByte(unsigned char ch)
 {
     float letterScore = 0;
 
     switch (tolower(ch))
     {
-    case 'a': letterScore = 8.12; break;
-    case 'b': letterScore = 1.49; break;
-    case 'c': letterScore = 2.71; break;
-    case 'd': letterScore = 4.32; break;
-    case 'e': letterScore = 12.02; break;
-    case 'f': letterScore = 2.30; break;
-    case 'g': letterScore = 2.03; break;
-    case 'h': letterScore = 5.92; break;
-    case 'i': letterScore = 7.31; break;
-    case 'j': letterScore = 0.10; break;
-    case 'k': letterScore = 0.69; break;
-    case 'l': letterScore = 3.98; break;
-    case 'm': letterScore = 2.61; break;
-    case 'n': letterScore = 6.95; break;
-    case 'o': letterScore = 7.68; break;
-    case 'p': letterScore = 1.82; break;
-    case 'q': letterScore = 0.11; break;
-    case 'r': letterScore = 6.02; break;
-    case 's': letterScore = 6.28; break;
-    case 't': letterScore = 9.10; break;
-    case 'u': letterScore = 2.88; break;
-    case 'v': letterScore = 1.11; break;
-    case 'w': letterScore = 2.09; break;
-    case 'x': letterScore = 0.17; break;
-    case 'y': letterScore = 2.11; break;
-    case 'z': letterScore = 0.07; break;
-    case ' ': letterScore = 15; break;
+    case 'a': letterScore = 8.12f; break;
+    case 'b': letterScore = 1.49f; break;
+    case 'c': letterScore = 2.71f; break;
+    case 'd': letterScore = 4.32f; break;
+    case 'e': letterScore = 12.02f; break;
+    case 'f': letterScore = 2.30f; break;
+    case 'g': letterScore = 2.03f; break;
+    case 'h': letterScore = 5.92f; break;
+    case 'i': letterScore = 7.31f; break;
+    case 'j': letterScore = 0.10f; break;
+    case 'k': letterScore = 0.69f; break;
+    case 'l': letterScore = 3.98f; break;
+    case 'm': letterScore = 2.61f; break;
+    case 'n': letterScore = 6.95f; break;
+    case 'o': letterScore = 7.68f; break;
+    case 'p': letterScore = 1.82f; break;
+    case 'q': letterScore = 0.11f; break;
+    case 'r': letterScore = 6.02f; break;
+    case 's': letterScore = 6.28f; break;
+    case 't': letterScore = 9.10f; break;
+    case 'u': letterScore = 2.88f; break;
+    case 'v': letterScore = 1.11f; break;
+    case 'w': letterScore = 2.09f; break;
+    case 'x': letterScore = 0.17f; break;
+    case 'y': letterScore = 2.11f; break;
+    case 'z': letterScore = 0.07f; break;
+    case ' ': letterScore = 15.0f; break;
     default:
         break;
     }
@@ -387,7 +395,7 @@ inline int FindIndexBase64(char ch)
 {
     int i;
     for (i = 0; i < 64; i++)
-        if (ch == base64Table[i])
+        if (ch == BASE64_TABLE[i])
             break;
 
     return i;

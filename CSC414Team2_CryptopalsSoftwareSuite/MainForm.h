@@ -632,20 +632,20 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   ChallengeSolution solution; //points to challange solution struct 
 			   // Check if base_hex_array is not empty
 			   System::String^ managedString = base_hex_array;
-			   //if (!String::IsNullOrEmpty(base_hex_array)) {
-				   // Convert System::String to std::string
-			   string hexString = marshal_as<string>(managedString);
+			   if (!String::IsNullOrEmpty(base_hex_array)) {
+				    //Convert System::String to std::string
+					string hexString = marshal_as<string>(managedString);
 
-			   // Task 1: Convert hex to base64
-			   string base64_string = solution.HexToBase64(hexString);
+					// Task 1: Convert hex to base64
+					string base64_string = solution.HexToBase64(hexString);
 
 			   // Update the hash_output text box with the base64 result
 			   base_64->Text = gcnew String(base64_string.c_str());
-			   //}
-			  // else {
-				   // Handle the case where base_hex_array is empty
-				   //base_64->Text = "Input is empty.";
-			  // }
+			   }
+			   else {
+				    //Handle the case where base_hex_array is empty
+					base_64->Text = "Input is empty.";
+			   }
 		   }
 
 		   void MainForm::fixed_xor()

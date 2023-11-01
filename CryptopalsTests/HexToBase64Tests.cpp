@@ -26,9 +26,9 @@ TEST(HexToBase64Tests, HexToBase64Padded) {
     };
 
     std::vector<TestCase> testCases = {
-        {"4927", "SSc="},  // 2 characters (1 byte) 
-        {"49276d20", "SSdtIA=="},  // 8 characters (4 bytes)
-        {"49276d206b", "SSdtIGs="},  // 10 characters (5 bytes)
+        {"4927", "SSc="},  // 4 characters (4 bytes) 
+        {"49276d20", "SSdtIA=="},  // 8 characters (8 bytes)
+        {"49276d206b", "SSdtIGs="},  // 10 characters (10 bytes)
     };
 
     for (const auto& testCase : testCases) {
