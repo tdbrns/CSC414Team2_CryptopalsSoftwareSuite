@@ -33,7 +33,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		String^ single_xor_base64;
 		String^ message_results;
 
-	private: System::Windows::Forms::PictureBox^ background_img;
+
 
 	private: System::Windows::Forms::Button^ fixed_xor_btn;
 
@@ -77,6 +77,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 	private: System::Windows::Forms::TextBox^ hex_string_2;
 	private: System::Windows::Forms::Label^ label13;
 
+
 	private: System::Windows::Forms::TextBox^ base_hex;
 
 	public:
@@ -107,8 +108,6 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			}
 		}
 
-		//protected:
-
 	private:
 		/// <summary>
 		/// Required designer variable.
@@ -131,7 +130,6 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->fixed_xor_btn = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
-			this->background_img = (gcnew System::Windows::Forms::PictureBox());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
@@ -160,47 +158,65 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->hex_string_2 = (gcnew System::Windows::Forms::TextBox());
 			this->label13 = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->background_img))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// base_64
 			// 
-			this->base_64->Location = System::Drawing::Point(182, 23);
+			this->base_64->Location = System::Drawing::Point(238, 29);
+			this->base_64->Margin = System::Windows::Forms::Padding(4);
+			this->base_64->Multiline = true;
 			this->base_64->Name = L"base_64";
-			this->base_64->Size = System::Drawing::Size(161, 20);
+			this->base_64->ReadOnly = true;
+			this->base_64->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->base_64->Size = System::Drawing::Size(213, 49);
 			this->base_64->TabIndex = 0;
+			this->base_64->WordWrap = false;
 			this->base_64->TextChanged += gcnew System::EventHandler(this, &MainForm::hash_input_TextChanged);
 			// 
 			// base_hex
 			// 
-			this->base_hex->Location = System::Drawing::Point(8, 20);
+			this->base_hex->Location = System::Drawing::Point(13, 29);
+			this->base_hex->Margin = System::Windows::Forms::Padding(4);
+			this->base_hex->Multiline = true;
 			this->base_hex->Name = L"base_hex";
-			this->base_hex->Size = System::Drawing::Size(164, 20);
+			this->base_hex->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->base_hex->Size = System::Drawing::Size(217, 49);
 			this->base_hex->TabIndex = 1;
+			this->base_hex->WordWrap = false;
 			this->base_hex->TextChanged += gcnew System::EventHandler(this, &MainForm::hash_base_hex_TextChanged);
 			// 
 			// hex_string_1
 			// 
-			this->hex_string_1->Location = System::Drawing::Point(8, 95);
+			this->hex_string_1->Location = System::Drawing::Point(13, 158);
+			this->hex_string_1->Margin = System::Windows::Forms::Padding(4);
+			this->hex_string_1->Multiline = true;
 			this->hex_string_1->Name = L"hex_string_1";
-			this->hex_string_1->Size = System::Drawing::Size(161, 20);
+			this->hex_string_1->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->hex_string_1->Size = System::Drawing::Size(213, 49);
 			this->hex_string_1->TabIndex = 9;
+			this->hex_string_1->WordWrap = false;
 			this->hex_string_1->TextChanged += gcnew System::EventHandler(this, &MainForm::xor_comparison_string_TextChanged);
 			// 
 			// xor_result_string
 			// 
-			this->xor_result_string->Location = System::Drawing::Point(349, 95);
+			this->xor_result_string->Location = System::Drawing::Point(455, 158);
+			this->xor_result_string->Margin = System::Windows::Forms::Padding(4);
+			this->xor_result_string->Multiline = true;
 			this->xor_result_string->Name = L"xor_result_string";
-			this->xor_result_string->Size = System::Drawing::Size(161, 20);
+			this->xor_result_string->ReadOnly = true;
+			this->xor_result_string->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->xor_result_string->Size = System::Drawing::Size(213, 49);
 			this->xor_result_string->TabIndex = 12;
+			this->xor_result_string->WordWrap = false;
 			this->xor_result_string->TextChanged += gcnew System::EventHandler(this, &MainForm::xor_result_string_TextChanged);
 			// 
 			// Convert
 			// 
 			this->Convert->ForeColor = System::Drawing::SystemColors::ControlText;
-			this->Convert->Location = System::Drawing::Point(8, 46);
+			this->Convert->Location = System::Drawing::Point(13, 86);
+			this->Convert->Margin = System::Windows::Forms::Padding(4);
 			this->Convert->Name = L"Convert";
-			this->Convert->Size = System::Drawing::Size(75, 23);
+			this->Convert->Size = System::Drawing::Size(100, 28);
 			this->Convert->TabIndex = 2;
 			this->Convert->Text = L"Convert";
 			this->Convert->UseVisualStyleBackColor = true;
@@ -208,9 +224,10 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// Cancel
 			// 
-			this->Cancel->Location = System::Drawing::Point(8, 455);
+			this->Cancel->Location = System::Drawing::Point(340, 1044);
+			this->Cancel->Margin = System::Windows::Forms::Padding(4);
 			this->Cancel->Name = L"Cancel";
-			this->Cancel->Size = System::Drawing::Size(75, 23);
+			this->Cancel->Size = System::Drawing::Size(100, 28);
 			this->Cancel->TabIndex = 3;
 			this->Cancel->Text = L"Clear All";
 			this->Cancel->UseVisualStyleBackColor = true;
@@ -218,9 +235,10 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// fixed_xor_btn
 			// 
-			this->fixed_xor_btn->Location = System::Drawing::Point(8, 121);
+			this->fixed_xor_btn->Location = System::Drawing::Point(13, 218);
+			this->fixed_xor_btn->Margin = System::Windows::Forms::Padding(4);
 			this->fixed_xor_btn->Name = L"fixed_xor_btn";
-			this->fixed_xor_btn->Size = System::Drawing::Size(90, 23);
+			this->fixed_xor_btn->Size = System::Drawing::Size(120, 28);
 			this->fixed_xor_btn->TabIndex = 10;
 			this->fixed_xor_btn->Text = L"Fixed Xor";
 			this->fixed_xor_btn->UseVisualStyleBackColor = true;
@@ -231,88 +249,95 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->label1->AutoSize = true;
 			this->label1->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->label1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label1->Location = System::Drawing::Point(12, 7);
+			this->label1->Location = System::Drawing::Point(16, 9);
+			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(53, 13);
+			this->label1->Size = System::Drawing::Size(124, 16);
 			this->label1->TabIndex = 4;
-			this->label1->Text = L"Base Hex";
+			this->label1->Text = L"Hexadecimal String";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(191, 7);
+			this->label2->Location = System::Drawing::Point(235, 9);
+			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(46, 13);
+			this->label2->Size = System::Drawing::Size(93, 16);
 			this->label2->TabIndex = 5;
-			this->label2->Text = L"Base 64";
-			// 
-			// background_img
-			// 
-			this->background_img->Location = System::Drawing::Point(8, 12);
-			this->background_img->Name = L"background_img";
-			this->background_img->Size = System::Drawing::Size(286, 136);
-			this->background_img->TabIndex = 6;
-			this->background_img->TabStop = false;
+			this->label2->Text = L"Base 64 String";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
 			this->label3->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->label3->Location = System::Drawing::Point(9, 79);
+			this->label3->Location = System::Drawing::Point(14, 138);
+			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(107, 13);
+			this->label3->Size = System::Drawing::Size(134, 16);
 			this->label3->TabIndex = 8;
 			this->label3->Text = L"Hexadecimal String 1";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(354, 79);
+			this->label4->Location = System::Drawing::Point(452, 138);
+			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(56, 13);
+			this->label4->Size = System::Drawing::Size(68, 16);
 			this->label4->TabIndex = 11;
 			this->label4->Text = L"Xor Result";
-			this->label4->Click += gcnew System::EventHandler(this, &MainForm::label4_Click);
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(5, 298);
+			this->label5->Location = System::Drawing::Point(15, 527);
+			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(54, 13);
+			this->label5->Size = System::Drawing::Size(66, 16);
 			this->label5->TabIndex = 13;
 			this->label5->Text = L"Plain Text";
 			// 
 			// plain_text_box
 			// 
-			this->plain_text_box->Location = System::Drawing::Point(8, 314);
+			this->plain_text_box->Location = System::Drawing::Point(14, 547);
+			this->plain_text_box->Margin = System::Windows::Forms::Padding(4);
+			this->plain_text_box->Multiline = true;
 			this->plain_text_box->Name = L"plain_text_box";
-			this->plain_text_box->Size = System::Drawing::Size(161, 20);
+			this->plain_text_box->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->plain_text_box->Size = System::Drawing::Size(213, 49);
 			this->plain_text_box->TabIndex = 14;
+			this->plain_text_box->WordWrap = false;
 			this->plain_text_box->TextChanged += gcnew System::EventHandler(this, &MainForm::plain_text_box_TextChanged);
 			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(332, 298);
+			this->label6->Location = System::Drawing::Point(446, 527);
+			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(61, 13);
+			this->label6->Size = System::Drawing::Size(75, 16);
 			this->label6->TabIndex = 15;
 			this->label6->Text = L"Cipher Text";
 			// 
 			// cipher_text_box
 			// 
-			this->cipher_text_box->Location = System::Drawing::Point(335, 314);
+			this->cipher_text_box->Location = System::Drawing::Point(450, 546);
+			this->cipher_text_box->Margin = System::Windows::Forms::Padding(4);
+			this->cipher_text_box->Multiline = true;
 			this->cipher_text_box->Name = L"cipher_text_box";
-			this->cipher_text_box->Size = System::Drawing::Size(161, 20);
+			this->cipher_text_box->ReadOnly = true;
+			this->cipher_text_box->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->cipher_text_box->Size = System::Drawing::Size(213, 50);
 			this->cipher_text_box->TabIndex = 16;
+			this->cipher_text_box->WordWrap = false;
 			this->cipher_text_box->TextChanged += gcnew System::EventHandler(this, &MainForm::cipher_text_box_TextChanged);
 			// 
 			// repeat_xor_btn
 			// 
-			this->repeat_xor_btn->Location = System::Drawing::Point(8, 340);
+			this->repeat_xor_btn->Location = System::Drawing::Point(15, 604);
+			this->repeat_xor_btn->Margin = System::Windows::Forms::Padding(4);
 			this->repeat_xor_btn->Name = L"repeat_xor_btn";
-			this->repeat_xor_btn->Size = System::Drawing::Size(75, 23);
+			this->repeat_xor_btn->Size = System::Drawing::Size(100, 28);
 			this->repeat_xor_btn->TabIndex = 17;
 			this->repeat_xor_btn->Text = L"Repeat Xor";
 			this->repeat_xor_btn->UseVisualStyleBackColor = true;
@@ -321,85 +346,109 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(177, 298);
+			this->label7->Location = System::Drawing::Point(239, 527);
+			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(25, 13);
+			this->label7->Size = System::Drawing::Size(30, 16);
 			this->label7->TabIndex = 18;
 			this->label7->Text = L"Key";
 			// 
 			// key_text_box
 			// 
-			this->key_text_box->Location = System::Drawing::Point(175, 314);
+			this->key_text_box->Location = System::Drawing::Point(236, 546);
+			this->key_text_box->Margin = System::Windows::Forms::Padding(4);
+			this->key_text_box->Multiline = true;
 			this->key_text_box->Name = L"key_text_box";
-			this->key_text_box->Size = System::Drawing::Size(154, 20);
+			this->key_text_box->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->key_text_box->Size = System::Drawing::Size(204, 50);
 			this->key_text_box->TabIndex = 19;
+			this->key_text_box->WordWrap = false;
 			this->key_text_box->TextChanged += gcnew System::EventHandler(this, &MainForm::key_text_box_TextChanged);
 			// 
 			// add_file_btn
 			// 
-			this->add_file_btn->Location = System::Drawing::Point(8, 272);
+			this->add_file_btn->Location = System::Drawing::Point(14, 476);
+			this->add_file_btn->Margin = System::Windows::Forms::Padding(4);
 			this->add_file_btn->Name = L"add_file_btn";
-			this->add_file_btn->Size = System::Drawing::Size(75, 23);
+			this->add_file_btn->Size = System::Drawing::Size(100, 28);
 			this->add_file_btn->TabIndex = 20;
-			this->add_file_btn->Text = L"Add File";
+			this->add_file_btn->Text = L"Choose File";
 			this->add_file_btn->UseVisualStyleBackColor = true;
 			this->add_file_btn->Click += gcnew System::EventHandler(this, &MainForm::add_file_btn_Click);
 			// 
 			// file_xor_results
 			// 
-			this->file_xor_results->Location = System::Drawing::Point(8, 246);
+			this->file_xor_results->Location = System::Drawing::Point(13, 424);
+			this->file_xor_results->Margin = System::Windows::Forms::Padding(4);
+			this->file_xor_results->Multiline = true;
 			this->file_xor_results->Name = L"file_xor_results";
-			this->file_xor_results->Size = System::Drawing::Size(161, 20);
+			this->file_xor_results->ReadOnly = true;
+			this->file_xor_results->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->file_xor_results->Size = System::Drawing::Size(304, 49);
 			this->file_xor_results->TabIndex = 21;
+			this->file_xor_results->WordWrap = false;
 			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(5, 375);
+			this->label8->Location = System::Drawing::Point(10, 659);
+			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(113, 13);
+			this->label8->Size = System::Drawing::Size(260, 16);
 			this->label8->TabIndex = 22;
-			this->label8->Text = L"Break Repeat Key Xor";
+			this->label8->Text = L"Break Repeat Key Xor (Key and Message)";
 			// 
 			// hex_single_byte_cipher
 			// 
-			this->hex_single_byte_cipher->Location = System::Drawing::Point(8, 173);
+			this->hex_single_byte_cipher->Location = System::Drawing::Point(13, 293);
+			this->hex_single_byte_cipher->Margin = System::Windows::Forms::Padding(4);
+			this->hex_single_byte_cipher->Multiline = true;
 			this->hex_single_byte_cipher->Name = L"hex_single_byte_cipher";
-			this->hex_single_byte_cipher->Size = System::Drawing::Size(161, 20);
+			this->hex_single_byte_cipher->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->hex_single_byte_cipher->Size = System::Drawing::Size(213, 49);
 			this->hex_single_byte_cipher->TabIndex = 23;
+			this->hex_single_byte_cipher->WordWrap = false;
 			this->hex_single_byte_cipher->TextChanged += gcnew System::EventHandler(this, &MainForm::hex_single_byte_cipher_TextChanged);
 			// 
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(9, 157);
+			this->label9->Location = System::Drawing::Point(16, 273);
+			this->label9->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(53, 13);
+			this->label9->Size = System::Drawing::Size(124, 16);
 			this->label9->TabIndex = 24;
-			this->label9->Text = L"Base Hex";
+			this->label9->Text = L"Hexadecimal String";
 			// 
 			// message_box
 			// 
-			this->message_box->Location = System::Drawing::Point(182, 173);
+			this->message_box->Location = System::Drawing::Point(234, 293);
+			this->message_box->Margin = System::Windows::Forms::Padding(4);
+			this->message_box->Multiline = true;
 			this->message_box->Name = L"message_box";
-			this->message_box->Size = System::Drawing::Size(159, 20);
+			this->message_box->ReadOnly = true;
+			this->message_box->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->message_box->Size = System::Drawing::Size(211, 49);
 			this->message_box->TabIndex = 25;
+			this->message_box->WordWrap = false;
 			this->message_box->TextChanged += gcnew System::EventHandler(this, &MainForm::message_box_TextChanged);
 			// 
 			// Message
 			// 
 			this->Message->AutoSize = true;
-			this->Message->Location = System::Drawing::Point(187, 157);
+			this->Message->Location = System::Drawing::Point(231, 273);
+			this->Message->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Message->Name = L"Message";
-			this->Message->Size = System::Drawing::Size(50, 13);
+			this->Message->Size = System::Drawing::Size(116, 16);
 			this->Message->TabIndex = 26;
-			this->Message->Text = L"Message";
+			this->Message->Text = L"Key and Message";
 			// 
 			// single_byte_xor_btn
 			// 
-			this->single_byte_xor_btn->Location = System::Drawing::Point(8, 199);
+			this->single_byte_xor_btn->Location = System::Drawing::Point(16, 353);
+			this->single_byte_xor_btn->Margin = System::Windows::Forms::Padding(4);
 			this->single_byte_xor_btn->Name = L"single_byte_xor_btn";
-			this->single_byte_xor_btn->Size = System::Drawing::Size(90, 23);
+			this->single_byte_xor_btn->Size = System::Drawing::Size(120, 28);
 			this->single_byte_xor_btn->TabIndex = 27;
 			this->single_byte_xor_btn->Text = L"Single Byte Xor";
 			this->single_byte_xor_btn->UseVisualStyleBackColor = true;
@@ -407,104 +456,131 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// file_break_repeat_xor_change
 			// 
-			this->file_break_repeat_xor_change->Location = System::Drawing::Point(8, 391);
+			this->file_break_repeat_xor_change->Location = System::Drawing::Point(13, 679);
+			this->file_break_repeat_xor_change->Margin = System::Windows::Forms::Padding(4);
+			this->file_break_repeat_xor_change->Multiline = true;
 			this->file_break_repeat_xor_change->Name = L"file_break_repeat_xor_change";
-			this->file_break_repeat_xor_change->Size = System::Drawing::Size(151, 20);
+			this->file_break_repeat_xor_change->ReadOnly = true;
+			this->file_break_repeat_xor_change->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->file_break_repeat_xor_change->Size = System::Drawing::Size(427, 49);
 			this->file_break_repeat_xor_change->TabIndex = 28;
+			this->file_break_repeat_xor_change->WordWrap = false;
 			// 
 			// break_repeat_btn
 			// 
-			this->break_repeat_btn->Location = System::Drawing::Point(8, 417);
+			this->break_repeat_btn->Location = System::Drawing::Point(14, 736);
+			this->break_repeat_btn->Margin = System::Windows::Forms::Padding(4);
 			this->break_repeat_btn->Name = L"break_repeat_btn";
-			this->break_repeat_btn->Size = System::Drawing::Size(75, 23);
+			this->break_repeat_btn->Size = System::Drawing::Size(100, 28);
 			this->break_repeat_btn->TabIndex = 29;
-			this->break_repeat_btn->Text = L"Add File";
+			this->break_repeat_btn->Text = L"Choose File";
 			this->break_repeat_btn->UseVisualStyleBackColor = true;
 			this->break_repeat_btn->Click += gcnew System::EventHandler(this, &MainForm::break_repeat_btn_Click);
 			// 
 			// AES_btn
 			// 
-			this->AES_btn->Location = System::Drawing::Point(165, 417);
+			this->AES_btn->Location = System::Drawing::Point(10, 869);
+			this->AES_btn->Margin = System::Windows::Forms::Padding(4);
 			this->AES_btn->Name = L"AES_btn";
-			this->AES_btn->Size = System::Drawing::Size(75, 23);
+			this->AES_btn->Size = System::Drawing::Size(100, 28);
 			this->AES_btn->TabIndex = 30;
-			this->AES_btn->Text = L"Add File";
+			this->AES_btn->Text = L"Choose File";
 			this->AES_btn->UseVisualStyleBackColor = true;
 			this->AES_btn->Click += gcnew System::EventHandler(this, &MainForm::AES_btn_Click);
 			// 
 			// AEX_textbox
 			// 
-			this->AEX_textbox->Location = System::Drawing::Point(165, 391);
+			this->AEX_textbox->Location = System::Drawing::Point(10, 811);
+			this->AEX_textbox->Margin = System::Windows::Forms::Padding(4);
+			this->AEX_textbox->Multiline = true;
 			this->AEX_textbox->Name = L"AEX_textbox";
-			this->AEX_textbox->Size = System::Drawing::Size(164, 20);
+			this->AEX_textbox->ReadOnly = true;
+			this->AEX_textbox->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->AEX_textbox->Size = System::Drawing::Size(307, 50);
 			this->AEX_textbox->TabIndex = 31;
+			this->AEX_textbox->WordWrap = false;
 			// 
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(172, 375);
+			this->label10->Location = System::Drawing::Point(10, 791);
+			this->label10->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(63, 13);
+			this->label10->Size = System::Drawing::Size(235, 16);
 			this->label10->TabIndex = 32;
-			this->label10->Text = L"AES in ECB";
+			this->label10->Text = L"AES in ECB Mode (Key and Message)";
 			// 
 			// Detect_AES_in_ECB_textbox
 			// 
-			this->Detect_AES_in_ECB_textbox->Location = System::Drawing::Point(335, 391);
+			this->Detect_AES_in_ECB_textbox->Location = System::Drawing::Point(18, 947);
+			this->Detect_AES_in_ECB_textbox->Margin = System::Windows::Forms::Padding(4);
+			this->Detect_AES_in_ECB_textbox->Multiline = true;
 			this->Detect_AES_in_ECB_textbox->Name = L"Detect_AES_in_ECB_textbox";
-			this->Detect_AES_in_ECB_textbox->Size = System::Drawing::Size(161, 20);
+			this->Detect_AES_in_ECB_textbox->ReadOnly = true;
+			this->Detect_AES_in_ECB_textbox->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->Detect_AES_in_ECB_textbox->Size = System::Drawing::Size(299, 50);
 			this->Detect_AES_in_ECB_textbox->TabIndex = 33;
+			this->Detect_AES_in_ECB_textbox->WordWrap = false;
 			// 
 			// label11
 			// 
 			this->label11->AutoSize = true;
-			this->label11->Location = System::Drawing::Point(332, 375);
+			this->label11->Location = System::Drawing::Point(14, 928);
+			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(99, 13);
+			this->label11->Size = System::Drawing::Size(157, 16);
 			this->label11->TabIndex = 34;
-			this->label11->Text = L"Detect AES In ECB";
+			this->label11->Text = L"Detect AES In ECB Mode";
 			// 
 			// Detect_AES_In_ECB_btn
 			// 
-			this->Detect_AES_In_ECB_btn->Location = System::Drawing::Point(335, 417);
+			this->Detect_AES_In_ECB_btn->Location = System::Drawing::Point(18, 1005);
+			this->Detect_AES_In_ECB_btn->Margin = System::Windows::Forms::Padding(4);
 			this->Detect_AES_In_ECB_btn->Name = L"Detect_AES_In_ECB_btn";
-			this->Detect_AES_In_ECB_btn->Size = System::Drawing::Size(75, 23);
+			this->Detect_AES_In_ECB_btn->Size = System::Drawing::Size(100, 28);
 			this->Detect_AES_In_ECB_btn->TabIndex = 35;
-			this->Detect_AES_In_ECB_btn->Text = L"Add File";
+			this->Detect_AES_In_ECB_btn->Text = L"Choose File";
 			this->Detect_AES_In_ECB_btn->UseVisualStyleBackColor = true;
 			this->Detect_AES_In_ECB_btn->Click += gcnew System::EventHandler(this, &MainForm::Detect_AES_In_ECB_btn_Click);
 			// 
 			// label12
 			// 
 			this->label12->AutoSize = true;
-			this->label12->Location = System::Drawing::Point(9, 230);
+			this->label12->Location = System::Drawing::Point(17, 404);
+			this->label12->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(115, 13);
+			this->label12->Size = System::Drawing::Size(141, 16);
 			this->label12->TabIndex = 36;
 			this->label12->Text = L"Detect Single Char Xor";
 			// 
 			// hex_string_2
 			// 
-			this->hex_string_2->Location = System::Drawing::Point(182, 95);
+			this->hex_string_2->Location = System::Drawing::Point(234, 158);
+			this->hex_string_2->Margin = System::Windows::Forms::Padding(4);
+			this->hex_string_2->Multiline = true;
 			this->hex_string_2->Name = L"hex_string_2";
-			this->hex_string_2->Size = System::Drawing::Size(161, 20);
+			this->hex_string_2->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->hex_string_2->Size = System::Drawing::Size(213, 49);
 			this->hex_string_2->TabIndex = 37;
+			this->hex_string_2->WordWrap = false;
 			this->hex_string_2->TextChanged += gcnew System::EventHandler(this, &MainForm::hex_string_2_TextChanged);
 			// 
 			// label13
 			// 
 			this->label13->AutoSize = true;
-			this->label13->Location = System::Drawing::Point(179, 79);
+			this->label13->Location = System::Drawing::Point(233, 138);
+			this->label13->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label13->Name = L"label13";
-			this->label13->Size = System::Drawing::Size(107, 13);
+			this->label13->Size = System::Drawing::Size(134, 16);
 			this->label13->TabIndex = 38;
 			this->label13->Text = L"Hexadecimal String 2";
 			// 
 			// MainForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(519, 495);
+			this->AutoScroll = true;
+			this->ClientSize = System::Drawing::Size(707, 627);
 			this->Controls->Add(this->label13);
 			this->Controls->Add(this->hex_string_2);
 			this->Controls->Add(this->label12);
@@ -542,11 +618,10 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->Controls->Add(this->base_hex);
 			this->Controls->Add(this->base_64);
 			this->Controls->Add(this->Convert);
-			this->Controls->Add(this->background_img);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"MainForm";
 			this->Text = L"CryptoPal";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->background_img))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -662,147 +737,122 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		cipher_text_box->Text = "";
 	}
 
+		   /*************************************************** UI Method for Challenge 8 ***************************************************/
 		   void MainForm::hex_to_base64()
 		   {
-			   ChallengeSolution solution; //points to challange solution struct 
-			   // Check if base_hex_array is not empty
-			   System::String^ managedString = base_hex_array;
-			   if (!String::IsNullOrEmpty(base_hex_array)) {
-				    //Convert System::String to std::string
-					string hexString = marshal_as<string>(managedString);
+			   ChallengeSolution solution;
+			   String^ managedString = base_hex_array;
 
-					// Task 1: Convert hex to base64
+			   // Check if base_hex_array is not empty
+			   if (!String::IsNullOrEmpty(base_hex_array)) 
+			   {
+					string hexString = marshal_as<string>(managedString);
 					string base64_string = solution.HexToBase64(hexString);
 
-			   // Update the hash_output text box with the base64 result
-			   base_64->Text = gcnew String(base64_string.c_str());
+					base_64->Text = gcnew String(base64_string.c_str());
 			   }
-			   else {
-				    //Handle the case where base_hex_array is empty
+			   else
 					base_64->Text = "Input is empty.";
-			   }
 		   }
 
+		   /*************************************************** UI Method for Challenge 2 ***************************************************/
 		   void MainForm::fixed_xor()
 		   {
 			   ChallengeSolution solution;
-			   System::String^ managedString = hex_1;
+			   String^ managedString = hex_1;
+			   String^ managedString_2 = hex_2;
 			   string hexString = marshal_as<string>(managedString);
-			   System::String^ managedString_2 = hex_2;
 
 			   if (!String::IsNullOrEmpty(hex_1))
 			   {
 				   string xor_string = marshal_as<string>(managedString);
 				   string xor_string_2 = marshal_as<string>(managedString_2);
 				   string result_xor = solution.FixedXOR(xor_string, xor_string_2);
-				   xor_results = gcnew String(result_xor.c_str());
 				   xor_result_string->Text = gcnew String(result_xor.c_str());
 			   }
-			   else {
-				   // Handle the case where base_hex_array is empty
+			   else
 				   xor_result_string->Text = "Input is empty.";
-			   }
 		   }
 
+		   /*************************************************** UI Method for Challenge 3 ***************************************************/
 		   void MainForm::single_byte_cipher()
 		   {
 			   ChallengeSolution solution;
-			   System::String^ managedString = single_xor_base64;
-			   System::String^ managedString2 = message_results;
+			   String^ managedString = single_xor_base64;
+			   String^ managedString2 = message_results;
 
-			   if (!String::IsNullOrEmpty(single_xor_base64)) {
-				  string single_xor_base64_txt = marshal_as<string>(managedString);
-				  string message = solution.SingleByteXORCipher(single_xor_base64_txt);
-				   message_results = gcnew String(message.c_str());
+			   if (!String::IsNullOrEmpty(single_xor_base64)) 
+			   {
+				   string single_xor_base64_txt = marshal_as<string>(managedString);
+				   string message = solution.SingleByteXORCipher(single_xor_base64_txt);
 				   message_box->Text = gcnew String(message.c_str());
 			   }
-			   else {
+			   else 
 				   message_box->Text = "Input is empty.";
-			   }
-
 		   }
 
-		   void MainForm::repeat_xor()
-		   {
-			   ChallengeSolution solution;
-			   System::String^ managedString = plain_txt;
-			   string plain_txt_string = marshal_as<string>(managedString);
-			   System::String^ managedString_2 = key_txt;
-			   if (!String::IsNullOrEmpty(key_txt)) {
-				   string key_txt_string = marshal_as<string>(managedString_2);
-				   string cipher_result = solution.RepeatingKeyXOR(plain_txt_string, key_txt_string);
-				   cipher_txt = gcnew String(cipher_result.c_str());
-				   cipher_text_box->Text = gcnew String(cipher_result.c_str());
-			   }
-			   else {
-				   cipher_text_box->Text = "Input is empty.";
-			   }
-
-		   }
-
+		   /*************************************************** UI Method for Challenge 4 ***************************************************/
 		   void MainForm::single_char_xor()
 		   {
 			   ChallengeSolution solution;
 			   OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
-			   // Set the file filter and other properties as needed.
+			   // Set the file filter and other properties
 			   openFileDialog1->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 			   openFileDialog1->FilterIndex = 1;
 			   openFileDialog1->RestoreDirectory = true;
-			  
 
+			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
+			   {   
+				   string filePathStr = marshal_as<string>(openFileDialog1->FileName);
+				   string result = solution.DetectSingleCharXOR(filePathStr);
 
-			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-				   
-				   // Get the selected file name and pass it to DetectSingleCharXOR.
-				   String^ selectedFileName = openFileDialog1->FileName;
-
-				   // Convert the selectedFileName to a standard string (if needed).
-				   string standardStringFileName = marshal_as<string>(selectedFileName);
-
-				   // Call the DetectSingleCharXOR function with the selected file name.
-				   string result = solution.DetectSingleCharXOR(standardStringFileName);
-
-				   // Display or process the result in the file_xor_results TextBox.
-				   // Assuming "file_xor_results" is the name of your TextBox:
 				   file_xor_results->Text = gcnew String(result.c_str());
-			   };
+			   }
+			   else
+				   Detect_AES_in_ECB_textbox->Text = "Cannot open dialog box";
 		   }
 
+		   /*************************************************** UI Method for Challenge 5 ***************************************************/
+		   void MainForm::repeat_xor()
+		   {
+			   ChallengeSolution solution;
+			   String^ managedString = plain_txt;
+			   String^ managedString_2 = key_txt;
+			   string plain_txt_string = marshal_as<string>(managedString);
 
-		   /// <summary>
-		   /// function to select file 
-		   /// </summary>
+			   if (!String::IsNullOrEmpty(key_txt)) 
+			   {
+				   string key_txt_string = marshal_as<string>(managedString_2);
+				   string cipher_result = solution.RepeatingKeyXOR(plain_txt_string, key_txt_string);
+				   cipher_text_box->Text = gcnew String(cipher_result.c_str());
+			   }
+			   else
+				   cipher_text_box->Text = "Input is empty.";
+		   }
+
+		   /*************************************************** UI Method for Challenge 6 ***************************************************/
 		   void MainForm::break_repeat_key_xor()
 		   {
 			   ChallengeSolution solution;
 			   OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
-			   // Set the file filter and other properties as needed.
 			   openFileDialog1->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 			   openFileDialog1->FilterIndex = 1;
 			   openFileDialog1->RestoreDirectory = true;
-			   
-			  
 
+			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
+			   {
+				   string filePathStr = marshal_as<string>(openFileDialog1->FileName);
+				   string result = solution.BreakRepeatingKeyXOR(filePathStr);
 
-			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-				   
-				   // Get the selected file name and pass it to DetectSingleCharXOR.
-				   String^ selectedFileName = openFileDialog1->FileName;
-				   // Convert the selectedFileName to a standard string (if needed).
-				   string standardStringFileName = marshal_as<string>(selectedFileName);
-
-				   // Call the DetectSingleCharXOR function with the selected file name.
-				   string result = solution.BreakRepeatingKeyXOR(standardStringFileName);
-
-				   // Display or process the result in the file_xor_results TextBox.
-				   // Assuming "file_xor_results" is the name of your TextBox:
 				   file_break_repeat_xor_change->Text = gcnew String(result.c_str());
-			   };
-
+			   }
+			   else
+				   Detect_AES_in_ECB_textbox->Text = "Cannot open dialog box";
 		   }
 
+		   /*************************************************** UI Method for Challenge 7 ***************************************************/
 		   void MainForm::AES_in_ECB()
 		   {
 			   ChallengeSolution solution;
@@ -813,24 +863,18 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   openFileDialog1->FilterIndex = 1;
 			   openFileDialog1->RestoreDirectory = true;
 			   
+			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
+			   {
+				   string filePathStr = marshal_as<string>(openFileDialog1->FileName);
+				   string result = solution.AES_ECBMode(filePathStr);
 
-			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-
-				   String^ selectedFileName = openFileDialog1->FileName;
-
-				   // Convert the selectedFileName to a standard string (if needed).
-				   string standardStringFileName = marshal_as<string>(selectedFileName);
-
-				   // Call the DetectSingleCharXOR function with the selected file name.
-				   string result = solution.AES_ECBMode(standardStringFileName);
-
-				   // Display or process the result in the file_xor_results TextBox.
-				   // Assuming "file_xor_results" is the name of your TextBox:
 				   AEX_textbox->Text = gcnew String(result.c_str());
-			   };
-
+			   }
+			   else
+				   Detect_AES_in_ECB_textbox->Text = "Cannot open dialog box";
 		   }
 
+		   /*************************************************** UI Method for Challenge 8 ***************************************************/
 		   void MainForm::Detect_AES_in_ECB()
 		   {
 			   ChallengeSolution solution;
@@ -840,26 +884,19 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   openFileDialog1->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 			   openFileDialog1->FilterIndex = 1;
 			   openFileDialog1->RestoreDirectory = true;
-			  
 
-			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-
-
-				   String^ selectedFileName = openFileDialog1->FileName;
-				   
+			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
+			   {
 				   // Convert the selectedFileName to a standard string (if needed).
-				  string standardStringFileName = marshal_as<string>(selectedFileName);
+				   string filePathStr = marshal_as<string>(openFileDialog1->FileName);
 
 				   // Call the DetectSingleCharXOR function with the selected file name.
-				   string result = solution.DetectAES_ECBMode(standardStringFileName);
+				   string result = solution.DetectAES_ECBMode(filePathStr);
 
-				   // Display or process the result in the file_xor_results TextBox.
-				   // Assuming "file_xor_results" is the name of your TextBox:
 				   Detect_AES_in_ECB_textbox->Text = gcnew String(result.c_str());
 			   }
-
-		   };
-	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
-};
+			   else
+				   Detect_AES_in_ECB_textbox->Text = "Cannot open dialog box";
+		   }
+	};
 }

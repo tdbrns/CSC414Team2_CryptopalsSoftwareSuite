@@ -187,7 +187,9 @@ inline string ChallengeSolution::SingleByteXORCipher(string hexString)
         float highestScore = *max_element(plaintextScores.begin(), plaintextScores.end());
         char key = distance(plaintextScores.begin(), max_element(plaintextScores.begin(), plaintextScores.end()));
     
-        string message;
+        string message = "Key: ";
+        message += key;
+        message += "\r\nMessage:\r\n";
     
         // Decrypt the message and then displays the message
         for (size_t i = 0; i < hexBytes.size(); i++)
@@ -207,7 +209,6 @@ inline string ChallengeSolution::SingleByteXORCipher(string hexString)
 /*************************************************** Method for Challenge 4 ***************************************************/
 inline string ChallengeSolution::DetectSingleCharXOR(string fileName)
 {
-    // change file_name to a const char* somehow
     try
     {
         // Input validation
@@ -319,10 +320,8 @@ inline string ChallengeSolution::BreakRepeatingKeyXOR(string fileName)
         //if (fileName != "datafile_challenge6.txt")
         //    return "Incorrect file";
 
-        const char* cStringFileName = fileName.c_str();
-
         Block base64Text;
-        if (!BlockReadFile(&base64Text, cStringFileName))
+        if (!BlockReadFile(&base64Text, fileName.c_str()))
             return "Error reading file.";
     
         int maxSize = base64Text.len * 3 / 4;
@@ -340,7 +339,12 @@ inline string ChallengeSolution::BreakRepeatingKeyXOR(string fileName)
         Block plaintext;
         plaintext.Alloc(hexBuffer.len);
     
-        string message = "";
+        string message = "Key: ";
+        for (int i = 0; i < key.len; i++)
+            message += key.data[i];
+
+        message += "\r\nMessage:\r\n";
+
         for (int i = 0; i < hexBuffer.len; i++)
         {
             char byte = key.data[i % key.len];
@@ -366,12 +370,10 @@ inline string ChallengeSolution::AES_ECBMode(string fileName)
         //if (fileName != "datafile_challenge7.txt")
         //    return "Incorrect file";
 
-        const char* cStringFileName = fileName.c_str();
-
         // YELLOW SUBMARINE in hexadecimal form
         unsigned char strKey[16] = { 0x59, 0x45, 0x4C, 0x4C, 0x4F, 0x57, 0x20, 0x53, 0x55, 0x42, 0x4D, 0x41, 0x52, 0x49, 0x4E, 0x45 };
         Block base64Text;
-        if (!BlockReadFile(&base64Text, cStringFileName))
+        if (!BlockReadFile(&base64Text, fileName.c_str()))
             return "Error reading file\n";
     
         // Base64 decode the input
@@ -407,10 +409,8 @@ inline string ChallengeSolution::DetectAES_ECBMode(string fileName)
         //if (fileName != "datafile_challenge8.txt")
         //    return "Inc orrect file";
 
-        const char* cStringFileName = fileName.c_str();
-
         string message;
-        vector<Block> ciphertextLines = GetLinesFromFile(cStringFileName);
+        vector<Block> ciphertextLines = GetLinesFromFile(fileName.c_str());
         if (ciphertextLines.size() == 0)
             return "Failed to open file.";
     
