@@ -76,6 +76,14 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 	private: System::Windows::Forms::Label^ label12;
 	private: System::Windows::Forms::TextBox^ hex_string_2;
 	private: System::Windows::Forms::Label^ label13;
+	private: System::Windows::Forms::GroupBox^ groupBox1;
+	private: System::Windows::Forms::GroupBox^ groupBox2;
+	private: System::Windows::Forms::GroupBox^ groupBox3;
+	private: System::Windows::Forms::GroupBox^ groupBox4;
+	private: System::Windows::Forms::GroupBox^ groupBox5;
+	private: System::Windows::Forms::GroupBox^ groupBox6;
+	private: System::Windows::Forms::GroupBox^ groupBox7;
+	private: System::Windows::Forms::GroupBox^ groupBox8;
 
 
 	private: System::Windows::Forms::TextBox^ base_hex;
@@ -158,11 +166,27 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->label12 = (gcnew System::Windows::Forms::Label());
 			this->hex_string_2 = (gcnew System::Windows::Forms::TextBox());
 			this->label13 = (gcnew System::Windows::Forms::Label());
+			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox4 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox5 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox6 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox7 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox8 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox1->SuspendLayout();
+			this->groupBox2->SuspendLayout();
+			this->groupBox3->SuspendLayout();
+			this->groupBox4->SuspendLayout();
+			this->groupBox5->SuspendLayout();
+			this->groupBox6->SuspendLayout();
+			this->groupBox7->SuspendLayout();
+			this->groupBox8->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// base_64
 			// 
-			this->base_64->Location = System::Drawing::Point(238, 29);
+			this->base_64->Location = System::Drawing::Point(228, 20);
 			this->base_64->Margin = System::Windows::Forms::Padding(4);
 			this->base_64->Multiline = true;
 			this->base_64->Name = L"base_64";
@@ -175,7 +199,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// base_hex
 			// 
-			this->base_hex->Location = System::Drawing::Point(13, 29);
+			this->base_hex->Location = System::Drawing::Point(3, 20);
 			this->base_hex->Margin = System::Windows::Forms::Padding(4);
 			this->base_hex->Multiline = true;
 			this->base_hex->Name = L"base_hex";
@@ -187,7 +211,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// hex_string_1
 			// 
-			this->hex_string_1->Location = System::Drawing::Point(13, 158);
+			this->hex_string_1->Location = System::Drawing::Point(5, 20);
 			this->hex_string_1->Margin = System::Windows::Forms::Padding(4);
 			this->hex_string_1->Multiline = true;
 			this->hex_string_1->Name = L"hex_string_1";
@@ -199,7 +223,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// xor_result_string
 			// 
-			this->xor_result_string->Location = System::Drawing::Point(455, 158);
+			this->xor_result_string->Location = System::Drawing::Point(447, 20);
 			this->xor_result_string->Margin = System::Windows::Forms::Padding(4);
 			this->xor_result_string->Multiline = true;
 			this->xor_result_string->Name = L"xor_result_string";
@@ -213,7 +237,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// Convert
 			// 
 			this->Convert->ForeColor = System::Drawing::SystemColors::ControlText;
-			this->Convert->Location = System::Drawing::Point(13, 86);
+			this->Convert->Location = System::Drawing::Point(3, 77);
 			this->Convert->Margin = System::Windows::Forms::Padding(4);
 			this->Convert->Name = L"Convert";
 			this->Convert->Size = System::Drawing::Size(100, 28);
@@ -224,10 +248,11 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// Cancel
 			// 
-			this->Cancel->Location = System::Drawing::Point(340, 1044);
+			this->Cancel->Dock = System::Windows::Forms::DockStyle::Bottom;
+			this->Cancel->Location = System::Drawing::Point(0, 1258);
 			this->Cancel->Margin = System::Windows::Forms::Padding(4);
 			this->Cancel->Name = L"Cancel";
-			this->Cancel->Size = System::Drawing::Size(100, 28);
+			this->Cancel->Size = System::Drawing::Size(894, 28);
 			this->Cancel->TabIndex = 3;
 			this->Cancel->Text = L"Clear All";
 			this->Cancel->UseVisualStyleBackColor = true;
@@ -235,7 +260,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// fixed_xor_btn
 			// 
-			this->fixed_xor_btn->Location = System::Drawing::Point(13, 218);
+			this->fixed_xor_btn->Location = System::Drawing::Point(5, 80);
 			this->fixed_xor_btn->Margin = System::Windows::Forms::Padding(4);
 			this->fixed_xor_btn->Name = L"fixed_xor_btn";
 			this->fixed_xor_btn->Size = System::Drawing::Size(120, 28);
@@ -247,9 +272,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->BackColor = System::Drawing::SystemColors::ButtonFace;
 			this->label1->ForeColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->label1->Location = System::Drawing::Point(16, 9);
+			this->label1->Location = System::Drawing::Point(6, 0);
 			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(124, 16);
@@ -259,7 +283,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(235, 9);
+			this->label2->Location = System::Drawing::Point(225, 0);
 			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(93, 16);
@@ -270,7 +294,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			this->label3->AutoSize = true;
 			this->label3->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-			this->label3->Location = System::Drawing::Point(14, 138);
+			this->label3->Location = System::Drawing::Point(6, 0);
 			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(134, 16);
@@ -280,7 +304,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(452, 138);
+			this->label4->Location = System::Drawing::Point(444, 0);
 			this->label4->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(68, 16);
@@ -290,7 +314,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(15, 527);
+			this->label5->Location = System::Drawing::Point(4, 0);
 			this->label5->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(66, 16);
@@ -299,12 +323,12 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// plain_text_box
 			// 
-			this->plain_text_box->Location = System::Drawing::Point(14, 547);
+			this->plain_text_box->Location = System::Drawing::Point(7, 20);
 			this->plain_text_box->Margin = System::Windows::Forms::Padding(4);
 			this->plain_text_box->Multiline = true;
 			this->plain_text_box->Name = L"plain_text_box";
 			this->plain_text_box->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->plain_text_box->Size = System::Drawing::Size(213, 49);
+			this->plain_text_box->Size = System::Drawing::Size(300, 83);
 			this->plain_text_box->TabIndex = 14;
 			this->plain_text_box->WordWrap = false;
 			this->plain_text_box->TextChanged += gcnew System::EventHandler(this, &MainForm::plain_text_box_TextChanged);
@@ -312,7 +336,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(446, 527);
+			this->label6->Location = System::Drawing::Point(527, 4);
 			this->label6->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(75, 16);
@@ -321,20 +345,20 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// cipher_text_box
 			// 
-			this->cipher_text_box->Location = System::Drawing::Point(450, 546);
+			this->cipher_text_box->Location = System::Drawing::Point(527, 24);
 			this->cipher_text_box->Margin = System::Windows::Forms::Padding(4);
 			this->cipher_text_box->Multiline = true;
 			this->cipher_text_box->Name = L"cipher_text_box";
 			this->cipher_text_box->ReadOnly = true;
 			this->cipher_text_box->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->cipher_text_box->Size = System::Drawing::Size(213, 50);
+			this->cipher_text_box->Size = System::Drawing::Size(306, 83);
 			this->cipher_text_box->TabIndex = 16;
 			this->cipher_text_box->WordWrap = false;
 			this->cipher_text_box->TextChanged += gcnew System::EventHandler(this, &MainForm::cipher_text_box_TextChanged);
 			// 
 			// repeat_xor_btn
 			// 
-			this->repeat_xor_btn->Location = System::Drawing::Point(15, 604);
+			this->repeat_xor_btn->Location = System::Drawing::Point(7, 111);
 			this->repeat_xor_btn->Margin = System::Windows::Forms::Padding(4);
 			this->repeat_xor_btn->Name = L"repeat_xor_btn";
 			this->repeat_xor_btn->Size = System::Drawing::Size(100, 28);
@@ -346,7 +370,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(239, 527);
+			this->label7->Location = System::Drawing::Point(318, 1);
 			this->label7->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label7->Name = L"label7";
 			this->label7->Size = System::Drawing::Size(30, 16);
@@ -355,7 +379,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// key_text_box
 			// 
-			this->key_text_box->Location = System::Drawing::Point(236, 546);
+			this->key_text_box->Location = System::Drawing::Point(315, 20);
 			this->key_text_box->Margin = System::Windows::Forms::Padding(4);
 			this->key_text_box->Multiline = true;
 			this->key_text_box->Name = L"key_text_box";
@@ -367,7 +391,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// add_file_btn
 			// 
-			this->add_file_btn->Location = System::Drawing::Point(14, 476);
+			this->add_file_btn->Location = System::Drawing::Point(3, 111);
 			this->add_file_btn->Margin = System::Windows::Forms::Padding(4);
 			this->add_file_btn->Name = L"add_file_btn";
 			this->add_file_btn->Size = System::Drawing::Size(100, 28);
@@ -378,20 +402,20 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// file_xor_results
 			// 
-			this->file_xor_results->Location = System::Drawing::Point(13, 424);
+			this->file_xor_results->Location = System::Drawing::Point(4, 20);
 			this->file_xor_results->Margin = System::Windows::Forms::Padding(4);
 			this->file_xor_results->Multiline = true;
 			this->file_xor_results->Name = L"file_xor_results";
 			this->file_xor_results->ReadOnly = true;
 			this->file_xor_results->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
-			this->file_xor_results->Size = System::Drawing::Size(304, 49);
+			this->file_xor_results->Size = System::Drawing::Size(304, 83);
 			this->file_xor_results->TabIndex = 21;
 			this->file_xor_results->WordWrap = false;
 			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(10, 659);
+			this->label8->Location = System::Drawing::Point(6, 7);
 			this->label8->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label8->Name = L"label8";
 			this->label8->Size = System::Drawing::Size(260, 16);
@@ -400,7 +424,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// hex_single_byte_cipher
 			// 
-			this->hex_single_byte_cipher->Location = System::Drawing::Point(13, 293);
+			this->hex_single_byte_cipher->Location = System::Drawing::Point(3, 20);
 			this->hex_single_byte_cipher->Margin = System::Windows::Forms::Padding(4);
 			this->hex_single_byte_cipher->Multiline = true;
 			this->hex_single_byte_cipher->Name = L"hex_single_byte_cipher";
@@ -413,7 +437,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(16, 273);
+			this->label9->Location = System::Drawing::Point(6, 0);
 			this->label9->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(124, 16);
@@ -422,13 +446,13 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// message_box
 			// 
-			this->message_box->Location = System::Drawing::Point(234, 293);
+			this->message_box->Location = System::Drawing::Point(224, 20);
 			this->message_box->Margin = System::Windows::Forms::Padding(4);
 			this->message_box->Multiline = true;
 			this->message_box->Name = L"message_box";
 			this->message_box->ReadOnly = true;
 			this->message_box->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->message_box->Size = System::Drawing::Size(211, 49);
+			this->message_box->Size = System::Drawing::Size(335, 85);
 			this->message_box->TabIndex = 25;
 			this->message_box->WordWrap = false;
 			this->message_box->TextChanged += gcnew System::EventHandler(this, &MainForm::message_box_TextChanged);
@@ -436,7 +460,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// Message
 			// 
 			this->Message->AutoSize = true;
-			this->Message->Location = System::Drawing::Point(231, 273);
+			this->Message->Location = System::Drawing::Point(221, 0);
 			this->Message->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->Message->Name = L"Message";
 			this->Message->Size = System::Drawing::Size(116, 16);
@@ -445,7 +469,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// single_byte_xor_btn
 			// 
-			this->single_byte_xor_btn->Location = System::Drawing::Point(16, 353);
+			this->single_byte_xor_btn->Location = System::Drawing::Point(3, 77);
 			this->single_byte_xor_btn->Margin = System::Windows::Forms::Padding(4);
 			this->single_byte_xor_btn->Name = L"single_byte_xor_btn";
 			this->single_byte_xor_btn->Size = System::Drawing::Size(120, 28);
@@ -456,19 +480,19 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// file_break_repeat_xor_change
 			// 
-			this->file_break_repeat_xor_change->Location = System::Drawing::Point(13, 679);
+			this->file_break_repeat_xor_change->Location = System::Drawing::Point(5, 27);
 			this->file_break_repeat_xor_change->Margin = System::Windows::Forms::Padding(4);
 			this->file_break_repeat_xor_change->Multiline = true;
 			this->file_break_repeat_xor_change->Name = L"file_break_repeat_xor_change";
 			this->file_break_repeat_xor_change->ReadOnly = true;
 			this->file_break_repeat_xor_change->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->file_break_repeat_xor_change->Size = System::Drawing::Size(427, 49);
+			this->file_break_repeat_xor_change->Size = System::Drawing::Size(308, 83);
 			this->file_break_repeat_xor_change->TabIndex = 28;
 			this->file_break_repeat_xor_change->WordWrap = false;
 			// 
 			// break_repeat_btn
 			// 
-			this->break_repeat_btn->Location = System::Drawing::Point(14, 736);
+			this->break_repeat_btn->Location = System::Drawing::Point(5, 118);
 			this->break_repeat_btn->Margin = System::Windows::Forms::Padding(4);
 			this->break_repeat_btn->Name = L"break_repeat_btn";
 			this->break_repeat_btn->Size = System::Drawing::Size(100, 28);
@@ -479,7 +503,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// AES_btn
 			// 
-			this->AES_btn->Location = System::Drawing::Point(10, 869);
+			this->AES_btn->Location = System::Drawing::Point(3, 127);
 			this->AES_btn->Margin = System::Windows::Forms::Padding(4);
 			this->AES_btn->Name = L"AES_btn";
 			this->AES_btn->Size = System::Drawing::Size(100, 28);
@@ -490,20 +514,20 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// AEX_textbox
 			// 
-			this->AEX_textbox->Location = System::Drawing::Point(10, 811);
+			this->AEX_textbox->Location = System::Drawing::Point(5, 36);
 			this->AEX_textbox->Margin = System::Windows::Forms::Padding(4);
 			this->AEX_textbox->Multiline = true;
 			this->AEX_textbox->Name = L"AEX_textbox";
 			this->AEX_textbox->ReadOnly = true;
 			this->AEX_textbox->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->AEX_textbox->Size = System::Drawing::Size(307, 50);
+			this->AEX_textbox->Size = System::Drawing::Size(308, 83);
 			this->AEX_textbox->TabIndex = 31;
 			this->AEX_textbox->WordWrap = false;
 			// 
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(10, 791);
+			this->label10->Location = System::Drawing::Point(3, 16);
 			this->label10->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label10->Name = L"label10";
 			this->label10->Size = System::Drawing::Size(235, 16);
@@ -512,20 +536,20 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// Detect_AES_in_ECB_textbox
 			// 
-			this->Detect_AES_in_ECB_textbox->Location = System::Drawing::Point(18, 947);
+			this->Detect_AES_in_ECB_textbox->Location = System::Drawing::Point(4, 20);
 			this->Detect_AES_in_ECB_textbox->Margin = System::Windows::Forms::Padding(4);
 			this->Detect_AES_in_ECB_textbox->Multiline = true;
 			this->Detect_AES_in_ECB_textbox->Name = L"Detect_AES_in_ECB_textbox";
 			this->Detect_AES_in_ECB_textbox->ReadOnly = true;
 			this->Detect_AES_in_ECB_textbox->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
-			this->Detect_AES_in_ECB_textbox->Size = System::Drawing::Size(299, 50);
+			this->Detect_AES_in_ECB_textbox->Size = System::Drawing::Size(307, 83);
 			this->Detect_AES_in_ECB_textbox->TabIndex = 33;
 			this->Detect_AES_in_ECB_textbox->WordWrap = false;
 			// 
 			// label11
 			// 
 			this->label11->AutoSize = true;
-			this->label11->Location = System::Drawing::Point(14, 928);
+			this->label11->Location = System::Drawing::Point(4, 0);
 			this->label11->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label11->Name = L"label11";
 			this->label11->Size = System::Drawing::Size(157, 16);
@@ -534,7 +558,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// Detect_AES_In_ECB_btn
 			// 
-			this->Detect_AES_In_ECB_btn->Location = System::Drawing::Point(18, 1005);
+			this->Detect_AES_In_ECB_btn->Location = System::Drawing::Point(4, 111);
 			this->Detect_AES_In_ECB_btn->Margin = System::Windows::Forms::Padding(4);
 			this->Detect_AES_In_ECB_btn->Name = L"Detect_AES_In_ECB_btn";
 			this->Detect_AES_In_ECB_btn->Size = System::Drawing::Size(100, 28);
@@ -546,7 +570,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label12
 			// 
 			this->label12->AutoSize = true;
-			this->label12->Location = System::Drawing::Point(17, 404);
+			this->label12->Location = System::Drawing::Point(8, 0);
 			this->label12->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label12->Name = L"label12";
 			this->label12->Size = System::Drawing::Size(141, 16);
@@ -555,7 +579,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// hex_string_2
 			// 
-			this->hex_string_2->Location = System::Drawing::Point(234, 158);
+			this->hex_string_2->Location = System::Drawing::Point(226, 20);
 			this->hex_string_2->Margin = System::Windows::Forms::Padding(4);
 			this->hex_string_2->Multiline = true;
 			this->hex_string_2->Name = L"hex_string_2";
@@ -568,62 +592,169 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label13
 			// 
 			this->label13->AutoSize = true;
-			this->label13->Location = System::Drawing::Point(233, 138);
+			this->label13->Location = System::Drawing::Point(225, 0);
 			this->label13->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label13->Name = L"label13";
 			this->label13->Size = System::Drawing::Size(134, 16);
 			this->label13->TabIndex = 38;
 			this->label13->Text = L"Hexadecimal String 2";
 			// 
+			// groupBox1
+			// 
+			this->groupBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->groupBox1->Controls->Add(this->label2);
+			this->groupBox1->Controls->Add(this->label1);
+			this->groupBox1->Controls->Add(this->base_hex);
+			this->groupBox1->Controls->Add(this->base_64);
+			this->groupBox1->Controls->Add(this->Convert);
+			this->groupBox1->Location = System::Drawing::Point(12, 12);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(450, 110);
+			this->groupBox1->TabIndex = 39;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"groupBox1";
+			// 
+			// groupBox2
+			// 
+			this->groupBox2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->groupBox2->Controls->Add(this->label13);
+			this->groupBox2->Controls->Add(this->hex_string_2);
+			this->groupBox2->Controls->Add(this->xor_result_string);
+			this->groupBox2->Controls->Add(this->label4);
+			this->groupBox2->Controls->Add(this->fixed_xor_btn);
+			this->groupBox2->Controls->Add(this->hex_string_1);
+			this->groupBox2->Controls->Add(this->label3);
+			this->groupBox2->Location = System::Drawing::Point(10, 141);
+			this->groupBox2->Name = L"groupBox2";
+			this->groupBox2->Size = System::Drawing::Size(669, 111);
+			this->groupBox2->TabIndex = 40;
+			this->groupBox2->TabStop = false;
+			// 
+			// groupBox3
+			// 
+			this->groupBox3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->groupBox3->Controls->Add(this->single_byte_xor_btn);
+			this->groupBox3->Controls->Add(this->Message);
+			this->groupBox3->Controls->Add(this->message_box);
+			this->groupBox3->Controls->Add(this->label9);
+			this->groupBox3->Controls->Add(this->hex_single_byte_cipher);
+			this->groupBox3->Location = System::Drawing::Point(10, 271);
+			this->groupBox3->Name = L"groupBox3";
+			this->groupBox3->Size = System::Drawing::Size(570, 119);
+			this->groupBox3->TabIndex = 41;
+			this->groupBox3->TabStop = false;
+			// 
+			// groupBox4
+			// 
+			this->groupBox4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->groupBox4->Controls->Add(this->label12);
+			this->groupBox4->Controls->Add(this->file_xor_results);
+			this->groupBox4->Controls->Add(this->add_file_btn);
+			this->groupBox4->Location = System::Drawing::Point(11, 413);
+			this->groupBox4->Name = L"groupBox4";
+			this->groupBox4->Size = System::Drawing::Size(316, 144);
+			this->groupBox4->TabIndex = 42;
+			this->groupBox4->TabStop = false;
+			// 
+			// groupBox5
+			// 
+			this->groupBox5->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->groupBox5->Controls->Add(this->cipher_text_box);
+			this->groupBox5->Controls->Add(this->plain_text_box);
+			this->groupBox5->Controls->Add(this->key_text_box);
+			this->groupBox5->Controls->Add(this->label7);
+			this->groupBox5->Controls->Add(this->repeat_xor_btn);
+			this->groupBox5->Controls->Add(this->label6);
+			this->groupBox5->Controls->Add(this->label5);
+			this->groupBox5->Location = System::Drawing::Point(11, 581);
+			this->groupBox5->Name = L"groupBox5";
+			this->groupBox5->Size = System::Drawing::Size(842, 147);
+			this->groupBox5->TabIndex = 0;
+			this->groupBox5->TabStop = false;
+			// 
+			// groupBox6
+			// 
+			this->groupBox6->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->groupBox6->Controls->Add(this->break_repeat_btn);
+			this->groupBox6->Controls->Add(this->file_break_repeat_xor_change);
+			this->groupBox6->Controls->Add(this->label8);
+			this->groupBox6->Location = System::Drawing::Point(8, 753);
+			this->groupBox6->Name = L"groupBox6";
+			this->groupBox6->Size = System::Drawing::Size(322, 153);
+			this->groupBox6->TabIndex = 43;
+			this->groupBox6->TabStop = false;
+			// 
+			// groupBox7
+			// 
+			this->groupBox7->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->groupBox7->Controls->Add(this->AEX_textbox);
+			this->groupBox7->Controls->Add(this->label10);
+			this->groupBox7->Controls->Add(this->AES_btn);
+			this->groupBox7->Location = System::Drawing::Point(8, 928);
+			this->groupBox7->Name = L"groupBox7";
+			this->groupBox7->Size = System::Drawing::Size(322, 165);
+			this->groupBox7->TabIndex = 44;
+			this->groupBox7->TabStop = false;
+			// 
+			// groupBox8
+			// 
+			this->groupBox8->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
+				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->groupBox8->Controls->Add(this->Detect_AES_in_ECB_textbox);
+			this->groupBox8->Controls->Add(this->Detect_AES_In_ECB_btn);
+			this->groupBox8->Controls->Add(this->label11);
+			this->groupBox8->Location = System::Drawing::Point(8, 1113);
+			this->groupBox8->Name = L"groupBox8";
+			this->groupBox8->Size = System::Drawing::Size(320, 145);
+			this->groupBox8->TabIndex = 45;
+			this->groupBox8->TabStop = false;
+			this->groupBox8->Text = L"groupBox8";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
-			this->ClientSize = System::Drawing::Size(707, 627);
-			this->Controls->Add(this->label13);
-			this->Controls->Add(this->hex_string_2);
-			this->Controls->Add(this->label12);
-			this->Controls->Add(this->Detect_AES_In_ECB_btn);
-			this->Controls->Add(this->label11);
-			this->Controls->Add(this->Detect_AES_in_ECB_textbox);
-			this->Controls->Add(this->label10);
-			this->Controls->Add(this->AEX_textbox);
-			this->Controls->Add(this->AES_btn);
-			this->Controls->Add(this->break_repeat_btn);
-			this->Controls->Add(this->file_break_repeat_xor_change);
-			this->Controls->Add(this->single_byte_xor_btn);
-			this->Controls->Add(this->Message);
-			this->Controls->Add(this->message_box);
-			this->Controls->Add(this->label9);
-			this->Controls->Add(this->hex_single_byte_cipher);
-			this->Controls->Add(this->label8);
-			this->Controls->Add(this->file_xor_results);
-			this->Controls->Add(this->add_file_btn);
-			this->Controls->Add(this->key_text_box);
-			this->Controls->Add(this->label7);
-			this->Controls->Add(this->repeat_xor_btn);
-			this->Controls->Add(this->cipher_text_box);
-			this->Controls->Add(this->label6);
-			this->Controls->Add(this->plain_text_box);
-			this->Controls->Add(this->label5);
-			this->Controls->Add(this->xor_result_string);
-			this->Controls->Add(this->label4);
-			this->Controls->Add(this->fixed_xor_btn);
-			this->Controls->Add(this->hex_string_1);
-			this->Controls->Add(this->label3);
-			this->Controls->Add(this->label2);
-			this->Controls->Add(this->label1);
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
+				static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			this->ClientSize = System::Drawing::Size(915, 753);
+			this->Controls->Add(this->groupBox8);
+			this->Controls->Add(this->groupBox7);
+			this->Controls->Add(this->groupBox6);
+			this->Controls->Add(this->groupBox5);
+			this->Controls->Add(this->groupBox4);
+			this->Controls->Add(this->groupBox3);
+			this->Controls->Add(this->groupBox2);
+			this->Controls->Add(this->groupBox1);
 			this->Controls->Add(this->Cancel);
-			this->Controls->Add(this->base_hex);
-			this->Controls->Add(this->base_64);
-			this->Controls->Add(this->Convert);
 			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"MainForm";
 			this->Text = L"CryptoPal";
 			this->Load += gcnew System::EventHandler(this, &MainForm::MyForm_Load);
+			this->groupBox1->ResumeLayout(false);
+			this->groupBox1->PerformLayout();
+			this->groupBox2->ResumeLayout(false);
+			this->groupBox2->PerformLayout();
+			this->groupBox3->ResumeLayout(false);
+			this->groupBox3->PerformLayout();
+			this->groupBox4->ResumeLayout(false);
+			this->groupBox4->PerformLayout();
+			this->groupBox5->ResumeLayout(false);
+			this->groupBox5->PerformLayout();
+			this->groupBox6->ResumeLayout(false);
+			this->groupBox6->PerformLayout();
+			this->groupBox7->ResumeLayout(false);
+			this->groupBox7->PerformLayout();
+			this->groupBox8->ResumeLayout(false);
+			this->groupBox8->PerformLayout();
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -737,7 +868,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		cipher_text_box->Text = "";
 	}
 
-		   /*************************************************** UI Method for Challenge 8 ***************************************************/
+		   /*************************************************** UI Method for Challenge 1 ***************************************************/
 		   void MainForm::hex_to_base64()
 		   {
 			   ChallengeSolution solution;
