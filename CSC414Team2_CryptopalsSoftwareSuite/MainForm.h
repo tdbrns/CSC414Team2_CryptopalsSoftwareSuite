@@ -24,7 +24,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
 		String^ base_hex_array;
 		String^ base_64_array;
-		String^ xor_compare;
+		String^ hex_1;
+		String^ hex_2;
 		String^ xor_results;
 		String^ plain_txt;
 		String^ key_txt;
@@ -43,7 +44,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 	private: System::Windows::Forms::Label^ label4;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
-	private: System::Windows::Forms::TextBox^ xor_comparison_string;
+	private: System::Windows::Forms::TextBox^ hex_string_1;
+
 	private: System::Windows::Forms::TextBox^ xor_result_string;
 	private: System::Windows::Forms::TextBox^ base_64;
 	private: System::Windows::Forms::Label^ label5;
@@ -72,6 +74,9 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 	private: System::Windows::Forms::Label^ label11;
 	private: System::Windows::Forms::Button^ Detect_AES_In_ECB_btn;
 	private: System::Windows::Forms::Label^ label12;
+	private: System::Windows::Forms::TextBox^ hex_string_2;
+	private: System::Windows::Forms::Label^ label13;
+
 	private: System::Windows::Forms::TextBox^ base_hex;
 
 	public:
@@ -80,7 +85,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			InitializeComponent();
 			base_hex_array = {};
 			base_64_array = {};
-			xor_compare = {};
+			hex_1 = {};
+			hex_2 = {};
 			xor_results = {};
 			plain_txt = {};
 			key_txt = {};
@@ -118,7 +124,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		{
 			this->base_64 = (gcnew System::Windows::Forms::TextBox());
 			this->base_hex = (gcnew System::Windows::Forms::TextBox());
-			this->xor_comparison_string = (gcnew System::Windows::Forms::TextBox());
+			this->hex_string_1 = (gcnew System::Windows::Forms::TextBox());
 			this->xor_result_string = (gcnew System::Windows::Forms::TextBox());
 			this->Convert = (gcnew System::Windows::Forms::Button());
 			this->Cancel = (gcnew System::Windows::Forms::Button());
@@ -152,6 +158,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->Detect_AES_In_ECB_btn = (gcnew System::Windows::Forms::Button());
 			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->hex_string_2 = (gcnew System::Windows::Forms::TextBox());
+			this->label13 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->background_img))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -171,17 +179,17 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->base_hex->TabIndex = 1;
 			this->base_hex->TextChanged += gcnew System::EventHandler(this, &MainForm::hash_base_hex_TextChanged);
 			// 
-			// xor_comparison_string
+			// hex_string_1
 			// 
-			this->xor_comparison_string->Location = System::Drawing::Point(8, 95);
-			this->xor_comparison_string->Name = L"xor_comparison_string";
-			this->xor_comparison_string->Size = System::Drawing::Size(161, 20);
-			this->xor_comparison_string->TabIndex = 9;
-			this->xor_comparison_string->TextChanged += gcnew System::EventHandler(this, &MainForm::xor_comparison_string_TextChanged);
+			this->hex_string_1->Location = System::Drawing::Point(8, 95);
+			this->hex_string_1->Name = L"hex_string_1";
+			this->hex_string_1->Size = System::Drawing::Size(161, 20);
+			this->hex_string_1->TabIndex = 9;
+			this->hex_string_1->TextChanged += gcnew System::EventHandler(this, &MainForm::xor_comparison_string_TextChanged);
 			// 
 			// xor_result_string
 			// 
-			this->xor_result_string->Location = System::Drawing::Point(180, 95);
+			this->xor_result_string->Location = System::Drawing::Point(349, 95);
 			this->xor_result_string->Name = L"xor_result_string";
 			this->xor_result_string->Size = System::Drawing::Size(161, 20);
 			this->xor_result_string->TabIndex = 12;
@@ -249,20 +257,22 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label3
 			// 
 			this->label3->AutoSize = true;
+			this->label3->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
 			this->label3->Location = System::Drawing::Point(9, 79);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(81, 13);
+			this->label3->Size = System::Drawing::Size(107, 13);
 			this->label3->TabIndex = 8;
-			this->label3->Text = L"Xor Comparison";
+			this->label3->Text = L"Hexadecimal String 1";
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(181, 79);
+			this->label4->Location = System::Drawing::Point(354, 79);
 			this->label4->Name = L"label4";
 			this->label4->Size = System::Drawing::Size(56, 13);
 			this->label4->TabIndex = 11;
 			this->label4->Text = L"Xor Result";
+			this->label4->Click += gcnew System::EventHandler(this, &MainForm::label4_Click);
 			// 
 			// label5
 			// 
@@ -473,11 +483,30 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->label12->TabIndex = 36;
 			this->label12->Text = L"Detect Single Char Xor";
 			// 
+			// hex_string_2
+			// 
+			this->hex_string_2->Location = System::Drawing::Point(182, 95);
+			this->hex_string_2->Name = L"hex_string_2";
+			this->hex_string_2->Size = System::Drawing::Size(161, 20);
+			this->hex_string_2->TabIndex = 37;
+			this->hex_string_2->TextChanged += gcnew System::EventHandler(this, &MainForm::hex_string_2_TextChanged);
+			// 
+			// label13
+			// 
+			this->label13->AutoSize = true;
+			this->label13->Location = System::Drawing::Point(179, 79);
+			this->label13->Name = L"label13";
+			this->label13->Size = System::Drawing::Size(107, 13);
+			this->label13->TabIndex = 38;
+			this->label13->Text = L"Hexadecimal String 2";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(519, 495);
+			this->Controls->Add(this->label13);
+			this->Controls->Add(this->hex_string_2);
 			this->Controls->Add(this->label12);
 			this->Controls->Add(this->Detect_AES_In_ECB_btn);
 			this->Controls->Add(this->label11);
@@ -505,7 +534,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->Controls->Add(this->xor_result_string);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->fixed_xor_btn);
-			this->Controls->Add(this->xor_comparison_string);
+			this->Controls->Add(this->hex_string_1);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -536,8 +565,13 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 	}
 
 	private: System::Void xor_comparison_string_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-		String^ inputText = xor_comparison_string->Text;
-		xor_compare = inputText;
+		String^ inputText = hex_string_1->Text;
+		hex_1 = inputText;
+	}
+
+	private: System::Void hex_string_2_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+		String^ inputText = hex_string_2->Text;
+		hex_2 = inputText;
 	}
 
 	private: System::Void xor_result_string_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -614,7 +648,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 	{
 		base_hex->Text = "";
 		base_64->Text = "";
-		xor_comparison_string->Text = "";
+		hex_string_1->Text = "";
+		hex_string_2->Text = "";
 		xor_result_string->Text = "";
 		hex_single_byte_cipher->Text = "";
 		message_box->Text = "";
@@ -651,11 +686,11 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   void MainForm::fixed_xor()
 		   {
 			   ChallengeSolution solution;
-			   System::String^ managedString = base_hex_array;
+			   System::String^ managedString = hex_1;
 			   string hexString = marshal_as<string>(managedString);
-			   System::String^ managedString_2 = xor_compare;
+			   System::String^ managedString_2 = hex_2;
 
-			   if (!String::IsNullOrEmpty(xor_compare))
+			   if (!String::IsNullOrEmpty(hex_1))
 			   {
 				   string xor_string = marshal_as<string>(managedString);
 				   string xor_string_2 = marshal_as<string>(managedString_2);
@@ -714,11 +749,13 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   openFileDialog1->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 			   openFileDialog1->FilterIndex = 1;
 			   openFileDialog1->RestoreDirectory = true;
-			   String^ selectedFileName = openFileDialog1->FileName;
+			  
 
 
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+				   
 				   // Get the selected file name and pass it to DetectSingleCharXOR.
+				   String^ selectedFileName = openFileDialog1->FileName;
 
 				   // Convert the selectedFileName to a standard string (if needed).
 				   string standardStringFileName = marshal_as<string>(selectedFileName);
@@ -745,12 +782,14 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   openFileDialog1->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 			   openFileDialog1->FilterIndex = 1;
 			   openFileDialog1->RestoreDirectory = true;
-			   // Get the selected file name and pass it to DetectSingleCharXOR.
-			   String^ selectedFileName = openFileDialog1->FileName;
+			   
+			  
 
 
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
-
+				   
+				   // Get the selected file name and pass it to DetectSingleCharXOR.
+				   String^ selectedFileName = openFileDialog1->FileName;
 				   // Convert the selectedFileName to a standard string (if needed).
 				   string standardStringFileName = marshal_as<string>(selectedFileName);
 
@@ -773,9 +812,11 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   openFileDialog1->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 			   openFileDialog1->FilterIndex = 1;
 			   openFileDialog1->RestoreDirectory = true;
-			   String^ selectedFileName = openFileDialog1->FileName;
+			   
 
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
+
+				   String^ selectedFileName = openFileDialog1->FileName;
 
 				   // Convert the selectedFileName to a standard string (if needed).
 				   string standardStringFileName = marshal_as<string>(selectedFileName);
@@ -799,10 +840,13 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   openFileDialog1->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
 			   openFileDialog1->FilterIndex = 1;
 			   openFileDialog1->RestoreDirectory = true;
-			   String^ selectedFileName = openFileDialog1->FileName;
+			  
 
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) {
 
+
+				   String^ selectedFileName = openFileDialog1->FileName;
+				   
 				   // Convert the selectedFileName to a standard string (if needed).
 				  string standardStringFileName = marshal_as<string>(selectedFileName);
 
@@ -815,5 +859,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   }
 
 		   };
-	};
+	private: System::Void label4_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

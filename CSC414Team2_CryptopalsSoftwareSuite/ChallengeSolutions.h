@@ -223,7 +223,7 @@ inline string ChallengeSolution::DetectSingleCharXOR(string fileName)
 
         // Read in hex strings from datafile_challenge4.txt
         ifstream fileIn;
-        fileIn.open("datafile_challenge4.txt");
+        fileIn.open(fileName);
         while (!fileIn.eof())
         {
             std::getline(fileIn, ciphertext);
@@ -319,8 +319,10 @@ inline string ChallengeSolution::BreakRepeatingKeyXOR(string fileName)
         //if (fileName != "datafile_challenge6.txt")
         //    return "Incorrect file";
 
+        const char* cStringFileName = fileName.c_str();
+
         Block base64Text;
-        if (!BlockReadFile(&base64Text, "datafile_challenge6.txt"))
+        if (!BlockReadFile(&base64Text, cStringFileName))
             return "Error reading file.";
     
         int maxSize = base64Text.len * 3 / 4;
@@ -364,10 +366,12 @@ inline string ChallengeSolution::AES_ECBMode(string fileName)
         //if (fileName != "datafile_challenge7.txt")
         //    return "Incorrect file";
 
+        const char* cStringFileName = fileName.c_str();
+
         // YELLOW SUBMARINE in hexadecimal form
         unsigned char strKey[16] = { 0x59, 0x45, 0x4C, 0x4C, 0x4F, 0x57, 0x20, 0x53, 0x55, 0x42, 0x4D, 0x41, 0x52, 0x49, 0x4E, 0x45 };
         Block base64Text;
-        if (!BlockReadFile(&base64Text, "datafile_challenge7.txt"))
+        if (!BlockReadFile(&base64Text, cStringFileName))
             return "Error reading file\n";
     
         // Base64 decode the input
@@ -403,8 +407,10 @@ inline string ChallengeSolution::DetectAES_ECBMode(string fileName)
         //if (fileName != "datafile_challenge8.txt")
         //    return "Inc orrect file";
 
+        const char* cStringFileName = fileName.c_str();
+
         string message;
-        vector<Block> ciphertextLines = GetLinesFromFile("datafile_challenge8.txt");
+        vector<Block> ciphertextLines = GetLinesFromFile(cStringFileName);
         if (ciphertextLines.size() == 0)
             return "Failed to open file.";
     
