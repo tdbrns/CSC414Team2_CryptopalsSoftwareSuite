@@ -35,3 +35,19 @@ TEST(HexToBase64Tests, HexToBase64Padded) {
         EXPECT_EQ(HexSolutions.HexToBase64(testCase.input_hex), testCase.expected_base64);
     }
 }
+
+TEST(HexToBase64Tests, HexToBase64Invalid) {
+    struct TestCase {
+        std::string input_hex;
+        std::string expected_base64;
+    };
+
+    std::vector<TestCase> testCases = {
+        {"zbzefa", "n/a"},  // invalid hexadecimal
+        {"ccc", "n/a"},  // not enough characters
+    };
+
+    for (const auto& testCase : testCases) {
+        EXPECT_ANY_THROW(HexSolutions.HexToBase64(testCase.input_hex));
+    }
+}

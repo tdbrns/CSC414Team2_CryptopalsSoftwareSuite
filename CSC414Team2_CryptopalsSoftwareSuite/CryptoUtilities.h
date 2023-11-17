@@ -224,6 +224,8 @@ inline bool IsBase64Block(Block text)
         if (!isBase64Val)
             return false;
     }
+
+    return true;
 }
 
 // Checks if given Block of data is hexadecimal
@@ -399,6 +401,24 @@ static inline string& rightTrim(string& str)
 static inline string& trim(string& str)
 {
     return leftTrim(rightTrim(str));
+}
+
+inline bool BlockFromString(Block* out, const std::string& str)
+{
+    if (str.empty())
+        return false;
+
+    int contentLength = str.size();
+
+    out->Alloc(contentLength);
+
+    if (out->data) // Check if allocation was successful
+    {
+        memcpy(out->data, str.data(), contentLength);
+        return true;
+    }
+
+    return false;
 }
 
 // Read the contents of a file into a Block struct

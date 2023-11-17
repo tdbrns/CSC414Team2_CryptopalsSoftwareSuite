@@ -251,7 +251,6 @@ inline string ChallengeSolution::RepeatingKeyXOR(const string& plain_text, const
     {
         return e.what();
     }
-
 }
 
 /*************************************************** Method for Challenge 6 ***************************************************/
@@ -297,7 +296,6 @@ inline string ChallengeSolution::BreakRepeatingKeyXOR(Block base64Text)
     {
         return e.what();
     }
-   
 }
 
 /*************************************************** Method for Challenge 7 ***************************************************/
