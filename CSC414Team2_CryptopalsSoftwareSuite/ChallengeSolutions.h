@@ -6,15 +6,15 @@
 // challenges. Each method can be called via a ChallengeSolution struct variable.
 struct ChallengeSolution
 {
-    // Method prototypes for the eight challenges
+    // Prototypes for the eight challenge methods
     string HexToBase64(string);
     string FixedXOR(string, string);
     string SingleByteXORCipher(string);
-    string DetectSingleCharXOR(string);
+    string DetectSingleCharXOR(vector<string>);
     string RepeatingKeyXOR(const string&, const string);
-    string BreakRepeatingKeyXOR(string);
-    string AES_ECBMode(string);
-    string DetectAES_ECBMode(string);
+    string BreakRepeatingKeyXOR(Block);
+    string AES_ECBMode(Block);
+    string DetectAES_ECBMode(vector<Block>);
 };
 
 /*************************************************** Method for Challenge 1 ***************************************************/
@@ -25,23 +25,8 @@ inline string ChallengeSolution::HexToBase64(string hexString)
         // Input validation
         if (hexString.length() < 4 && hexString.length() > 0)
             return "Must enter at least 4 characters";
-        
-        for (size_t i = 0; i < hexString.length(); i++)
-        {
-            bool isHexVal = false;
-
-            for (char hexChar : HEX_TABLE)
-            {
-                if (hexString[i] == hexChar)
-                {
-                    isHexVal = true;
-                    break;
-                }
-            }
-
-            if (!isHexVal)
-                return "Must enter a hexadecimal string";
-        }
+        if (!IsHexadecimalString(hexString))
+            return "Data is not in hexadecimal form";
 
         vector<unsigned char> hexBytes = HexToBytes(hexString);
         string base64String;
@@ -102,29 +87,10 @@ inline string ChallengeSolution::FixedXOR(string hexString1, string hexString2)
         // Input validation
         if (hexString1.length() != hexString2.length())
             return "Strings are not the same length.";
-        else
-        {
-            for (size_t i = 0; i < hexString1.length(); i++)
-            {
-                bool firstStringIsHex = false;
-                bool secondStringIsHex = false;
-
-                for (char hexChar : HEX_TABLE)
-                {
-                    if (hexString1[i] == hexChar)
-                        firstStringIsHex = true;
-
-                    if (hexString2[i] == hexChar)
-                        secondStringIsHex = true;
-
-                    if (firstStringIsHex && secondStringIsHex)
-                        break;
-                }
-
-                if (!(firstStringIsHex && secondStringIsHex))
-                    return "Enter a hexadecimal string";
-            }
-        }
+        if (!IsHexadecimalString(hexString1))
+            return "Data is not in hexadecimal form";
+        if (!IsHexadecimalString(hexString2))
+            return "Data is not in hexadecimal form";
 
         string result;
 
@@ -150,22 +116,8 @@ inline string ChallengeSolution::SingleByteXORCipher(string hexString)
     try
     {
         // Input validation
-        for (size_t i = 0; i < hexString.length(); i++)
-        {
-            bool isHexVal = false;
-
-            for (char hexChar : HEX_TABLE)
-            {
-                if (hexString[i] == hexChar)
-                {
-                    isHexVal = true;
-                    break;
-                }
-            }
-
-            if (!isHexVal)
-                return "Enter a hexadecimal string";
-        }
+        if (!IsHexadecimalString(hexString))
+            return "Data is not in hexadecimal form";
 
         vector<float> plaintextScores;
         vector<unsigned char> hexBytes = HexToBytes(hexString);
@@ -207,34 +159,26 @@ inline string ChallengeSolution::SingleByteXORCipher(string hexString)
 }
 
 /*************************************************** Method for Challenge 4 ***************************************************/
-inline string ChallengeSolution::DetectSingleCharXOR(string fileName)
+inline string ChallengeSolution::DetectSingleCharXOR(vector<string> hexCiphertexts)
 {
     try
     {
         // Input validation
-        //if (fileName != "datafile_challenge4.txt")
-        //    return "Incorrect file";
+        for (string hexText : hexCiphertexts)
+        {
+            if (!IsHexadecimalString(hexText))
+                return "Data is not in hexadecimal form";
+        }
 
-        vector<string> ciphertexts;
         vector<float> highPlaintextScores;
         vector<unsigned char> candidateBytes;
         string bestCandidate;
         string ciphertext;
         char possibleKey = '\0';
 
-        // Read in hex strings from datafile_challenge4.txt
-        ifstream fileIn;
-        fileIn.open(fileName);
-        while (!fileIn.eof())
+        for (size_t i = 0; i < hexCiphertexts.size(); i++)
         {
-            std::getline(fileIn, ciphertext);
-            ciphertexts.push_back(ciphertext);
-        }
-        fileIn.close();
-
-        for (size_t i = 0; i < ciphertexts.size(); i++)
-        {
-            vector<unsigned char> hexBytes = HexToBytes(ciphertexts[i]);
+            vector<unsigned char> hexBytes = HexToBytes(hexCiphertexts[i]);
             vector<float> plaintextScores;
             string plaintext;
 
@@ -259,7 +203,7 @@ inline string ChallengeSolution::DetectSingleCharXOR(string fileName)
             if (highScore == *max_element(highPlaintextScores.begin(), highPlaintextScores.end()))
             {
                 possibleKey = distance(plaintextScores.begin(), max_element(plaintextScores.begin(), plaintextScores.end()));
-                bestCandidate = ciphertexts[i];
+                bestCandidate = hexCiphertexts[i];
                 candidateBytes = hexBytes;
             }
         }
@@ -280,7 +224,6 @@ inline string ChallengeSolution::DetectSingleCharXOR(string fileName)
     {
         return e.what();
     }
-    
 }
 
 /*************************************************** Method for Challenge 5 ***************************************************/
@@ -312,18 +255,14 @@ inline string ChallengeSolution::RepeatingKeyXOR(const string& plain_text, const
 }
 
 /*************************************************** Method for Challenge 6 ***************************************************/
-inline string ChallengeSolution::BreakRepeatingKeyXOR(string fileName)
+inline string ChallengeSolution::BreakRepeatingKeyXOR(Block base64Text)
 {
     try
     {
         // Input validation
-        //if (fileName != "datafile_challenge6.txt")
-        //    return "Incorrect file";
+        if (!IsBase64Block(base64Text))
+            return "Data is not in base64 form";
 
-        Block base64Text;
-        if (!BlockReadFile(&base64Text, fileName.c_str()))
-            return "Error reading file.";
-    
         int maxSize = base64Text.len * 3 / 4;
     
         Block hexBuffer;
@@ -362,19 +301,16 @@ inline string ChallengeSolution::BreakRepeatingKeyXOR(string fileName)
 }
 
 /*************************************************** Method for Challenge 7 ***************************************************/
-inline string ChallengeSolution::AES_ECBMode(string fileName)
+inline string ChallengeSolution::AES_ECBMode(Block base64Text)
 {
     try
     {
         // Input validation
-        //if (fileName != "datafile_challenge7.txt")
-        //    return "Incorrect file";
+        if (!IsBase64Block(base64Text))
+            return "Data is not in base64 form";
 
-        // YELLOW SUBMARINE in hexadecimal form
+        // YELLOW SUBMARINE in hexadecimal form; YELLOW SUBMARINE is the default key?
         unsigned char strKey[16] = { 0x59, 0x45, 0x4C, 0x4C, 0x4F, 0x57, 0x20, 0x53, 0x55, 0x42, 0x4D, 0x41, 0x52, 0x49, 0x4E, 0x45 };
-        Block base64Text;
-        if (!BlockReadFile(&base64Text, fileName.c_str()))
-            return "Error reading file\n";
     
         // Base64 decode the input
         int iMaximumSize = base64Text.len * 3 / 4;
@@ -401,22 +337,21 @@ inline string ChallengeSolution::AES_ECBMode(string fileName)
 }
 
 /*************************************************** Method for Challenge 8 ***************************************************/
-inline string ChallengeSolution::DetectAES_ECBMode(string fileName)
+inline string ChallengeSolution::DetectAES_ECBMode(vector<Block> hexCiphertexts)
 {
     try
     {
         // Input validation
-        //if (fileName != "datafile_challenge8.txt")
-        //    return "Inc orrect file";
-
+        for (Block hexText : hexCiphertexts)
+        {
+            if (!IsHexadecimalBlock(hexText))
+                return "Data is not in hexadecimal form";
+        }
         string message;
-        vector<Block> ciphertextLines = GetLinesFromFile(fileName.c_str());
-        if (ciphertextLines.size() == 0)
-            return "Failed to open file.";
     
         int lineNum = 0;
     
-        for (Block const& line : ciphertextLines)
+        for (Block const& line : hexCiphertexts)
         {
             lineNum++;
     

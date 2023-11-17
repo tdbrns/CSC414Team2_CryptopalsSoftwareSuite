@@ -182,6 +182,71 @@ inline float ScoreBlock(unsigned char* block, int blockLen)
     return score;
 }
 
+// Checks if given string is hexadecimal
+inline bool IsHexadecimalString(string str)
+{
+    for (size_t i = 0; i < str.length(); i++)
+    {
+        bool isHexVal = false;
+
+        for (char hexChar : HEX_TABLE)
+        {
+            if (str[i] == hexChar)
+            {
+                isHexVal = true;
+                break;
+            }
+        }
+
+        if (!isHexVal)
+            return false;
+    }
+
+    return true;
+}
+
+// Checks if given Block of data is base64
+inline bool IsBase64Block(Block text)
+{
+    for (size_t i = 0; i < text.len; i++)
+    {
+        bool isBase64Val = false;
+
+        for (unsigned char base64Char : BASE64_TABLE)
+        {
+            if (text.data[i] == base64Char || text.data[i] == '=')
+            {
+                isBase64Val = true;
+                break;
+            }
+        }
+
+        if (!isBase64Val)
+            return false;
+    }
+}
+
+// Checks if given Block of data is hexadecimal
+inline bool IsHexadecimalBlock(Block text)
+{
+    for (size_t i = 0; i < text.len; i++)
+    {
+        bool isHexVal = false;
+
+        for (unsigned char hexChar : HEX_TABLE)
+        {
+            if (text.data[i] == hexChar)
+            {
+                isHexVal = true;
+                break;
+            }
+        }
+
+        if (!isHexVal)
+            return false;
+    }
+}
+
 // Converts hexadecimal values into bytes
 inline vector<unsigned char> HexToBytes(const string& hex)
 {
