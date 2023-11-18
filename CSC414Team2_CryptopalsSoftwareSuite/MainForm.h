@@ -933,13 +933,13 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 	}
 
 	private: System::Void key_text_box_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-		String^ inputText = key_text_box->Text;
-		key_txt = inputText;
+		//String^ inputText = key_text_box->Text;
+		//key_txt = inputText;
 	}
 
 	private: System::Void plain_text_box_TextChanged(System::Object^ sender, System::EventArgs^ e) {
-		String^ inputText = plain_text_box->Text;
-		plain_txt = inputText;
+		//String^ inputText = plain_text_box->Text;
+		//plain_txt = inputText;
 	}
 
 	private: System::Void cipher_text_box_TextChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -1036,7 +1036,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 					base_64->Text = gcnew String(base64_string.c_str());
 			   }
 			   else
-					base_64->Text = "Input is empty";
+					base_64->Text = "Invalid input";
 		   }
 
 		   /*************************************************** UI Method for Challenge 2 ***************************************************/
@@ -1047,7 +1047,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   String^ managedString_2 = hex_2;
 			   string hexString = marshal_as<string>(managedString);
 
-			   if (!String::IsNullOrEmpty(hex_1))
+			   if (!String::IsNullOrEmpty(hex_1) || !String::IsNullOrEmpty(hex_2))
 			   {
 				   // Display output
 				   string xor_string = marshal_as<string>(managedString);
@@ -1056,7 +1056,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 				   xor_result_string->Text = gcnew String(result_xor.c_str());
 			   }
 			   else
-				   xor_result_string->Text = "Input is empty";
+				   xor_result_string->Text = "Invalid input";
 		   }
 
 		   /*************************************************** UI Method for Challenge 3 ***************************************************/
@@ -1074,7 +1074,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 				   message_box->Text = gcnew String(message.c_str());
 			   }
 			   else 
-				   message_box->Text = "Input is empty";
+				   message_box->Text = "Invalid input";
 		   }
 
 		   /*************************************************** UI Methods for Challenge 4 ***************************************************/
@@ -1118,11 +1118,11 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   void MainForm::repeat_xor()
 		   {
 			   ChallengeSolution solution;
-			   String^ managedString = plain_txt;
-			   String^ managedString_2 = key_txt;
+			   String^ managedString = plain_text_box->Text;
+			   String^ managedString_2 = key_text_box->Text;
 			   string plain_txt_string = marshal_as<string>(managedString);
 
-			   if (!String::IsNullOrEmpty(key_txt)) 
+			   if (!String::IsNullOrEmpty(key_text_box->Text) || !String::IsNullOrEmpty(plain_text_box->Text)) 
 			   {
 				   // Display output
 				   string key_txt_string = marshal_as<string>(managedString_2);
@@ -1130,7 +1130,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 				   cipher_text_box->Text = gcnew String(cipher_result.c_str());
 			   }
 			   else
-				   cipher_text_box->Text = "Input is empty";
+				   cipher_text_box->Text = "Invalid input";
 		   }
 
 		   /*************************************************** UI Method for Challenge 6 ***************************************************/

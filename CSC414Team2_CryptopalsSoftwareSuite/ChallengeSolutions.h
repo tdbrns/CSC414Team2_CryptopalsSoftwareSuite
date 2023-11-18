@@ -2,16 +2,17 @@
 
 #include "CryptoUtilities.h"
 
-// The ChallengeSolution struct of ChallengeSolutions.h holds the primary methods that are used to solve all eight Cryptopal 
-// challenges. Each method can be called via a ChallengeSolution struct variable.
-struct ChallengeSolution
+// The ChallengeSolution class of ChallengeSolutions.h holds the primary methods that are used to solve all eight Cryptopal 
+// challenges. Each method can be called via a ChallengeSolution object.
+class ChallengeSolution
 {
+public:
     // Prototypes for the eight challenge methods
     string HexToBase64(string);
     string FixedXOR(string, string);
     string SingleByteXORCipher(string);
     string DetectSingleCharXOR(vector<string>);
-    string RepeatingKeyXOR(const string&, const string);
+    string RepeatingKeyXOR(string, string);
     string BreakRepeatingKeyXOR(Block);
     string AES_ECBMode(Block);
     string DetectAES_ECBMode(vector<Block>);
@@ -24,13 +25,14 @@ inline string ChallengeSolution::HexToBase64(string hexString)
     {
         // Input validation
         if (hexString.length() < 4 && hexString.length() > 0)
-            return "Must enter at least 4 characters";
+            throw std::exception("Must enter at least 4 characters");
         if (!IsHexadecimalString(hexString))
-            return "Data is not in hexadecimal form";
+            throw std::exception("Data is not in hexadecimal form");
 
         vector<unsigned char> hexBytes = HexToBytes(hexString);
         string base64String;
         size_t i = 0;
+
 
          //Takes Hex and Converts it into base64
         while (i < hexBytes.size())
@@ -74,7 +76,9 @@ inline string ChallengeSolution::HexToBase64(string hexString)
     }
     catch (const std::exception& e)
     {
-        return e.what();
+        string exception = "Exception: ";
+        string errorMsg(e.what());
+        return exception + errorMsg;
     }
 }
 
@@ -86,11 +90,11 @@ inline string ChallengeSolution::FixedXOR(string hexString1, string hexString2)
     {
         // Input validation
         if (hexString1.length() != hexString2.length())
-            return "Strings are not the same length.";
+            throw std::exception("Strings are not the same length.");
         if (!IsHexadecimalString(hexString1))
-            return "Data is not in hexadecimal form";
+            throw std::exception("Data is not in hexadecimal form");
         if (!IsHexadecimalString(hexString2))
-            return "Data is not in hexadecimal form";
+            throw std::exception("Data is not in hexadecimal form");
 
         string result;
 
@@ -106,7 +110,9 @@ inline string ChallengeSolution::FixedXOR(string hexString1, string hexString2)
     }
     catch (const std::exception& e) 
     {
-        return e.what();
+        string exception = "Exception: ";
+        string errorMsg(e.what());
+        return exception + errorMsg;
     }
 }
 
@@ -117,7 +123,7 @@ inline string ChallengeSolution::SingleByteXORCipher(string hexString)
     {
         // Input validation
         if (!IsHexadecimalString(hexString))
-            return "Data is not in hexadecimal form";
+            throw std::exception("Data is not in hexadecimal form");
 
         vector<float> plaintextScores;
         vector<unsigned char> hexBytes = HexToBytes(hexString);
@@ -154,7 +160,9 @@ inline string ChallengeSolution::SingleByteXORCipher(string hexString)
     }
     catch (const std::exception& e)
     {
-        return e.what();
+        string exception = "Exception: ";
+        string errorMsg(e.what());
+        return exception + errorMsg;
     }
 }
 
@@ -167,7 +175,7 @@ inline string ChallengeSolution::DetectSingleCharXOR(vector<string> hexCiphertex
         for (string hexText : hexCiphertexts)
         {
             if (!IsHexadecimalString(hexText))
-                return "Data is not in hexadecimal form";
+                throw std::exception("Data is not in hexadecimal form");
         }
 
         vector<float> highPlaintextScores;
@@ -222,12 +230,14 @@ inline string ChallengeSolution::DetectSingleCharXOR(vector<string> hexCiphertex
     }
     catch (const std::exception& e)
     {
-        return e.what();
+        string exception = "Exception: ";
+        string errorMsg(e.what());
+        return exception + errorMsg;
     }
 }
 
 /*************************************************** Method for Challenge 5 ***************************************************/
-inline string ChallengeSolution::RepeatingKeyXOR(const string& plain_text, const string key)
+inline string ChallengeSolution::RepeatingKeyXOR(string plain_text, string key)
 {
     try
     {
@@ -249,7 +259,9 @@ inline string ChallengeSolution::RepeatingKeyXOR(const string& plain_text, const
     }
     catch (const std::exception& e)
     {
-        return e.what();
+        string exception = "Exception: ";
+        string errorMsg(e.what());
+        return exception + errorMsg;
     }
 }
 
@@ -260,7 +272,7 @@ inline string ChallengeSolution::BreakRepeatingKeyXOR(Block base64Text)
     {
         // Input validation
         if (!IsBase64Block(base64Text))
-            return "Data is not in base64 form";
+            throw std::exception("Data is not in base64 form");
 
         int maxSize = base64Text.len * 3 / 4;
     
@@ -294,7 +306,9 @@ inline string ChallengeSolution::BreakRepeatingKeyXOR(Block base64Text)
     }
     catch (const std::exception& e)
     {
-        return e.what();
+        string exception = "Exception: ";
+        string errorMsg(e.what());
+        return exception + errorMsg;
     }
 }
 
@@ -305,7 +319,7 @@ inline string ChallengeSolution::AES_ECBMode(Block base64Text)
     {
         // Input validation
         if (!IsBase64Block(base64Text))
-            return "Data is not in base64 form";
+            throw std::exception("Data is not in base64 form");
 
         // YELLOW SUBMARINE in hexadecimal form; YELLOW SUBMARINE is the default key?
         unsigned char strKey[16] = { 0x59, 0x45, 0x4C, 0x4C, 0x4F, 0x57, 0x20, 0x53, 0x55, 0x42, 0x4D, 0x41, 0x52, 0x49, 0x4E, 0x45 };
@@ -330,7 +344,9 @@ inline string ChallengeSolution::AES_ECBMode(Block base64Text)
     }
     catch (const std::exception& e)
     {
-        return e.what();
+        string exception = "Exception: ";
+        string errorMsg(e.what());
+        return exception + errorMsg;
     }
 }
 
@@ -343,12 +359,11 @@ inline string ChallengeSolution::DetectAES_ECBMode(vector<Block> hexCiphertexts)
         for (Block hexText : hexCiphertexts)
         {
             if (!IsHexadecimalBlock(hexText))
-                return "Data is not in hexadecimal form";
+                throw std::exception("Data is not in hexadecimal form");
         }
+
         string message;
-    
         int lineNum = 0;
-    
         for (Block const& line : hexCiphertexts)
         {
             lineNum++;
@@ -371,6 +386,8 @@ inline string ChallengeSolution::DetectAES_ECBMode(vector<Block> hexCiphertexts)
     }
     catch (const std::exception& e)
     {
-        return e.what();
+        string exception = "Exception: ";
+        string errorMsg(e.what());
+        return exception + errorMsg;
     }
 }
