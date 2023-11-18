@@ -1018,18 +1018,19 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 	}
 
 		   // UI method for displaying text from a chosen text file
-		   String^ MainForm::DisplayFileContents(StreamReader^ dataIn)
+		   void MainForm::OpenFileContents(StreamReader^ dataIn, String^& inputStr, bool& isAcceptableLen)
 		   {
 			   String^ tempStr;
-			   String^ inputStr = "";
+			   //String^ inputStr = "";
 
 			   while ((tempStr = dataIn->ReadLine()) != nullptr && inputStr->Length < TEXTBOX_MAX_CAPACITY + 1)
 				   inputStr += tempStr;
 
-			   if (inputStr->Length <= TEXTBOX_MAX_CAPACITY)
-				   return inputStr;
-			   else
-				   return "File is too large";
+			   if (inputStr->Length > TEXTBOX_MAX_CAPACITY)
+			   {
+				   isAcceptableLen = false;
+				   inputStr = "File is too large";
+			   }
 		   }
 
 		   /*************************************************** UI Method for Challenge 1 ***************************************************/
@@ -1101,12 +1102,16 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   openFileDialog1->RestoreDirectory = true;
 
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
-			   {   
-				   // Display contents of text file
+			   {
 				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
-				   single_char_xor_input->Text = DisplayFileContents(dataIn);
+				   String^ inputStr = "";
+				   bool isAcceptableLen = true;
 
-				   if (!String::IsNullOrEmpty(single_char_xor_input->Text) && single_char_xor_input->Text != "File is too large")
+				   // Display contents of text file
+				   OpenFileContents(dataIn, inputStr, isAcceptableLen);
+				   single_char_xor_input->Text = inputStr;
+
+				   if (!String::IsNullOrEmpty(single_char_xor_input->Text) && isAcceptableLen == true)
 				   {
 						// Parse file contents for processing
 						string line;
@@ -1114,8 +1119,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 						fileIn.open(marshal_as<string>(openFileDialog1->FileName));
 						while (!fileIn.eof())
 						{
-							   std::getline(fileIn, line);
-							   fileLines.push_back(line);
+							std::getline(fileIn, line);
+							fileLines.push_back(line);
 						}
 						fileIn.close();
 
@@ -1161,16 +1166,19 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
 			   {
-				   Block base64Text;
-				   string fileName = marshal_as<string>(openFileDialog1->FileName);
+					StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
+					String^ inputStr = "";
+					bool isAcceptableLen = true;
 
 					// Display contents of text file
-					StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
-					break_repeat_xor_input->Text = DisplayFileContents(dataIn);
+					OpenFileContents(dataIn, inputStr, isAcceptableLen);
+					break_repeat_xor_input->Text = inputStr;
 
-					if (!String::IsNullOrEmpty(break_repeat_xor_input->Text) && break_repeat_xor_input->Text != "File is too large")
+					if (!String::IsNullOrEmpty(break_repeat_xor_input->Text) && isAcceptableLen == true)
 					{
 						// Parse file contents
+						Block base64Text;
+						string fileName = marshal_as<string>(openFileDialog1->FileName);
 						if (!BlockReadFile(&base64Text, fileName.c_str()))
 							break_repeat_xor_input->Text = "Error reading file";
 						else
@@ -1200,16 +1208,19 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
 			   {
-				   Block base64Text;
-				   string fileName = marshal_as<string>(openFileDialog1->FileName);
+				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
+				   String^ inputStr = "";
+				   bool isAcceptableLen = true;
 
 				   // Display contents of text file
-				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
-				   aes_ecb_input->Text = DisplayFileContents(dataIn);
+				   OpenFileContents(dataIn, inputStr, isAcceptableLen);
+				   aes_ecb_input->Text = inputStr;
 
-				   if (!String::IsNullOrEmpty(aes_ecb_input->Text) && aes_ecb_input->Text != "File is too large")
+				   if (!String::IsNullOrEmpty(aes_ecb_input->Text) && isAcceptableLen == true)
 				   {
 					   // Parse file contents
+					   Block base64Text;
+					   string fileName = marshal_as<string>(openFileDialog1->FileName);
 					   if (!BlockReadFile(&base64Text, fileName.c_str()))
 						   aes_ecb_output->Text = "Error reading file";
 					   else
@@ -1239,24 +1250,24 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 			   {
-				   // Parse file contents
-				   string fileName = marshal_as<string>(openFileDialog1->FileName);
-				   vector<Block> hexCiphertexts = GetLinesFromFile(fileName.c_str());
+				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
+				   String^ inputStr = "";
+				   bool isAcceptableLen = true;
 
 				   // Display contents of text file
-				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
-				   detect_aes_ecb_input->Text = DisplayFileContents(dataIn);
+				   OpenFileContents(dataIn, inputStr, isAcceptableLen);
+				   detect_aes_ecb_input->Text = inputStr;
 
 				   if (!String::IsNullOrEmpty(detect_aes_ecb_input->Text) && detect_aes_ecb_input->Text != "File is too large")
 				   {
+					   // Parse file contents
+					   string fileName = marshal_as<string>(openFileDialog1->FileName);
+					   vector<Block> hexCiphertexts = GetLinesFromFile(fileName.c_str());
+
 					   if (hexCiphertexts.size() == 0)
 						   detect_aes_ecb_input->Text = "Error reading file";
 					   else
 					   {
-						   // Display contents of text file
-						   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
-						   detect_aes_ecb_input->Text = DisplayFileContents(dataIn);
-
 						   // Display output
 						   string result = solution.DetectAES_ECBMode(hexCiphertexts);
 						   Detect_AES_in_ECB_textbox->Text = gcnew String(result.c_str());
