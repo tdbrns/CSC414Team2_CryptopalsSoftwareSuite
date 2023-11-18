@@ -3,8 +3,13 @@
 #include <msclr/marshal_cppstd.h>
 #include "ChallengeSolutions.h"
 
-using msclr::interop::marshal_as;		// marshal_as is used to convert data types defined by the .NET Framework to data types 
-										// defined by the standard C++ library and vice versa.
+// The maximum capacity of a textbox is 32767 characters by default
+constexpr auto TEXTBOX_MAX_CAPACITY = 32767;	
+
+// marshal_as is used to convert data types defined by the .NET Framework to data types
+// defined by the standard C++ library and vice versa.
+using msclr::interop::marshal_as;		 
+										
 
 namespace  CSC414Team2CryptopalsSoftwareSuite {
 
@@ -71,7 +76,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
 	private: System::Windows::Forms::Button^ break_repeat_btn;
 	private: System::Windows::Forms::Button^ AES_btn;
-	private: System::Windows::Forms::TextBox^ AEX_textbox;
+	private: System::Windows::Forms::TextBox^ aes_ecb_output;
+
 	private: System::Windows::Forms::Label^ label10;
 	private: System::Windows::Forms::TextBox^ Detect_AES_in_ECB_textbox;
 	private: System::Windows::Forms::Label^ label11;
@@ -176,7 +182,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->file_break_repeat_xor_change = (gcnew System::Windows::Forms::TextBox());
 			this->break_repeat_btn = (gcnew System::Windows::Forms::Button());
 			this->AES_btn = (gcnew System::Windows::Forms::Button());
-			this->AEX_textbox = (gcnew System::Windows::Forms::TextBox());
+			this->aes_ecb_output = (gcnew System::Windows::Forms::TextBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->Detect_AES_in_ECB_textbox = (gcnew System::Windows::Forms::TextBox());
 			this->label11 = (gcnew System::Windows::Forms::Label());
@@ -195,11 +201,11 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->label15 = (gcnew System::Windows::Forms::Label());
 			this->break_repeat_xor_input = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox7 = (gcnew System::Windows::Forms::GroupBox());
-			this->groupBox8 = (gcnew System::Windows::Forms::GroupBox());
-			this->aes_ecb_input = (gcnew System::Windows::Forms::TextBox());
 			this->label16 = (gcnew System::Windows::Forms::Label());
-			this->detect_aes_ecb_input = (gcnew System::Windows::Forms::TextBox());
+			this->aes_ecb_input = (gcnew System::Windows::Forms::TextBox());
+			this->groupBox8 = (gcnew System::Windows::Forms::GroupBox());
 			this->label18 = (gcnew System::Windows::Forms::Label());
+			this->detect_aes_ecb_input = (gcnew System::Windows::Forms::TextBox());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->groupBox3->SuspendLayout();
@@ -539,17 +545,17 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->AES_btn->UseVisualStyleBackColor = true;
 			this->AES_btn->Click += gcnew System::EventHandler(this, &MainForm::AES_btn_Click);
 			// 
-			// AEX_textbox
+			// aes_ecb_output
 			// 
-			this->AEX_textbox->Location = System::Drawing::Point(348, 51);
-			this->AEX_textbox->Margin = System::Windows::Forms::Padding(4);
-			this->AEX_textbox->Multiline = true;
-			this->AEX_textbox->Name = L"AEX_textbox";
-			this->AEX_textbox->ReadOnly = true;
-			this->AEX_textbox->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->AEX_textbox->Size = System::Drawing::Size(338, 83);
-			this->AEX_textbox->TabIndex = 31;
-			this->AEX_textbox->WordWrap = false;
+			this->aes_ecb_output->Location = System::Drawing::Point(348, 51);
+			this->aes_ecb_output->Margin = System::Windows::Forms::Padding(4);
+			this->aes_ecb_output->Multiline = true;
+			this->aes_ecb_output->Name = L"aes_ecb_output";
+			this->aes_ecb_output->ReadOnly = true;
+			this->aes_ecb_output->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->aes_ecb_output->Size = System::Drawing::Size(338, 83);
+			this->aes_ecb_output->TabIndex = 31;
+			this->aes_ecb_output->WordWrap = false;
 			// 
 			// label10
 			// 
@@ -786,7 +792,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 				static_cast<System::Int32>(static_cast<System::Byte>(192)));
 			this->groupBox7->Controls->Add(this->label16);
 			this->groupBox7->Controls->Add(this->aes_ecb_input);
-			this->groupBox7->Controls->Add(this->AEX_textbox);
+			this->groupBox7->Controls->Add(this->aes_ecb_output);
 			this->groupBox7->Controls->Add(this->label10);
 			this->groupBox7->Controls->Add(this->AES_btn);
 			this->groupBox7->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 10.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -797,6 +803,26 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->groupBox7->TabIndex = 44;
 			this->groupBox7->TabStop = false;
 			this->groupBox7->Text = L"Challenge 7: AES in ECB Mode";
+			// 
+			// label16
+			// 
+			this->label16->AutoSize = true;
+			this->label16->Location = System::Drawing::Point(6, 27);
+			this->label16->Name = L"label16";
+			this->label16->Size = System::Drawing::Size(66, 20);
+			this->label16->TabIndex = 34;
+			this->label16->Text = L"Base64";
+			// 
+			// aes_ecb_input
+			// 
+			this->aes_ecb_input->Location = System::Drawing::Point(3, 51);
+			this->aes_ecb_input->Multiline = true;
+			this->aes_ecb_input->Name = L"aes_ecb_input";
+			this->aes_ecb_input->ReadOnly = true;
+			this->aes_ecb_input->ScrollBars = System::Windows::Forms::ScrollBars::Both;
+			this->aes_ecb_input->Size = System::Drawing::Size(338, 83);
+			this->aes_ecb_input->TabIndex = 33;
+			this->aes_ecb_input->WordWrap = false;
 			// 
 			// groupBox8
 			// 
@@ -816,25 +842,14 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->groupBox8->TabStop = false;
 			this->groupBox8->Text = L"Challenge 8: Detect AES in ECB mode";
 			// 
-			// aes_ecb_input
+			// label18
 			// 
-			this->aes_ecb_input->Location = System::Drawing::Point(3, 51);
-			this->aes_ecb_input->Multiline = true;
-			this->aes_ecb_input->Name = L"aes_ecb_input";
-			this->aes_ecb_input->ReadOnly = true;
-			this->aes_ecb_input->ScrollBars = System::Windows::Forms::ScrollBars::Both;
-			this->aes_ecb_input->Size = System::Drawing::Size(338, 83);
-			this->aes_ecb_input->TabIndex = 33;
-			this->aes_ecb_input->WordWrap = false;
-			// 
-			// label16
-			// 
-			this->label16->AutoSize = true;
-			this->label16->Location = System::Drawing::Point(6, 27);
-			this->label16->Name = L"label16";
-			this->label16->Size = System::Drawing::Size(66, 20);
-			this->label16->TabIndex = 34;
-			this->label16->Text = L"Base64";
+			this->label18->AutoSize = true;
+			this->label18->Location = System::Drawing::Point(6, 27);
+			this->label18->Name = L"label18";
+			this->label18->Size = System::Drawing::Size(106, 20);
+			this->label18->TabIndex = 38;
+			this->label18->Text = L"Hexadecimal";
 			// 
 			// detect_aes_ecb_input
 			// 
@@ -847,15 +862,6 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->detect_aes_ecb_input->TabIndex = 36;
 			this->detect_aes_ecb_input->WordWrap = false;
 			// 
-			// label18
-			// 
-			this->label18->AutoSize = true;
-			this->label18->Location = System::Drawing::Point(6, 27);
-			this->label18->Name = L"label18";
-			this->label18->Size = System::Drawing::Size(106, 20);
-			this->label18->TabIndex = 38;
-			this->label18->Text = L"Hexadecimal";
-			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
@@ -863,7 +869,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->AutoScroll = true;
 			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
 				static_cast<System::Int32>(static_cast<System::Byte>(128)));
-			this->ClientSize = System::Drawing::Size(1272, 672);
+			this->ClientSize = System::Drawing::Size(1293, 672);
 			this->Controls->Add(this->groupBox8);
 			this->Controls->Add(this->groupBox7);
 			this->Controls->Add(this->groupBox6);
@@ -1000,7 +1006,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		message_box->Text = "";
 		file_xor_results->Text = "";
 		file_break_repeat_xor_change->Text = "";
-		AEX_textbox->Text = "";
+		aes_ecb_output->Text = "";
 		Detect_AES_in_ECB_textbox->Text = "";
 		key_text_box->Text = "";
 		plain_text_box->Text = "";
@@ -1016,9 +1022,14 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   {
 			   String^ tempStr;
 			   String^ inputStr = "";
-			   while ((tempStr = dataIn->ReadLine()) != nullptr)
+
+			   while ((tempStr = dataIn->ReadLine()) != nullptr && inputStr->Length < TEXTBOX_MAX_CAPACITY + 1)
 				   inputStr += tempStr;
-			   return inputStr;
+
+			   if (inputStr->Length <= TEXTBOX_MAX_CAPACITY)
+				   return inputStr;
+			   else
+				   return "File is too large";
 		   }
 
 		   /*************************************************** UI Method for Challenge 1 ***************************************************/
@@ -1091,24 +1102,29 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
 			   if (openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK) 
 			   {   
-
-				   // Parse file contents
-				   string line;
-				   ifstream fileIn;
-				   fileIn.open(marshal_as<string>(openFileDialog1->FileName));
-				   while (!fileIn.eof())
-				   {
-					   std::getline(fileIn, line);
-					   fileLines.push_back(line);
-				   }
-				   fileIn.close();
-
+				   // Display contents of text file
 				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
 				   single_char_xor_input->Text = DisplayFileContents(dataIn);
 
-				   // Display output
-				   string result = solution.DetectSingleCharXOR(fileLines);
-				   file_xor_results->Text = gcnew String(result.c_str());
+				   if (!String::IsNullOrEmpty(single_char_xor_input->Text) && single_char_xor_input->Text != "File is too large")
+				   {
+						// Parse file contents for processing
+						string line;
+						ifstream fileIn;
+						fileIn.open(marshal_as<string>(openFileDialog1->FileName));
+						while (!fileIn.eof())
+						{
+							   std::getline(fileIn, line);
+							   fileLines.push_back(line);
+						}
+						fileIn.close();
+
+						// Display output
+						string result = solution.DetectSingleCharXOR(fileLines);
+						file_xor_results->Text = gcnew String(result.c_str());
+				   }
+				   else
+					   file_xor_results->Text = "Invalid input";
 			   }
 			   else
 				   file_xor_results->Text = "Cannot open dialog box";
@@ -1148,19 +1164,24 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 				   Block base64Text;
 				   string fileName = marshal_as<string>(openFileDialog1->FileName);
 
-				   // Parse file contents
-				   if (!BlockReadFile(&base64Text, fileName.c_str()))
-					   break_repeat_xor_input->Text = "Error reading file.";
-				   else
-				   {
-					   // Display contents of text file
-					   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
-					   break_repeat_xor_input->Text = DisplayFileContents(dataIn);
+					// Display contents of text file
+					StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
+					break_repeat_xor_input->Text = DisplayFileContents(dataIn);
 
-					   // Display output
-					   string result = solution.BreakRepeatingKeyXOR(base64Text);
-					   file_break_repeat_xor_change->Text = gcnew String(result.c_str());
-				   }
+					if (!String::IsNullOrEmpty(break_repeat_xor_input->Text) && break_repeat_xor_input->Text != "File is too large")
+					{
+						// Parse file contents
+						if (!BlockReadFile(&base64Text, fileName.c_str()))
+							break_repeat_xor_input->Text = "Error reading file";
+						else
+						{
+							// Display output
+							string result = solution.BreakRepeatingKeyXOR(base64Text);
+							file_break_repeat_xor_change->Text = gcnew String(result.c_str());
+						}
+					}
+					else
+						file_break_repeat_xor_change->Text = "Invalid input";
 			   }
 			   else
 				   Detect_AES_in_ECB_textbox->Text = "Cannot open dialog box";
@@ -1182,19 +1203,24 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 				   Block base64Text;
 				   string fileName = marshal_as<string>(openFileDialog1->FileName);
 
-				   // Parse file contents
-				   if (!BlockReadFile(&base64Text, fileName.c_str()))
-					   aes_ecb_input->Text = "Error reading file.";
-				   else
-				   {
-					   // Display contents of text file
-					   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
-					   aes_ecb_input->Text = DisplayFileContents(dataIn);
+				   // Display contents of text file
+				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
+				   aes_ecb_input->Text = DisplayFileContents(dataIn);
 
-					   // Display output
-					   string result = solution.AES_ECBMode(base64Text);
-					   AEX_textbox->Text = gcnew String(result.c_str());
+				   if (!String::IsNullOrEmpty(aes_ecb_input->Text) && aes_ecb_input->Text != "File is too large")
+				   {
+					   // Parse file contents
+					   if (!BlockReadFile(&base64Text, fileName.c_str()))
+						   aes_ecb_output->Text = "Error reading file";
+					   else
+					   {
+						   // Display output
+						   string result = solution.AES_ECBMode(base64Text);
+						   aes_ecb_output->Text = gcnew String(result.c_str());
+					   }
 				   }
+				   else
+					   aes_ecb_output->Text = "Invalid input";
 			   }
 			   else
 				   Detect_AES_in_ECB_textbox->Text = "Cannot open dialog box";
@@ -1216,18 +1242,28 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 				   // Parse file contents
 				   string fileName = marshal_as<string>(openFileDialog1->FileName);
 				   vector<Block> hexCiphertexts = GetLinesFromFile(fileName.c_str());
-				   if (hexCiphertexts.size() == 0)
-					   detect_aes_ecb_input->Text = "Error reading file.";
-				   else
-				   {
-					   // Display contents of text file
-					   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
-					   detect_aes_ecb_input->Text = DisplayFileContents(dataIn);
 
-					   // Display output
-					   string result = solution.DetectAES_ECBMode(hexCiphertexts);
-					   Detect_AES_in_ECB_textbox->Text = gcnew String(result.c_str());
+				   // Display contents of text file
+				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
+				   detect_aes_ecb_input->Text = DisplayFileContents(dataIn);
+
+				   if (!String::IsNullOrEmpty(detect_aes_ecb_input->Text) && detect_aes_ecb_input->Text != "File is too large")
+				   {
+					   if (hexCiphertexts.size() == 0)
+						   detect_aes_ecb_input->Text = "Error reading file";
+					   else
+					   {
+						   // Display contents of text file
+						   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
+						   detect_aes_ecb_input->Text = DisplayFileContents(dataIn);
+
+						   // Display output
+						   string result = solution.DetectAES_ECBMode(hexCiphertexts);
+						   Detect_AES_in_ECB_textbox->Text = gcnew String(result.c_str());
+					   }
 				   }
+				   else
+					   Detect_AES_in_ECB_textbox->Text = "Invalid input";
 			   }
 			   else
 				   Detect_AES_in_ECB_textbox->Text = "Cannot open dialog box";
