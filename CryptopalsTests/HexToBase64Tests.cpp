@@ -48,6 +48,6 @@ TEST(HexToBase64Tests, HexToBase64Invalid) {
     };
 
     for (const auto& testCase : testCases) {
-        EXPECT_ANY_THROW(HexSolutions.HexToBase64(testCase.input_hex));
+        EXPECT_TRUE(HexSolutions.HexToBase64(testCase.input_hex).rfind("Exception:", 0) == 0);
     }
 }

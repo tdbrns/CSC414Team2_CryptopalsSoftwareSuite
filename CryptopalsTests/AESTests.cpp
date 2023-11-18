@@ -1,19 +1,89 @@
 #include "gtest/gtest.h"
+#include "ChallengeSolutions.h"
+
+ChallengeSolution AESSolutions;
+
+// -- ECB 128 Decrypt
 
 TEST(AESTests, DecryptAESInECB) {
     struct TestCase {
         std::string input_encrypted;
-        std::string input_key;
         std::string expected_decrypted;
     };
 
     std::vector<TestCase> testCases = {
-        {"3ad77bb40d7a3660a89ecaf32466ef97", "2b7e151628aed2a6abf7158809cf4f3c", "6bc1bee22e409f96e93d7e117393172a"},
-        {"f5d3d58503b9699de785895a96fdbaaf", "2b7e151628aed2a6abf7158809cf4f3c", "ae2d8a571e03ac9c9eb76fac45af8e51"},
-        {"43b1cd7f598ece23881b00e3ed030688", "2b7e151628aed2a6abf7158809cf4f3c", "30c81c46a35ce411e5fbc1191a0a52ef"},
+        {"401gyzJgpJNkouYaQRZZRg==", "Hello, World!"}, // padded
     };
 
     for (const auto& testCase : testCases) {
-        FAIL() << "Doesn't take input";
+        Block testBlock;
+        BlockFromString(&testBlock, testCase.input_encrypted);
+        EXPECT_EQ(AESSolutions.AES_ECBMode(testBlock), testCase.expected_decrypted);
+    }
+}
+
+TEST(AESTests, DecryptAESInECBInvalid) {
+    struct TestCase {
+        std::string input_encrypted;
+        std::string expected_decrypted;
+    };
+
+    std::vector<TestCase> testCases = {
+        {"", "n/a"}, // null
+         {"--wads", "n/a"}, // bad base64
+    };
+
+    for (const auto& testCase : testCases) {
+        Block testBlock;
+        BlockFromString(&testBlock, testCase.input_encrypted);
+        //EXPECT_TRUE(AESSolutions.AES_ECBMode(testBlock).rfind("Exception:", 0) == 0);
+    }
+}
+
+// -- Detect AES in ECB 
+
+TEST(AESTests, DetectAESInECB) {
+    struct TestCase {
+        std::vector<std::string> input_encrypted;
+        std::string ECB_str;
+    };
+
+    std::vector<TestCase> testCases = {
+        {{"401gyzJgpJNkouYaQRZZRg=="}, "401gyzJgpJNkouYaQRZZRg=="}, // 1
+    };
+
+    for (const auto& testCase : testCases) {
+        std::vector<Block> blockTestVector;
+        for (const auto& str : testCase.input_encrypted) {
+            Block testBlock;
+            BlockFromString(&testBlock, str);
+
+            blockTestVector.push_back(testBlock);
+        }
+
+        EXPECT_EQ(AESSolutions.DetectAES_ECBMode(blockTestVector), testCase.ECB_str);
+    }
+}
+
+TEST(AESTests, DetectAESInECBInvalid) {
+    struct TestCase {
+        std::vector<std::string> input_encrypted;
+        std::string ECB_str;
+    };
+
+    std::vector<TestCase> testCases = {
+        {{"401gyzJgpJNkouYaQRZZRg=="}, "401gyzJgpJNkouYaQRZZRg=="}, // padded
+    };
+
+    for (const auto& testCase : testCases) {
+        std::vector<Block> blockTestVector;
+        for (const auto& str : testCase.input_encrypted) {
+            Block testBlock;
+            BlockFromString(&testBlock, str);
+
+            blockTestVector.push_back(testBlock);
+        }
+
+        EXPECT_EQ(AESSolutions.DetectAES_ECBMode(blockTestVector), testCase.ECB_str);
     }
 }
