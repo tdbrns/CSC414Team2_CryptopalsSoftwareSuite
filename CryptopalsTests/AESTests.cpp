@@ -49,7 +49,7 @@ TEST(AESTests, DetectAESInECB) {
     };
 
     std::vector<TestCase> testCases = {
-        {{"401gyzJgpJNkouYaQRZZRg=="}, "401gyzJgpJNkouYaQRZZRg=="}, // 1
+        {{"e34d60cb3260a49364a2e61a41165946"}, "e34d60cb3260a49364a2e61a41165946"}, // 1 ecb element
     };
 
     for (const auto& testCase : testCases) {
@@ -72,7 +72,8 @@ TEST(AESTests, DetectAESInECBInvalid) {
     };
 
     std::vector<TestCase> testCases = {
-        {{"401gyzJgpJNkouYaQRZZRg=="}, "401gyzJgpJNkouYaQRZZRg=="}, // padded
+        {{"401gyzJgpJNkouYaQRZZRg=="}, "n/a"}, // not hex
+        {{"ddada", "a03ffe"}, "n/a"}, // none
     };
 
     for (const auto& testCase : testCases) {
@@ -84,6 +85,6 @@ TEST(AESTests, DetectAESInECBInvalid) {
             blockTestVector.push_back(testBlock);
         }
 
-        EXPECT_EQ(AESSolutions.DetectAES_ECBMode(blockTestVector), testCase.ECB_str);
+        EXPECT_TRUE(AESSolutions.DetectAES_ECBMode(blockTestVector).rfind("Exception:", 0) == 0);
     }
 }

@@ -14,7 +14,8 @@ TEST(XORTests, FixedXOR) {
 
     std::vector<TestCase> testCases = {
         {"1c0111001f010100061a024b53535009181c", "686974207468652062756c6c277320657965", "746865206b696420646f6e277420706c6179"},
-        {"0123456789abcdef", "fedcba9876543210", "ffffffffffffffff"}
+        {"0123456789abcdef", "fedcba9876543210", "ffffffffffffffff"},
+        {"", "", ""}, // Empty
     };
 
     for (const auto& testCase : testCases) {
@@ -31,7 +32,6 @@ TEST(XORTests, FixedXORInvalid) {
 
     std::vector<TestCase> testCases = {
         {"1g2b3c", "123456", "n/a"}, // Non-hex
-        {"", "", "n/a"}, // Empty
         {"1c0111001f010100061a024b53535009", "686974207468652062756c6c277320657965", "6869682165687a2163756a7625387336296c"}, // unequal
     };
 
