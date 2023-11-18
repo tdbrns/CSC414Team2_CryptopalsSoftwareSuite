@@ -5,7 +5,7 @@ This software project simulates Crypto Challenge Set 1 of The Cryptopals Crypto 
 # Dependencies
 
 Three third-party software components are used in the project: GoogleTest, OpenSSL, and vcpkg. 
-- A GoogleTests suite is implemented as the primary QA testing software and for the project.
+- A GoogleTests suite is used as the primary QA testing software for the project.
 - The OpenSSL v1.1.1 library is integrated into the project mainly for its _aes.h_ file, which provides features for AES encryption and decryption that are essential in solving Cryptopal challenges 7 and 8.
 - vcpkg is used as a git submodule that manages the integration of software packages for OpenSSL and GoogleTest into the project.
 
