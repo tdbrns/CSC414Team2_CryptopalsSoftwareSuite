@@ -2,8 +2,8 @@
 
 #include "CryptoUtilities.h"
 
-// The ChallengeSolution class of ChallengeSolutions.h holds the primary methods that are used to solve all eight Cryptopal 
-// challenges. Each method can be called via a ChallengeSolution object.
+// The ChallengeSolver class of ChallengeSolver.h holds the primary methods that are used to solve all eight Cryptopal 
+// challenges. Each method can be called via a ChallengeSolver object.
 class ChallengeSolver
 {
 public:
