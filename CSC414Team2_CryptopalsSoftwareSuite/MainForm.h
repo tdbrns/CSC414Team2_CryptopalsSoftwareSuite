@@ -1,7 +1,7 @@
 #pragma once
 
 #include <msclr/marshal_cppstd.h>
-#include "ChallengeSolutions.h"
+#include "ChallengeSolvers.h"
 
 // The maximum capacity of a textbox is 32767 characters by default
 constexpr auto TEXTBOX_MAX_CAPACITY = 32767;	
@@ -102,6 +102,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 
 	private: System::Windows::Forms::Label^ label18;
 	private: System::Windows::Forms::TextBox^ detect_aes_ecb_input;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Label^ label17;
 
 
 
@@ -206,6 +208,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->groupBox8 = (gcnew System::Windows::Forms::GroupBox());
 			this->label18 = (gcnew System::Windows::Forms::Label());
 			this->detect_aes_ecb_input = (gcnew System::Windows::Forms::TextBox());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label17 = (gcnew System::Windows::Forms::Label());
 			this->groupBox1->SuspendLayout();
 			this->groupBox2->SuspendLayout();
 			this->groupBox3->SuspendLayout();
@@ -358,6 +362,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			this->plain_text_box->Location = System::Drawing::Point(6, 53);
 			this->plain_text_box->Margin = System::Windows::Forms::Padding(4);
+			this->plain_text_box->MaxLength = 999999;
 			this->plain_text_box->Multiline = true;
 			this->plain_text_box->Name = L"plain_text_box";
 			this->plain_text_box->ScrollBars = System::Windows::Forms::ScrollBars::Both;
@@ -380,6 +385,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			this->cipher_text_box->Location = System::Drawing::Point(526, 57);
 			this->cipher_text_box->Margin = System::Windows::Forms::Padding(4);
+			this->cipher_text_box->MaxLength = 999999;
 			this->cipher_text_box->Multiline = true;
 			this->cipher_text_box->Name = L"cipher_text_box";
 			this->cipher_text_box->ReadOnly = true;
@@ -437,6 +443,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			this->file_xor_results->Location = System::Drawing::Point(352, 60);
 			this->file_xor_results->Margin = System::Windows::Forms::Padding(4);
+			this->file_xor_results->MaxLength = 999999;
 			this->file_xor_results->Multiline = true;
 			this->file_xor_results->Name = L"file_xor_results";
 			this->file_xor_results->ReadOnly = true;
@@ -481,6 +488,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			this->message_box->Location = System::Drawing::Point(225, 56);
 			this->message_box->Margin = System::Windows::Forms::Padding(4);
+			this->message_box->MaxLength = 999999;
 			this->message_box->Multiline = true;
 			this->message_box->Name = L"message_box";
 			this->message_box->ReadOnly = true;
@@ -515,6 +523,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			this->file_break_repeat_xor_change->Location = System::Drawing::Point(348, 58);
 			this->file_break_repeat_xor_change->Margin = System::Windows::Forms::Padding(4);
+			this->file_break_repeat_xor_change->MaxLength = 999999;
 			this->file_break_repeat_xor_change->Multiline = true;
 			this->file_break_repeat_xor_change->Name = L"file_break_repeat_xor_change";
 			this->file_break_repeat_xor_change->ReadOnly = true;
@@ -547,8 +556,9 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			// aes_ecb_output
 			// 
-			this->aes_ecb_output->Location = System::Drawing::Point(348, 51);
+			this->aes_ecb_output->Location = System::Drawing::Point(543, 51);
 			this->aes_ecb_output->Margin = System::Windows::Forms::Padding(4);
+			this->aes_ecb_output->MaxLength = 999999;
 			this->aes_ecb_output->Multiline = true;
 			this->aes_ecb_output->Name = L"aes_ecb_output";
 			this->aes_ecb_output->ReadOnly = true;
@@ -560,17 +570,18 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(348, 27);
+			this->label10->Location = System::Drawing::Point(543, 27);
 			this->label10->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(142, 20);
+			this->label10->Size = System::Drawing::Size(77, 20);
 			this->label10->TabIndex = 32;
-			this->label10->Text = L"Key and Message";
+			this->label10->Text = L"Message";
 			// 
 			// Detect_AES_in_ECB_textbox
 			// 
 			this->Detect_AES_in_ECB_textbox->Location = System::Drawing::Point(348, 50);
 			this->Detect_AES_in_ECB_textbox->Margin = System::Windows::Forms::Padding(4);
+			this->Detect_AES_in_ECB_textbox->MaxLength = 999999;
 			this->Detect_AES_in_ECB_textbox->Multiline = true;
 			this->Detect_AES_in_ECB_textbox->Name = L"Detect_AES_in_ECB_textbox";
 			this->Detect_AES_in_ECB_textbox->ReadOnly = true;
@@ -720,6 +731,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// single_char_xor_input
 			// 
 			this->single_char_xor_input->Location = System::Drawing::Point(7, 60);
+			this->single_char_xor_input->MaxLength = 999999;
 			this->single_char_xor_input->Multiline = true;
 			this->single_char_xor_input->Name = L"single_char_xor_input";
 			this->single_char_xor_input->ReadOnly = true;
@@ -778,6 +790,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// break_repeat_xor_input
 			// 
 			this->break_repeat_xor_input->Location = System::Drawing::Point(3, 58);
+			this->break_repeat_xor_input->MaxLength = 999999;
 			this->break_repeat_xor_input->Multiline = true;
 			this->break_repeat_xor_input->Name = L"break_repeat_xor_input";
 			this->break_repeat_xor_input->ReadOnly = true;
@@ -790,6 +803,8 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// 
 			this->groupBox7->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(224)),
 				static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			this->groupBox7->Controls->Add(this->label17);
+			this->groupBox7->Controls->Add(this->textBox1);
 			this->groupBox7->Controls->Add(this->label16);
 			this->groupBox7->Controls->Add(this->aes_ecb_input);
 			this->groupBox7->Controls->Add(this->aes_ecb_output);
@@ -799,7 +814,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 				static_cast<System::Byte>(0)));
 			this->groupBox7->Location = System::Drawing::Point(9, 1041);
 			this->groupBox7->Name = L"groupBox7";
-			this->groupBox7->Size = System::Drawing::Size(699, 189);
+			this->groupBox7->Size = System::Drawing::Size(895, 189);
 			this->groupBox7->TabIndex = 44;
 			this->groupBox7->TabStop = false;
 			this->groupBox7->Text = L"Challenge 7: AES in ECB Mode";
@@ -816,6 +831,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// aes_ecb_input
 			// 
 			this->aes_ecb_input->Location = System::Drawing::Point(3, 51);
+			this->aes_ecb_input->MaxLength = 999999;
 			this->aes_ecb_input->Multiline = true;
 			this->aes_ecb_input->Name = L"aes_ecb_input";
 			this->aes_ecb_input->ReadOnly = true;
@@ -854,6 +870,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			// detect_aes_ecb_input
 			// 
 			this->detect_aes_ecb_input->Location = System::Drawing::Point(3, 50);
+			this->detect_aes_ecb_input->MaxLength = 999999;
 			this->detect_aes_ecb_input->Multiline = true;
 			this->detect_aes_ecb_input->Name = L"detect_aes_ecb_input";
 			this->detect_aes_ecb_input->ReadOnly = true;
@@ -861,6 +878,27 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			this->detect_aes_ecb_input->Size = System::Drawing::Size(338, 83);
 			this->detect_aes_ecb_input->TabIndex = 36;
 			this->detect_aes_ecb_input->WordWrap = false;
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(347, 51);
+			this->textBox1->Multiline = true;
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->ReadOnly = true;
+			this->textBox1->ScrollBars = System::Windows::Forms::ScrollBars::Horizontal;
+			this->textBox1->Size = System::Drawing::Size(189, 50);
+			this->textBox1->TabIndex = 20;
+			this->textBox1->Text = L"YELLOW SUBMARINE";
+			this->textBox1->WordWrap = false;
+			// 
+			// label17
+			// 
+			this->label17->AutoSize = true;
+			this->label17->Location = System::Drawing::Point(351, 27);
+			this->label17->Name = L"label17";
+			this->label17->Size = System::Drawing::Size(37, 20);
+			this->label17->TabIndex = 35;
+			this->label17->Text = L"Key";
 			// 
 			// MainForm
 			// 
@@ -1018,25 +1056,17 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 	}
 
 		   // UI method for displaying text from a chosen text file
-		   void MainForm::OpenFileContents(StreamReader^ dataIn, String^& inputStr, bool& isAcceptableLen)
+		   void MainForm::OpenFileContents(StreamReader^ dataIn, String^& inputStr)
 		   {
 			   String^ tempStr;
-			   //String^ inputStr = "";
-
-			   while ((tempStr = dataIn->ReadLine()) != nullptr && inputStr->Length < TEXTBOX_MAX_CAPACITY + 1)
+			   while ((tempStr = dataIn->ReadLine()))
 				   inputStr += tempStr;
-
-			   if (inputStr->Length > TEXTBOX_MAX_CAPACITY)
-			   {
-				   isAcceptableLen = false;
-				   inputStr = "File is too large";
-			   }
 		   }
 
 		   /*************************************************** UI Method for Challenge 1 ***************************************************/
 		   void MainForm::hex_to_base64()
 		   {
-			   ChallengeSolution solution;
+			   ChallengeSolver solution;
 			   String^ managedString = base_hex_array;
 
 			   // Check if base_hex_array is not empty
@@ -1054,12 +1084,12 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   /*************************************************** UI Method for Challenge 2 ***************************************************/
 		   void MainForm::fixed_xor()
 		   {
-			   ChallengeSolution solution;
+			   ChallengeSolver solution;
 			   String^ managedString = hex_1;
 			   String^ managedString_2 = hex_2;
 			   string hexString = marshal_as<string>(managedString);
 
-			   if (!String::IsNullOrEmpty(hex_1) || !String::IsNullOrEmpty(hex_2))
+			   if (!String::IsNullOrEmpty(hex_1) && !String::IsNullOrEmpty(hex_2))
 			   {
 				   // Display output
 				   string xor_string = marshal_as<string>(managedString);
@@ -1074,7 +1104,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   /*************************************************** UI Method for Challenge 3 ***************************************************/
 		   void MainForm::single_byte_cipher()
 		   {
-			   ChallengeSolution solution;
+			   ChallengeSolver solution;
 			   String^ managedString = single_xor_base64;
 			   String^ managedString2 = message_results;
 
@@ -1092,7 +1122,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   /*************************************************** UI Methods for Challenge 4 ***************************************************/
 		   void MainForm::single_char_xor_file()
 		   {
-			   ChallengeSolution solution;
+			   ChallengeSolver solution;
 			   vector<string> fileLines;
 			   OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
@@ -1105,13 +1135,12 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   {
 				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
 				   String^ inputStr = "";
-				   bool isAcceptableLen = true;
 
 				   // Display contents of text file
-				   OpenFileContents(dataIn, inputStr, isAcceptableLen);
+				   OpenFileContents(dataIn, inputStr);
 				   single_char_xor_input->Text = inputStr;
 
-				   if (!String::IsNullOrEmpty(single_char_xor_input->Text) && isAcceptableLen == true)
+				   if (!String::IsNullOrEmpty(single_char_xor_input->Text))
 				   {
 						// Parse file contents for processing
 						string line;
@@ -1138,12 +1167,12 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   /*************************************************** UI Method for Challenge 5 ***************************************************/
 		   void MainForm::repeat_xor()
 		   {
-			   ChallengeSolution solution;
+			   ChallengeSolver solution;
 			   String^ managedString = plain_text_box->Text;
 			   String^ managedString_2 = key_text_box->Text;
 			   string plain_txt_string = marshal_as<string>(managedString);
 
-			   if (!String::IsNullOrEmpty(key_text_box->Text) || !String::IsNullOrEmpty(plain_text_box->Text)) 
+			   if (!String::IsNullOrEmpty(key_text_box->Text) && !String::IsNullOrEmpty(plain_text_box->Text)) 
 			   {
 				   // Display output
 				   string key_txt_string = marshal_as<string>(managedString_2);
@@ -1157,7 +1186,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   /*************************************************** UI Method for Challenge 6 ***************************************************/
 		   void MainForm::break_repeat_key_xor()
 		   {
-			   ChallengeSolution solution;
+			   ChallengeSolver solution;
 			   OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
 			   openFileDialog1->Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
@@ -1168,13 +1197,12 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   {
 					StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
 					String^ inputStr = "";
-					bool isAcceptableLen = true;
 
 					// Display contents of text file
-					OpenFileContents(dataIn, inputStr, isAcceptableLen);
+					OpenFileContents(dataIn, inputStr);
 					break_repeat_xor_input->Text = inputStr;
 
-					if (!String::IsNullOrEmpty(break_repeat_xor_input->Text) && isAcceptableLen == true)
+					if (!String::IsNullOrEmpty(break_repeat_xor_input->Text))
 					{
 						// Parse file contents
 						Block base64Text;
@@ -1198,7 +1226,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   /*************************************************** UI Method for Challenge 7 ***************************************************/
 		   void MainForm::AES_in_ECB()
 		   {
-			   ChallengeSolution solution;
+			   ChallengeSolver solution;
 			   OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
 			   // Set the file filter and other properties as needed.
@@ -1210,13 +1238,12 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   {
 				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
 				   String^ inputStr = "";
-				   bool isAcceptableLen = true;
 
 				   // Display contents of text file
-				   OpenFileContents(dataIn, inputStr, isAcceptableLen);
+				   OpenFileContents(dataIn, inputStr);
 				   aes_ecb_input->Text = inputStr;
 
-				   if (!String::IsNullOrEmpty(aes_ecb_input->Text) && isAcceptableLen == true)
+				   if (!String::IsNullOrEmpty(aes_ecb_input->Text))
 				   {
 					   // Parse file contents
 					   Block base64Text;
@@ -1240,7 +1267,7 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 		   /*************************************************** UI Method for Challenge 8 ***************************************************/
 		   void MainForm::Detect_AES_in_ECB()
 		   {
-			   ChallengeSolution solution;
+			   ChallengeSolver solution;
 			   OpenFileDialog^ openFileDialog1 = gcnew OpenFileDialog();
 
 			   // Set the file filter and other properties as needed.
@@ -1252,13 +1279,12 @@ namespace  CSC414Team2CryptopalsSoftwareSuite {
 			   {
 				   StreamReader^ dataIn = File::OpenText(openFileDialog1->FileName);
 				   String^ inputStr = "";
-				   bool isAcceptableLen = true;
 
 				   // Display contents of text file
-				   OpenFileContents(dataIn, inputStr, isAcceptableLen);
+				   OpenFileContents(dataIn, inputStr);
 				   detect_aes_ecb_input->Text = inputStr;
 
-				   if (!String::IsNullOrEmpty(detect_aes_ecb_input->Text) && detect_aes_ecb_input->Text != "File is too large")
+				   if (!String::IsNullOrEmpty(detect_aes_ecb_input->Text))
 				   {
 					   // Parse file contents
 					   string fileName = marshal_as<string>(openFileDialog1->FileName);

@@ -1,6 +1,6 @@
 #pragma once
 // CryptoUtilities.h holds all of the supplementary functions and header files that are utilized within MainForm.h and
-// ChallengeSolutions.h
+// ChallengeSolvers.h
 
 #include <string>
 #include <iomanip>

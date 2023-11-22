@@ -29,7 +29,7 @@
     <ClInclude Include="CryptoUtilities.h">
       <Filter>Header Files\CryptoChallengeLib</Filter>
     </ClInclude>
-    <ClInclude Include="ChallengeSolutions.h">
+    <ClInclude Include="ChallengeSolvers.h">
       <Filter>Header Files\CryptoChallengeLib</Filter>
     </ClInclude>
   </ItemGroup>

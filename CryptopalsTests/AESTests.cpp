@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
-#include "ChallengeSolutions.h"
+#include "ChallengeSolvers.h"
 
-ChallengeSolution AESSolutions;
+ChallengeSolver AESSolutions;
 
 // -- ECB 128 Decrypt
 
